@@ -80,7 +80,8 @@
 .fdm-layout-enlarged .fdm-section-header h3 {
 	font-size: 150%;
 }
-.fdm-layout-enlarged .fdm-item-panel .fdm-item-title {
+.fdm-layout-enlarged .fdm-item-panel .fdm-item-title,
+.fdm-layout-enlarged .fdm-src-panel .src-title {
 	font-size: 120%;
 }
 
