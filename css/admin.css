@@ -1,0 +1,102 @@
+/**
+ * CSS Stylesheet for the admin interface for Food and Drink Menu
+ *
+ * @package Food and Drink Menu
+ */
+
+
+/**
+ * Admin dashboard icons
+ ***********************/
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu-item img,
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu img { display: none; }
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu-item .wp-menu-image { background: url('../img/icons/admin-menu-items-selected.png') center center no-repeat; }
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu .wp-menu-image { background: url('../img/icons/admin-menus-selected.png') center center no-repeat; }
+
+/* Input controls for custom post type options */
+.fdm-input-control {
+	margin: 20px 0;
+}
+.fdm-input-control label {
+	width: 100%;
+	display: block;
+	font-weight: bold;
+}
+.fdm-input-control input[type="text"] {
+	width: 25em;
+}
+.fdm-input-side-panel .fdm-input-control input[type="text"] {
+	width: 100%;
+}
+.fdm-radio-control label {
+	display: inline;
+	width: auto;
+}
+
+/**
+ * Menu Organizer
+ ****************/
+#fdm-menu-column-one,
+#fdm-menu-column-two {
+	width: 48%;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+#fdm-menu-column-one {
+	float: left;
+}
+#fdm-menu-column-two {
+	float: right;
+}
+#fdm-menu-organizer .fdm-column {
+	float: left;
+	width: 50%;
+}
+#fdm-menu-organizer .fdm-column h4 {
+	background-color: #eee;
+	border-bottom: 1px solid #ccc;
+	margin: 0;
+	padding: 10px;
+	text-align: center;
+}
+#fdm-menu-column-one .fdm-options h4,
+#fdm-menu-column-one .fdm-options ul,
+#fdm-menu-column-two .fdm-added h4,
+#fdm-menu-column-two .fdm-added ul  {
+	border-right: 1px solid #ccc;
+}
+#fdm-menu-organizer .fdm-column ul {
+	margin: 0;
+	padding: 10px;
+	height: 300px;
+	overflow: auto;
+}
+#fdm-menu-organizer .fdm-added ul {
+	background-color: white;
+}
+#fdm-menu-organizer a {
+	display: block;
+	width: 100%;
+	padding: 5px 0;
+	text-align: center;
+	background-color: #888;
+	color: white;
+	text-decoration: none;
+	border-radius: 10px;
+}
+#fdm-menu-organizer a:hover {
+	background-color: #555;
+}
+#fdm-menu-organizer .fdm-added a {
+	background-color: #30a82a;
+}
+#fdm-menu-organizer .fdm-added a:hover {
+	background-color: #2c7a28;
+}
+.fdm-menu-shortcode {
+	font-family: monospace;
+	background-color: white;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
