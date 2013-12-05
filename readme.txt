@@ -50,8 +50,16 @@ A Pro version is available which features:
 
 It can be purchased at [Theme of the Crop](http://themeofthecrop.org/ "Buy the Food and Drink Menu Pro plugin").
 
+== Screenshots ==
+
+1. Classic menu style in a two-column layout
+2. Classic menu style in a single-column layout
+3. Opt to use basic CSS only to adopt your theme's typography
+4. Add menu items with photos like regular WordPress posts
+5. Layout your menu with a point-and-click interface
+6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.org/ "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
+
 == Changelog ==
 
-= 1.0 =
-2013-10-20
-* Initial release
+= 1.0 (2013-12-05) =
+*	Initial release
