@@ -36,7 +36,8 @@ class sapAdminPageSettingSelectPost_1_0 extends sapAdminPageSetting_1_0 {
 	 */
 	public function display_setting() {
 
-		$posts = get_posts( $this->args );
+		$this->args['posts_per_page'] = -1;
+		$post_list = new WP_Query( $this->args );
 
 		?>
 
@@ -46,9 +47,14 @@ class sapAdminPageSettingSelectPost_1_0 extends sapAdminPageSetting_1_0 {
 					<option></option>
 				<?php endif; ?>
 
-				<?php foreach ( $posts as $post  ) : ?>
-					<option value="<?php echo esc_attr( $post->ID ); ?>"<?php if( $this->value == $post->ID ) : ?> selected="selected"<?php endif; ?>><?php echo esc_html( $post->post_title ); ?></option>
-				<?php endforeach; ?>
+				<?php
+					while( $post_list->have_posts() ) :
+						$post_list->the_post();
+				?>
+
+					<option value="<?php echo esc_attr( get_the_ID() ); ?>"<?php if( $this->value == get_the_ID() ) : ?> selected="selected"<?php endif; ?>><?php echo esc_html( get_the_title( get_the_ID() ) ); ?></option>
+
+				<?php endwhile; ?>
 
 			</select>
 
