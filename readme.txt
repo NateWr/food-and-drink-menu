@@ -74,6 +74,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/ "Buy the F
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/ "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+= 1.0.2 (2013-12-12) =
+*	Bumped the version number to fix tagging issues with WordPress plugin repository
+
 = 1.0.1 (2013-12-12) =
 *	Update admin icons to support 3.8
 
@@ -82,5 +85,5 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/ "Buy the F
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.2 =
 This small update will make the Food and Drink Menu compatible with the new admin dashboard style in WordPress 3.8
