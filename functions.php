@@ -42,10 +42,6 @@ function fdm_enqueue_admin_scripts() {
 	wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/css/admin.css', array(), '1.0' );
 	
 	// Backwards compatibility for old admin icons
-	//	$args['menu_icon'] = FDM_PLUGIN_URL . '/img/icons/admin-menus.png';
-//	$args['menu_icon'] = FDM_PLUGIN_URL . '/img/icons/admin-menu-items.png';
-	
-	// Backwards compatibility for old admin icons
 	global $wp_version;
 	if ( $wp_version < 3.8 ) {
 		wp_enqueue_style( 'fdm-admin-compat-3.8', FDM_PLUGIN_URL . '/css/admin-compat-3.8.css', array(), '1.0' );
