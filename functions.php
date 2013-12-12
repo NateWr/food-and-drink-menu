@@ -40,6 +40,17 @@ add_action( 'wp_enqueue_scripts', 'fdm_enqueue_frontend_scripts' );
 function fdm_enqueue_admin_scripts() {
 	wp_enqueue_script( 'fdm-admin', FDM_PLUGIN_URL . '/js/admin.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/css/admin.css', array(), '1.0' );
+	
+	// Backwards compatibility for old admin icons
+	//	$args['menu_icon'] = FDM_PLUGIN_URL . '/img/icons/admin-menus.png';
+//	$args['menu_icon'] = FDM_PLUGIN_URL . '/img/icons/admin-menu-items.png';
+	
+	// Backwards compatibility for old admin icons
+	global $wp_version;
+	if ( $wp_version < 3.8 ) {
+		wp_enqueue_style( 'fdm-admin-compat-3.8', FDM_PLUGIN_URL . '/css/admin-compat-3.8.css', array(), '1.0' );
+	}
+
 }
 add_action( 'admin_enqueue_scripts', 'fdm_enqueue_admin_scripts' );
 
@@ -74,7 +85,6 @@ function fdm_plugin_init() {
             'not_found_in_trash' => __( 'No Menu found in Trash', FDM_TEXTDOMAIN ),
             'parent' => __( 'Parent Menu', FDM_TEXTDOMAIN )
         ),
-		'menu_icon' => FDM_PLUGIN_URL . '/img/icons/admin-menus.png',
         'menu_position' => 15,
         'public' => true,
         'rewrite' => array( 'slug' => 'menu' ),
@@ -150,7 +160,6 @@ function fdm_plugin_init() {
             'not_found_in_trash' => __( 'No Menu Item found in Trash', FDM_TEXTDOMAIN ),
             'parent' => __( 'Parent Menu Item', FDM_TEXTDOMAIN )
         ),
-		'menu_icon' => FDM_PLUGIN_URL . '/img/icons/admin-menu-items.png',
         'menu_position' => 15,
         'public' => true,
         'rewrite' => array( 'slug' => 'menu-item' ),
