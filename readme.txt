@@ -4,7 +4,7 @@ Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.7.1
-Tags: restaurant, cafe, menu, coffee, food, drink, dining, cuisine
+Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
 Stable tag: 1.0
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
@@ -74,6 +74,13 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/ "Buy the F
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/ "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+= 1.0.1 (2013-12-12) =
+*	Update admin icons to support 3.8
 
 = 1.0 (2013-12-05) =
 *	Initial release
+
+== Upgrade Notice ==
+
+= 1.0.1 =
+This small update will make the Food and Drink Menu compatible with the new admin dashboard style in WordPress 3.8
