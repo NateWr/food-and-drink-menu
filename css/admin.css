@@ -10,14 +10,6 @@
 #adminmenu #menu-posts-fdm-menu .wp-menu-image:before { content: "\f330"; }
 #adminmenu #menu-posts-fdm-menu-item .wp-menu-image:before { content: "\f164"; }
 
-/**
- * Backwards compatibility for admin dashboard icons (pre 3.8)
- */
-#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu-item img,
-#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu img { display: none; }
-#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu-item .wp-menu-image { background: url('../img/icons/admin-menu-items-selected.png') center center no-repeat; }
-#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu.menu-icon-fdm-menu .wp-menu-image { background: url('../img/icons/admin-menus-selected.png') center center no-repeat; }
-
 /* Input controls for custom post type options */
 .fdm-input-control {
 	margin: 20px 0;
