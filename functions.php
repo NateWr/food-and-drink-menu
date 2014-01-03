@@ -706,7 +706,7 @@ function fdm_print_menu( $item_id, $args = array() ) {
 			$classes = array(
 				'fdm-section',
 				'fdm-section-' . $s,
-				'fdm-section-' . $id
+				'fdm-sectionid-' . $id
 			);
 
 			// Create filter so addons can add new classes
