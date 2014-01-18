@@ -608,7 +608,7 @@ function fdm_get_menu($menu_id = null) {
 						$item = array(
 							'id' 		=> $post->ID,
 							'title' 	=> $post->post_title,
-							'content' 	=> $post->post_content,
+							'content' 	=> apply_filters('the_content', $post->post_content),
 						);
 
 						// Get the image
@@ -890,7 +890,7 @@ function fdm_print_content( $item ) {
 
 	?>
 
-	<p class="fdm-item-content"><?php echo $item['content']; ?></p>
+	<div class="fdm-item-content"><?php echo $item['content']; ?></div>
 
 	<?php
 
