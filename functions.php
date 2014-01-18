@@ -181,7 +181,7 @@ function fdm_plugin_init() {
 	// Insantiate the Simple Admin Library so that we can add a settings page
 	$sap = sap_initialize_library(
 		array(
-			'version'		=> '1.0', // Version of the library
+			'version'		=> '1.1', // Version of the library
 			'lib_url'		=> FDM_PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 		)
 	);
