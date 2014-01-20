@@ -21,7 +21,7 @@ define( 'FDM_TEXTDOMAIN', 'fdmdomain' );
 define( 'FDM_PLUGIN_DIR', dirname( plugin_basename( __FILE__ ) ) );
 define( 'FDM_PLUGIN_URL', WP_PLUGIN_URL . '/' . FDM_PLUGIN_DIR );
 define( 'FDM_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
-define( 'FDM_UPGRADE_URL', 'http://themeofthecrop.com' );
+define( 'FDM_UPGRADE_URL', 'http://themeofthecrop.com/?utm_medium=Plugin%20Upgrade%20Link&utm_campaign=Food%20and%20Drink%20Menu%20Upgrade%20Link' );
 define( 'FDM_TEMPLATE_DIR', 'templates' );
 define( 'FDM_VERSION', 1 );
 
