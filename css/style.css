@@ -9,7 +9,9 @@
 }
 
 .fdm-menu,
-.fdm-section {
+.fdm-menu>li,
+.fdm-section,
+.fdm-section>li {
 	margin: 0;
 	list-style: none;
 	padding: 0;
