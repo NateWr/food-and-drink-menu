@@ -20,16 +20,17 @@ function fdm_rewrite_flush() {
  */
 function fdm_enqueue_frontend_scripts() {
 
+/*
 	// Base styles which determine layout of elements
 	if ( get_option( 'fdm-style' ) != 'none' ) {
-		wp_enqueue_style( 'fdm-base', FDM_PLUGIN_URL . '/css/style.css', '1.0' );
+		wp_enqueue_style( 'fdm-base', FDM_PLUGIN_URL . '/assets/css/style.css', '1.0' );
 	}
 
 	// Optional styling
 	if ( get_option( 'fdm-style' ) == 'classic' ) {
-		wp_enqueue_style( 'fdm-classic', FDM_PLUGIN_URL . '/css/classic.css', '1.0' );
+		wp_enqueue_style( 'fdm-classic', FDM_PLUGIN_URL . '/assets/css/classic.css', '1.0' );
 	}
-
+*/
 }
 add_action( 'wp_enqueue_scripts', 'fdm_enqueue_frontend_scripts' );
 
@@ -38,13 +39,13 @@ add_action( 'wp_enqueue_scripts', 'fdm_enqueue_frontend_scripts' );
  * @since 1.0
  */
 function fdm_enqueue_admin_scripts() {
-	wp_enqueue_script( 'fdm-admin', FDM_PLUGIN_URL . '/js/admin.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/css/admin.css', array(), '1.0' );
+	wp_enqueue_script( 'fdm-admin', FDM_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/assets/css/admin.css', array(), '1.0' );
 	
 	// Backwards compatibility for old admin icons
 	global $wp_version;
 	if ( $wp_version < 3.8 ) {
-		wp_enqueue_style( 'fdm-admin-compat-3.8', FDM_PLUGIN_URL . '/css/admin-compat-3.8.css', array(), '1.0' );
+		wp_enqueue_style( 'fdm-admin-compat-3.8', FDM_PLUGIN_URL . '/assets/css/admin-compat-3.8.css', array(), '1.0' );
 	}
 
 }
@@ -177,6 +178,39 @@ function fdm_plugin_init() {
 
 	// Add an action so addons can hook in after the menu is registered
 	do_action( 'fdm_menu_item_post_register' );
+	
+	// Define supported styles
+	require_once( 'views/Base.class.php' );
+	global $fdm_styles;
+	$fdm_styles = array(
+		'base' => new fdmStyle(
+			array(
+				'id'	=> 'base',
+				'label'	=> __( 'Base formatting only', FDM_TEXTDOMAIN ),
+				'css'	=> array(
+					'base' => FDM_PLUGIN_URL . '/assets/css/base.css'
+				)
+			)
+		),
+		'classic' => new fdmStyle(
+			array(
+				'id'	=> 'classic',
+				'label'	=> __( 'Classic style', FDM_TEXTDOMAIN ),
+				'css'	=> array(
+					'base' => FDM_PLUGIN_URL . '/assets/css/base.css',
+					'classic' => FDM_PLUGIN_URL . '/assets/css/classic.css'
+				)
+			)
+		),
+		'none' => new fdmStyle(
+			array(
+				'id'	=> 'none',
+				'label'	=> __( 'Don\'t load any CSS styles', FDM_TEXTDOMAIN ),
+				'css'	=> array( )
+			)
+		),
+	);
+	$fdm_styles = apply_filters( 'fdm_styles', $fdm_styles );
 
 	// Insantiate the Simple Admin Library so that we can add a settings page
 	$sap = sap_initialize_library(
@@ -207,6 +241,10 @@ function fdm_plugin_init() {
 			'description'	=> __( 'Choose what style you would like to use for your menu.', FDM_TEXTDOMAIN )
 		)
 	);
+	$options = array();
+	foreach( $fdm_styles as $style ) {
+		$options[$style->id] = $style->label;
+	}
 	$sap->add_setting(
 		'food-and-drink-menu-settings',
 		'fdm-style-settings',
@@ -216,11 +254,7 @@ function fdm_plugin_init() {
 			'title'			=> __( 'Style', FDM_TEXTDOMAIN ),
 			'description'	=> __( 'Choose the styling for your menus.', FDM_TEXTDOMAIN ),
 			'blank_option'	=> false,
-			'options'		=> array(
-				'base' 			=> __( 'Base formatting only', FDM_TEXTDOMAIN ),
-				'classic' 		=> __( 'Classic style', FDM_TEXTDOMAIN ),
-				'none' 			=> __( 'Don\'t load any CSS styles', FDM_TEXTDOMAIN )
-			)
+			'options'		=> $options
 		)
 	);
 
@@ -655,6 +689,7 @@ function fdm_print_menu( $item_id, $args = array() ) {
 	// Add css classes to menu list
 	$classes = array(
 		'fdm-menu',
+		'fdm-menu-' . $item_id,
 		'fdm-columns-' . count( $menu ),
 		'fdm-layout-' . esc_attr( $args['layout'] ),
 		'clearfix'
@@ -670,7 +705,7 @@ function fdm_print_menu( $item_id, $args = array() ) {
 
 	?>
 
-	<ul<?php echo fdm_format_classes( $classes ); ?>>
+	<ul id="<?php echo fdm_global_unique_id(); ?>"<?php echo fdm_format_classes( $classes ); ?>>
 
 	<?php
 
@@ -852,6 +887,11 @@ function fdm_print_menu( $item_id, $args = array() ) {
  */
 function fdm_menu_shortcode( $atts ) {
 
+	require_once( 'views/Base.class.php' );
+	$menu = new fdmViewMenu( array( 'id' => 14 ) );
+	$menu->render();
+
+/*
 	// Define shortcode attributes
 	$menu_atts = array(
 		'id' => null,
@@ -865,6 +905,7 @@ function fdm_menu_shortcode( $atts ) {
 	$args = shortcode_atts( $menu_atts, $atts );
 
 	return fdm_print_menu( $args['id'], $args );
+	*/
 }
 add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
 
@@ -1038,6 +1079,15 @@ function fdm_format_classes($classes) {
 	if (count($classes)) {
 		return ' class="' . join(" ", $classes) . '"';
 	}
+}
+ 
+/*
+ * Assign a globally unique id for each displayed menu
+ */
+$fdm_global_ids = 0;
+function fdm_global_unique_id() {
+	global $fdm_global_ids;
+	return 'fdm-menu-' . $fdm_global_ids++;
 }
 
 /**

@@ -1,0 +1,9 @@
+/**
+ * CSS to handle backwards compatiblity for WordPress versions less than 3.8
+ */
+#adminmenu #menu-posts-fdm-menu .wp-menu-image:before { display: none; }
+#adminmenu #menu-posts-fdm-menu-item .wp-menu-image:before { display: none; }
+#adminmenu #menu-posts-fdm-menu-item div.wp-menu-image { background: url( '../assets/img/icons/admin-menu-items.png' ) no-repeat 7px 6px; }
+#adminmenu #menu-posts-fdm-menu-item.wp-menu-open div.wp-menu-image { background: url( '../assets/img/icons/admin-menu-items-selected.png' ) no-repeat 7px 6px; }
+#adminmenu #menu-posts-fdm-menu div.wp-menu-image { background: url( '../assets/img/icons/admin-menus.png' ) no-repeat 7px 6px; }
+#adminmenu #menu-posts-fdm-menu.wp-menu-open div.wp-menu-image { background: url( '../assets/img/icons/admin-menus-selected.png' ) no-repeat 7px 6px; }
