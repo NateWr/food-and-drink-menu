@@ -218,7 +218,7 @@ class fdmViewMenu extends fdmView {
 
 		<?php
 		$output = ob_get_clean();
-		echo $output;
+		return $output;
 	}
 
 	/**

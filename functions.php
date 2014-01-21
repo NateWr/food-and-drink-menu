@@ -15,33 +15,13 @@ function fdm_rewrite_flush() {
 }
 
 /**
- * Enqueue the front-end CSS and Javascript
- * @since 1.0
- */
-function fdm_enqueue_frontend_scripts() {
-
-/*
-	// Base styles which determine layout of elements
-	if ( get_option( 'fdm-style' ) != 'none' ) {
-		wp_enqueue_style( 'fdm-base', FDM_PLUGIN_URL . '/assets/css/style.css', '1.0' );
-	}
-
-	// Optional styling
-	if ( get_option( 'fdm-style' ) == 'classic' ) {
-		wp_enqueue_style( 'fdm-classic', FDM_PLUGIN_URL . '/assets/css/classic.css', '1.0' );
-	}
-*/
-}
-add_action( 'wp_enqueue_scripts', 'fdm_enqueue_frontend_scripts' );
-
-/**
  * Enqueue the admin-only CSS and Javascript
  * @since 1.0
  */
 function fdm_enqueue_admin_scripts() {
 	wp_enqueue_script( 'fdm-admin', FDM_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/assets/css/admin.css', array(), '1.0' );
-	
+
 	// Backwards compatibility for old admin icons
 	global $wp_version;
 	if ( $wp_version < 3.8 ) {
@@ -178,7 +158,7 @@ function fdm_plugin_init() {
 
 	// Add an action so addons can hook in after the menu is registered
 	do_action( 'fdm_menu_item_post_register' );
-	
+
 	// Define supported styles
 	require_once( 'views/Base.class.php' );
 	global $fdm_styles;
@@ -312,6 +292,11 @@ function fdm_plugin_init() {
 
 	// Register all admin pages and settings with WordPress
 	$sap->add_admin_menus();
+
+	// Add filters on the menu style so we can apply the setting option
+	add_filter( 'fdm_menu_args', 'fdm_set_style' );
+	add_filter( 'fdm_shortcode_menu_atts', 'fdm_set_style' );
+
 }
 
 /**
@@ -586,312 +571,11 @@ function fdm_save_meta( $post_id ) {
 add_action( 'save_post', 'fdm_save_meta' );
 
 /**
- * Retrieve menu items and sort them by sections
- * @since 1.0
- */
-function fdm_get_menu($menu_id = null) {
-
-	// Exit early if no menu id is passed
-	// @todo if no menu id is passed, it should fetch the latest menu
-	if ( $menu_id === null ) {
-		return;
-	}
-
-	// Retrieve the menu columns
-	$menu = array();
-	$cols = array();
-	$retrieve_cols = array( 'one', 'two' );
-	foreach ( $retrieve_cols as $key => $col_num ) {
-		$col = get_post_meta( $menu_id, 'fdm_menu_column_' . $col_num, true );
-		if ( trim( $col ) != '' ) {
-			$cols[$key] = explode( ",", $col );
-			array_pop( $cols[$key] );
-
-			// Fetch the menu section information
-			foreach ( $cols[$key] as $section_id ) {
-				$section = new WP_Query( array(
-					'post_type'      	=> 'fdm-menu-item',
-					'posts_per_page' 	=> -1,
-					'order'				=> 'ASC',
-					'orderby'			=> 'menu_order',
-					'tax_query'     	=> array(
-						array(
-							'taxonomy' => 'fdm-menu-section',
-							'field'    => 'id',
-							'terms'    => $section_id,
-						),
-					),
-				));
-				if ( count( $section->posts ) ) {
-
-					// Add the menu section information
-					if ( !isset( $menu[$key] ) ) {
-						$menu[$key] = array();
-					}
-					$menu_section = get_term( $section_id, 'fdm-menu-section' );
-					$menu[$key][$section_id] = array(
-						"name" => $menu_section->name,
-						"description" => $menu_section->description,
-						"items" => array()
-					);
-
-					// Add the menu items to the section
-					foreach ( $section->posts as $post ) {
-
-						// Store the item
-						$item = array(
-							'id' 		=> $post->ID,
-							'title' 	=> $post->post_title,
-							'content' 	=> apply_filters('the_content', $post->post_content),
-						);
-
-						// Get the image
-						$item['image'] = wp_get_attachment_image_src( get_post_thumbnail_id( $item['id'] ), 'fdm-item-thumb' );
-
-						// Get the price
-						if ( !get_option( 'fdm-disable-price' ) ) {
-							$item['price'] = get_post_meta( $item['id'], 'fdm_item_price', true );
-						}
-
-						// Create filter so addons can add new data
-						$item = apply_filters( 'fdm_item_data', $item );
-
-						// Add the item to the section
-						$menu[$key][$section_id]['items'][] = $item;
-					}
-				}
-			}
-		}
-	}
-
-	if ( count( $menu ) ) {
-		return $menu;
-	} else {
-		return false;
-	}
-}
-
-/**
- * Print menu items
- * @sa fdm_get_menu()
- * @since 1.0
- */
-function fdm_print_menu( $item_id, $args = array() ) {
-
-	// Get the menu
-	$menu = fdm_get_menu( $item_id );
-
-	// Exit early if no menu is found
-	if ( $menu === false ) {
-		return;
-	}
-
-	// Add css classes to menu list
-	$classes = array(
-		'fdm-menu',
-		'fdm-menu-' . $item_id,
-		'fdm-columns-' . count( $menu ),
-		'fdm-layout-' . esc_attr( $args['layout'] ),
-		'clearfix'
-	);
-
-	// Create filter so addons can add new classes
-	$classes = apply_filters( 'fdm_menu_classes', $classes, $args );
-
-	// Capture output to return in one string
-	// If we print directly here instead of capturing the output, the
-	// menu will appear above any other content in the page/post.
-	ob_start();
-
-	?>
-
-	<ul id="<?php echo fdm_global_unique_id(); ?>"<?php echo fdm_format_classes( $classes ); ?>>
-
-	<?php
-
-	// Loop over each menu column
-	$c = 0; // Columns
-	$s = 0; // Sections
-	foreach ( $menu as $column ) :
-
-		// Add css classes to menu column
-		$classes = array(
-			'fdm-column',
-			'fdm-column-' . $c
-		);
-
-		// Add a last column class for easy css floating
-		if ( $c == count( $menu ) - 1 ) {
-			$classes[] = 'fdm-column-last';
-		}
-
-		// Create filter so addons can add new classes
-		$classes = apply_filters( 'fdm_menu_column_classes', $classes, $args, $c );
-
-		?>
-
-		<li<?php echo fdm_format_classes( $classes ); ?>>
-
-		<?php
-
-		// Loop over each menu section
-		foreach ( $column as $id => $section ) :
-
-			// Add css classes to menu section
-			$classes = array(
-				'fdm-section',
-				'fdm-section-' . $s,
-				'fdm-sectionid-' . $id
-			);
-
-			// Create filter so addons can add new classes
-			$classes = apply_filters( 'fdm_menu_section_classes', $classes, $section );
-
-			?>
-
-			<ul<?php echo fdm_format_classes( $classes ); ?>>
-				<li class="fdm-section-header">
-					<h3><?php echo $section['name']; ?></h3>
-
-					<?php if ( isset( $section['description'] ) && trim( $section['description'] ) ) : ?>
-
-					<p><?php echo $section['description']; ?></p>
-
-					<?php endif; ?>
-
-				</li>
-
-			<?php
-
-			// Loop over each menu item
-			$i = 0;
-			foreach ( $section['items'] as $item ) :
-
-				// This creates an array listing all of the elements we want to
-				// display for this item along with a function callback which
-				// will print the code for that item. By registering each
-				// element here we can easily hook into it to make changes with
-				// third-party plugins (eg - addons)
-				$elements = array(
-					'title'	=> 'fdm_print_title'
-				);
-
-				// Add css classes to menu item
-				$classes = array( 'fdm-item' );
-
-				// Add a class to the last item in the section
-				$i++;
-				if ( $i == count( $section['items'] ) ) {
-					$classes[] = 'fdm-item-last';
-				}
-
-				// Register elements
-				if ( $item['content'] ) {
-					$elements['content'] = 'fdm_print_content';
-				}
-
-				if ( $item['image'] ) {
-					$elements['image'] = 'fdm_print_image';
-					$classes[] = 'fdm-item-has-image';
-				}
-
-				if ( isset( $item['price'] ) && $item['price'] ) {
-					$elements['price'] = 'fdm_print_price';
-					$classes[] = 'fdm-item-has-price';
-				}
-
-				// Define the order to print elements' HTML
-				$elements_order = array(
-					'image',
-					'title',
-					'price',
-					'content'
-				);
-
-				// Filter the elements and classes
-				$elements = apply_filters( 'fdm_menu_item_elements', $elements, $item );
-				$elements_order = apply_filters( 'fdm_menu_item_elements_order', $elements_order, $item );
-				$classes = apply_filters( 'fdm_menu_item_classes', $classes, $item );
-
-				?>
-
-				<li<?php echo fdm_format_classes( $classes ); ?>>
-
-					<?php do_action( 'fdm_menu_item_before', $item ); ?>
-
-					<div class="fdm-item-panel">
-
-					<?php
-
-						// Loop through all the elements that have
-						// been defined and call the function attached to each
-						// element.
-						foreach( $elements_order as $element ) {
-							if ( isset( $elements[$element] ) && function_exists( $elements[$element] ) ) {
-								call_user_func( $elements[$element], $item );
-							}
-						}
-
-					?>
-
-						<div class="clearfix"></div>
-					</div>
-
-					<?php do_action( 'fdm_menu_item_after', $item ); ?>
-
-				</li>
-
-			<?php endforeach; // End menu item loop ?>
-
-			</ul>
-
-		<?php
-
-			// Increment menu section counter
-			$s++;
-
-		// End menu section loop
-		endforeach;
-
-		?>
-
-		</li>
-
-		<?php
-
-		// Increment column counter
-		$c++;
-
-	// End menu column loop
-	endforeach;
-
-	?>
-
-	</ul>
-	<div class="clearfix"></div>
-
-	<?php
-
-	// Capture the HTML output
-	$output = ob_get_contents();
-	ob_end_clean();
-
-	return $output;
-
-}
-
-/**
  * Create a shortcode to display a menu
  * @since 1.0
- * @todo If no ID is passed, have it search for and return the first menu found
  */
 function fdm_menu_shortcode( $atts ) {
 
-	require_once( 'views/Base.class.php' );
-	$menu = new fdmViewMenu( array( 'id' => 14 ) );
-	$menu->render();
-
-/*
 	// Define shortcode attributes
 	$menu_atts = array(
 		'id' => null,
@@ -903,172 +587,72 @@ function fdm_menu_shortcode( $atts ) {
 
 	// Extract the shortcode attributes
 	$args = shortcode_atts( $menu_atts, $atts );
+	
+	print_r($args);
 
-	return fdm_print_menu( $args['id'], $args );
-	*/
+	// Render menu
+	fdm_load_view_files();
+	$menu = new fdmViewMenu( $args );
+	echo $menu->render();
 }
 add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
 
 /**
- * Print the menu item title
- * @since 1.0
+ * Print the menu on menu post type pages
+ * @since 1.1
  */
-function fdm_print_title( $item ) {
+function fdm_cpt_menu_content( $content ) {
+	global $post;
 
-	?>
+	if ( ( FDM_MENU_POST_TYPE !== $post->post_type && FDM_MENUITEM_POST_TYPE !== $post->post_type )
+			|| !is_main_query() ) {
+		return $content;
+	}
 
-	<p class="fdm-item-title"><?php echo $item['title']; ?></p>
+	// We must disable this filter while we're rendering the menu in order to
+	// prevent it from falling into a recursive loop with each menu item's
+	// content.
+	remove_action( 'the_content', 'fdm_cpt_menu_content' );
 
-	<?php
+	fdm_load_view_files();
 
-}
-
-/**
- * Print the menu item content
- * @since 1.0
- */
-function fdm_print_content( $item ) {
-
-	?>
-
-	<div class="fdm-item-content"><?php echo $item['content']; ?></div>
-
-	<?php
-
-}
-
-/**
- * Print the menu item image
- * @since 1.0
- */
-function fdm_print_image( $item ) {
-
-	?>
-
-	<img class="fdm-item-image" src="<?php echo $item['image'][0]; ?>" title="<?php echo esc_attr( $item['title'] ); ?>" alt="<?php echo esc_attr( $item['title'] ); ?>">
-
-	<?php
-
-}
-
-/**
- * Print the menu item price
- * @since 1.0
- */
-function fdm_print_price( $item ) {
-
-	?>
-
-	<div class="fdm-item-price-wrapper">
-		<span class="fdm-item-price"><?php echo $item['price']; ?></span>
-	</div>
-
-	<?php
-
-}
-
-/**
- * Show preview for a single menu
- * @since 1.0
- */
-function fdm_preview_menu( $id ) {
-
-	$output = fdm_print_menu(
-		$id,
-		array( 'layout' => 'classic' )
+	$args = array(
+		'id'	=> $post->ID
 	);
+	$args = apply_filters( 'fdm_menu_args', $args );
 
-	$output = apply_filters( 'fdm_preview_menu', $output, $id );
+	$menu = new fdmViewMenu( $args );
+	$output = $menu->render();
 
-	return $output;
+	// Restore this filter
+    add_action( 'the_content', 'fdm_cpt_menu_content' );
 
+	return $content . $output;
+
+}
+add_filter( 'the_content', 'fdm_cpt_menu_content' );
+
+/**
+ * Set the style of a menu or menu item before rendering
+ * @since 1.1
+ */
+function fdm_set_style( $args ) {
+
+	$style = get_option( 'fdm-style' );
+	if ( !$style ) {
+		$style = 'base';
+	}
+	$args['style'] = $style;
+
+	return $args;
 }
 
 /**
- * Output the preview for a menu item
- * @since 1.0
+ * Load files needed for views
+ * @since 1.1
  */
-function fdm_preview_menu_item( $id ) {
-
-	$output = '<p>';
-	$output .= __( 'Menu Items can only be displayed as part of a Menu.', FDM_TEXTDOMAIN );
-	$output .= ' <a href="' . FDM_PLUGIN_URL . '/docs/" title="' . __( 'Food and Drink Menu Documentation', FDM_TEXTDOMAIN ) . '">Learn more</a>';
-	$output .= '</p>';
-
-	$output = apply_filters( 'fdm_preview_menu_item', $output, $id );
-
-	return $output;
-
-}
-
-/**
- * Support custom template files for menus and menu items
- *
- * If the current post type matches menus and menu items, this functione looks
- * for a content-[type].php template file in the current theme. If it can't find
- * it there, it will use the plugin's local template file.
- *
- * The Food and Drink Menu is designed to be added to a regular page or post
- * using shortcodes or widgets. These templates are just in place so that the
- * post preview functions are available from the admin. But if someone wanted
- * they could craft a custom page template for menus as well.
- *
- * @since 1.0
- * @sa fdm_redirect_theme()
- * @note h/t http://stackoverflow.com/a/4975004
- */
-function fdm_load_theme() {
-
-    global $wp;
-
-	// Exit early if this isn't a post
-	if ( !isset ( $wp->query_vars['post_type'] ) ) {
-		return;
-	}
-
-	if ( $wp->query_vars['post_type'] == 'fdm-menu-item' ) {
-
-		$template = 'single-menu-item.php';
-		if ( file_exists( TEMPLATEPATH . '/' . $template ) ) {
-			$return_template = TEMPLATEPATH . '/' . $template;
-		} else {
-			$return_template = dirname( __FILE__ ) . '/templates/' . $template;
-		}
-
-	} elseif ( $wp->query_vars['post_type'] == 'fdm-menu' ) {
-
-		$template = 'single-menu.php';
-		if ( file_exists( TEMPLATEPATH . '/' . $template ) ) {
-			$return_template = TEMPLATEPATH . '/' . $template;
-		} else {
-			$return_template = dirname( __FILE__ ) . '/' . FDM_TEMPLATE_DIR . '/' . $template;
-		}
-
-	}
-
-	if ( isset( $return_template ) ) {
-		fdm_redirect_theme($return_template);
-	}
-
-}
-add_action("template_redirect", 'fdm_load_theme');
-
-/**
- * Redirect to a theme template file for menus and menu items
- * @sa fdm_load_theme()
- * @since 1.0
- */
-function fdm_redirect_theme( $url ) {
-
-	global $post, $wp_query;
-
-	if ( have_posts() ) {
-		include( $url );
-		die();
-	} else {
-		$wp_query->is_404 = true;
-	}
-
+function fdm_load_view_files() {
+	require_once( 'views/Base.class.php' );
 }
 
 /**
@@ -1080,7 +664,7 @@ function fdm_format_classes($classes) {
 		return ' class="' . join(" ", $classes) . '"';
 	}
 }
- 
+
 /*
  * Assign a globally unique id for each displayed menu
  */
