@@ -63,19 +63,21 @@ class fdmView extends fdmBase {
 	 */
 	function find_template( $template ) {
 
-		$locations = array(
+		$this->template_dirs = array(
 			get_stylesheet_directory() . '/' . FDM_TEMPLATE_DIR . '/',
 			get_template_directory() . '/' . FDM_TEMPLATE_DIR . '/',
 			FDM_PLUGIN_DIR . '/' . FDM_TEMPLATE_DIR . '/'
 		);
+		
+		$this->template_dirs = apply_filters( 'fdm_template_directories', $this->template_dirs );
 
 		if ( isset( $this->layout ) && $this->layout != 'classic' ) {
 			$template .= '-' . $this->layout;
 		}
 
-		foreach ( $locations as $loc ) {
-			if ( file_exists( $loc . $template . '.php' ) ) {
-				return $loc . $template . '.php';
+		foreach ( $this->template_dirs as $dir ) {
+			if ( file_exists( $dir . $template . '.php' ) ) {
+				return $dir . $template . '.php';
 			}
 		}
 
