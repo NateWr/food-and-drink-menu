@@ -50,6 +50,20 @@ class fdmViewSection extends fdmView {
 
 		return apply_filters( 'fdm_menu_section_output', $output, $this );
 	}
+	
+	/**
+	 * Print the menu items in this section
+	 *
+	 * @note This just cleans up the template file a bit
+	 * @since 1.1
+	 */
+	public function print_items() {
+		$output = '';
+		foreach ( $this->items as $item ) {
+			$output .= $item->render();
+		}
+		return $output;
+	}
 
 	/**
 	 * Load section data

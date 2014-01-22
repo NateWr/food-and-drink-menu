@@ -7,11 +7,5 @@
 		<?php endif; ?>
 
 	</li>
-
-	<?php
-	foreach ( $this->items as $item ) {
-		echo $item->render();
-	}
-	?>
-
+	<?php echo $this->print_items(); ?>
 </ul>
