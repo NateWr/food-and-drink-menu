@@ -25,7 +25,8 @@ function fdm_menu_shortcode( $atts ) {
 	// Render menu
 	fdm_load_view_files();
 	$menu = new fdmViewMenu( $args );
-	echo $menu->render();
+
+	return $menu->render();
 }
 add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
 
@@ -33,7 +34,7 @@ add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
  * Create a shortcode to display a menu item
  * @since 1.1
  */
-function fdmp_menu_item_shortcode( $atts ) {
+function fdm_menu_item_shortcode( $atts ) {
 
 	// Define shortcode attributes
 	$menu_item_atts = array(
@@ -51,9 +52,10 @@ function fdmp_menu_item_shortcode( $atts ) {
 	// Render menu
 	fdm_load_view_files();
 	$menuitem = new fdmViewItem( $args );
-	echo $menuitem->render();
+
+	return $menuitem->render();
 }
-add_shortcode( 'fdm-menu-item', 'fdmp_menu_item_shortcode' );
+add_shortcode( 'fdm-menu-item', 'fdm_menu_item_shortcode' );
 
 /**
  * Load files needed for views
@@ -82,7 +84,7 @@ function fdm_global_unique_id() {
 	global $globally_unique_id;
 	return 'fdm-menu-' . $globally_unique_id++;
 }
-	
+
 /**
  * Tranform an array of CSS classes into an HTML attribute
  * @since 1.0

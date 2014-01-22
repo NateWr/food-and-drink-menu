@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Add a widget to display a menu
+ * Add a widget to display a menu item
  *
  * @since 1.0
  * @package Food and Drink Menu
  */
-class fdmWidgetMenu extends WP_Widget {
+class fdmWidgetMenuItem extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
@@ -15,9 +15,9 @@ class fdmWidgetMenu extends WP_Widget {
 	function __construct() {
 
 		parent::__construct(
-			'fdm_widget_menu',
-			__('Food and Drink Menu', FDM_TEXTDOMAIN),
-			array( 'description' => __( 'Display your food and drink menu.', FDM_TEXTDOMAIN ), )
+			'fdm_widget_menu_item',
+			__('Food and Drink Menu Item', FDM_TEXTDOMAIN),
+			array( 'description' => __( 'Display a single item from your food and drink menu.', FDM_TEXTDOMAIN ), )
 		);
 
 	}
@@ -36,9 +36,6 @@ class fdmWidgetMenu extends WP_Widget {
 		if( isset( $instance['id'] ) ) {
 			$atts['id'] = $instance['id'];
 		}
-		if( isset( $instance['layout'] ) ) {
-			$atts['layout'] = $instance['layout'];
-		}
 
 		// Print the widget's HTML markup
 		echo $args['before_widget'];
@@ -46,7 +43,7 @@ class fdmWidgetMenu extends WP_Widget {
 			$title = apply_filters( 'widget_title', $instance['title'] );
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
-		echo fdm_menu_shortcode( $atts );
+		echo fdm_menu_item_shortcode( $atts );
 		echo $args['after_widget'];
 
 	}
@@ -69,25 +66,25 @@ class fdmWidgetMenu extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"<?php if ( isset( $instance['title'] ) ) : ?> value="<?php echo esc_attr( $instance['title'] ); ?>"<?php endif; ?>>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'id' ); ?>"> <?php _e( 'Menu' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'id' ); ?>"> <?php _e( 'Menu Item' ); ?></label>
 			<select id="<?php echo $this->get_field_id( 'id' ); ?>" name="<?php echo $this->get_field_name( 'id' ); ?>">
 
 				<?php
 
-				$menus = new WP_Query( array(
+				$items = new WP_Query( array(
 						'posts_per_page' 	=> -1,
-						'post_type' 		=> 'fdm-menu'
+						'post_type' 		=> 'fdm-menu-item'
 					)
 				);
 
 				// Loop over all promotion post types
-				while( $menus->have_posts() ) :
-					$menus->next_post();
+				while( $items->have_posts() ) :
+					$items->next_post();
 
 				?>
 
-				<option value="<?php echo $menus->post->ID; ?>"<?php if ( $menus->post->ID == $id ) : ?> selected<?php endif; ?>>
-					<?php echo esc_attr( $menus->post->post_title ); ?>
+				<option value="<?php echo $items->post->ID; ?>"<?php if ( $items->post->ID == $id ) : ?> selected<?php endif; ?>>
+					<?php echo esc_attr( $items->post->post_title ); ?>
 				</option>
 
 				<?php
@@ -100,7 +97,6 @@ class fdmWidgetMenu extends WP_Widget {
 				?>
 			</select>
 		</p>
-
 
 		<?php
 

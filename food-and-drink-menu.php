@@ -140,6 +140,8 @@ class fdmFoodAndDrinkMenu {
 	public function register_widgets() {
 		require_once( 'widgets/WidgetMenu.class.php' );
 		register_widget( 'fdmWidgetMenu' );
+		require_once( 'widgets/WidgetMenuItem.class.php' );
+		register_widget( 'fdmWidgetMenuItem' );
 	}
 
 	/**
