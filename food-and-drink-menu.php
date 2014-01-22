@@ -152,7 +152,7 @@ class fdmFoodAndDrinkMenu {
 		global $post;
 
 		if ( ( FDM_MENU_POST_TYPE !== $post->post_type && FDM_MENUITEM_POST_TYPE !== $post->post_type )
-				|| !is_main_query() ) {
+				|| !is_main_query() || !in_the_loop() ) {
 			return $content;
 		}
 
