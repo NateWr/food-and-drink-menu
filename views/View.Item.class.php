@@ -16,6 +16,7 @@ class fdmViewItem extends fdmView {
 
 	/**
 	 * Render the view and enqueue required stylesheets
+	 *
 	 * @since 1.1
 	 */
 	public function render() {
@@ -33,16 +34,18 @@ class fdmViewItem extends fdmView {
 		$classes = array( 'fdm-item' );
 
 		// Register elements to display
-		$elements[] = 'title';
+		// Each element is referenced by its variable name (key) and location
+		// in the menu item where we want to print it (header, body or footer)
+		$elements['title'] = 'body';
 		if ( $this->content ) {
-			$elements[] = 'content';
+			$elements['content'] = 'body';
 		}
 		if ( isset( $this->image ) ) {
-			$elements[] = 'image';
+			$elements['image'] = 'body';
 			$classes[] = 'fdm-item-has-image';
 		}
 		if ( isset( $this->price ) && $this->price ) {
-			$elements[] = 'price';
+			$elements['price'] = 'body';
 			$classes[] = 'fdm-item-has-price';
 		}
 
@@ -80,12 +83,12 @@ class fdmViewItem extends fdmView {
 	 * @note This function just provides us with a cleaner template
 	 * @since 1.1
 	 */
-	public function print_elements() {
+	public function print_elements( $location ) {
 	
 		$output = '';
 		
 		foreach( $this->elements_order as $element ) {
-			if ( in_array( $element, $this->elements ) ) {
+			if ( isset( $this->elements[$element] ) && $this->elements[$element] == $location ) {
 
 				// Load the template for this content type
 				$template = $this->find_template( $this->content_map[$element] );
