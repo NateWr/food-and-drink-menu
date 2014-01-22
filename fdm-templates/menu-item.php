@@ -12,21 +12,8 @@
 
 		<div class="fdm-item-panel">
 
-		<?php
-			// Loop through all the elements that have
-			// been defined and call the function attached to each
-			// element.
-			foreach( $elements_order as $element ) {
-				if ( in_array( $element, $elements ) ) {
-					$class = $this->content_map[$element];
-					if ( class_exists( $class ) ) {
-						$content = new $class( $this->{$element} );
-						$content->render();
-					}
-				}
-			}
-		?>
-
+			<?php echo $this->print_elements(); ?>
+		
 			<div class="clearfix"></div>
 		</div>
 

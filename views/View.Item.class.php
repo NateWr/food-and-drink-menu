@@ -55,9 +55,9 @@ class fdmViewItem extends fdmView {
 		);
 
 		// Filter the elements and classes
-		$elements = apply_filters( 'fdm_menu_item_elements', $elements, $this );
-		$elements_order = apply_filters( 'fdm_menu_item_elements_order', $elements_order, $this );
-		$classes = apply_filters( 'fdm_menu_item_classes', $classes, $this );
+		$this->elements = apply_filters( 'fdm_menu_item_elements', $elements, $this );
+		$this->elements_order = apply_filters( 'fdm_menu_item_elements_order', $elements_order, $this );
+		$this->classes = apply_filters( 'fdm_menu_item_classes', $classes, $this );
 
 		// Capture output
 		ob_start();
@@ -69,6 +69,24 @@ class fdmViewItem extends fdmView {
 
 		return apply_filters( 'fdm_menu_item_output', $output, $this );
 
+	}
+
+	/**
+	 * Print each of the menu item elements in the defined order
+	 *
+	 * @note This function just provides us with a cleaner template
+	 * @since 1.1
+	 */
+	public function print_elements() {
+		foreach( $this->elements_order as $element ) {
+			if ( in_array( $element, $this->elements ) ) {
+				$class = $this->content_map[$element];
+				if ( class_exists( $class ) ) {
+					$content = new $class( $this->{$element} );
+					$content->render();
+				}
+			}
+		}
 	}
 
 	/**
