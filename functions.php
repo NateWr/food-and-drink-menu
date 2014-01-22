@@ -82,7 +82,8 @@ function fdm_load_view_files() {
 $globally_unique_id = 0;
 function fdm_global_unique_id() {
 	global $globally_unique_id;
-	return 'fdm-menu-' . $globally_unique_id++;
+	$globally_unique_id++;
+	return 'fdm-menu-' . $globally_unique_id;
 }
 
 /**

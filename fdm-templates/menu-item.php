@@ -1,5 +1,5 @@
 <?php if ( $this->is_singular() ) : ?>
-<div class="fdm-menu fdm-menu-item">
+<div id="<?php echo fdm_global_unique_id(); ?>" class="fdm-menu fdm-menu-item">
 <?php endif; ?>
 	
 	<?php echo $this->print_elements( 'header' ); ?>
