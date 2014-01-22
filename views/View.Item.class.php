@@ -67,41 +67,11 @@ class fdmViewItem extends fdmView {
 		
 		ob_start();
 		
-		if ( $this->singular ) :
-		?>
+		$template = fdm_find_template( 'menu-item' );
+		if ( $template ) {
+			include( $template );
+		}
 		
-			<div class="fdm-menu fdm-menu-item">
-			<?php endif; ?>
-				<<?php echo $html_element; echo fdm_format_classes( $classes ); ?>>
-					<?php do_action( 'fdm_menu_item_before', $this ); ?>
-					<div class="fdm-item-panel">
-
-					<?php
-						// Loop through all the elements that have
-						// been defined and call the function attached to each
-						// element.
-						foreach( $elements_order as $element ) {
-							if ( in_array( $element, $elements ) ) {
-								$class = $this->content_map[$element];
-								if ( class_exists( $class ) ) {
-									$content = new $class( $this->{$element} );
-									$content->render();
-								}
-							}
-						}
-					?>
-
-						<div class="clearfix"></div>
-					</div>
-
-					<?php do_action( 'fdm_menu_item_after', $this ); ?>
-
-				</<?php echo $html_element; ?>>
-			<?php if ( $this->singular ) : ?>
-			<?div>
-			<?php endif; ?>
-
-		<?php
 		$output = ob_get_clean();
 		return $output;
 
@@ -144,6 +114,17 @@ class fdmViewItem extends fdmView {
 		$data = apply_filters( 'fdm_item_data', $data );
 		
 		$this->parse_args( $data );
+	}
+	
+	/**
+	 * Check if this view is of a single item
+	 * @since 1.1
+	 */
+	public function is_singular() {
+		if ( isset( $this->singular ) && $this->singular === true ) {
+			return true;
+		}
+		return false;
 	}
 
 }

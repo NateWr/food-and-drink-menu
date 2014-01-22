@@ -726,3 +726,37 @@ function fdm_plugin_action_links( $links, $plugin ) {
 
 }
 add_filter('plugin_action_links', 'fdm_plugin_action_links', 10, 2);
+
+/**
+ * Load a view's template file
+ *
+ * First, it looks in the current theme's /fdm-templates/ directory. Then it
+ * will check a parent theme's /fdm-templates/ directory. If nothing is found
+ * there, it will retrieve the template from the plugin directory.
+
+ * @since 1.1
+ * @param string template Type of template to load (eg - menu, menu-item)
+ * @param string layout Optional layout of this template to use if available. If
+ *		$template = 'menu' and $layout = 'vertical', it will look for the
+ *		menu-vertical.php template.
+ */
+function fdm_find_template( $template, $layout = null ) {
+
+	$locations = array(
+		get_stylesheet_directory() . '/' . FDM_TEMPLATE_DIR . '/',
+		get_template_directory() . '/' . FDM_TEMPLATE_DIR . '/',
+		FDM_PLUGIN_DIR . '/' . FDM_TEMPLATE_DIR . '/'
+	);
+
+	if ( isset( $layout ) ) {
+		$template .= '-' . $layout;
+	}
+
+	foreach ( $locations as $loc ) {
+		if ( file_exists( $loc . $template . '.php' ) ) {
+			return $loc . $template . '.php';
+		}
+	}
+
+	return false;
+}

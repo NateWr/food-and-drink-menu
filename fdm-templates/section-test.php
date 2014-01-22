@@ -1,0 +1,1 @@
+<h1>test<?php echo $this->sections[$section]->title; ?></h1> 

@@ -196,7 +196,7 @@ class fdmViewMenu extends fdmView {
 					<?php
 					foreach ( $this->sections[$section]->posts as $item_id ) {
 						$item = new fdmViewItem( $this->items[$item_id] );
-						$item->render();
+						echo $item->render();
 					}
 					?>
 
