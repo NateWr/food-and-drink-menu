@@ -17,10 +17,6 @@ class fdmViewMenu extends fdmView {
 	// Store data to prevent duplicate database calls
 	public $data = array();
 
-	public $style = 'base';
-
-	public $layout = 'classic';
-
 	/**
 	 * Retrieve data if it hasn't been retrieved already
 	 * @since 1.1
@@ -32,10 +28,6 @@ class fdmViewMenu extends fdmView {
 
 		if ( !count( $this->sections ) ) {
 			$this->get_sections();
-		}
-
-		if ( !count( $this->items ) ) {
-			$this->get_items();
 		}
 	}
 
@@ -65,6 +57,7 @@ class fdmViewMenu extends fdmView {
 
 	/**
 	 * Define the sections for this menu
+	 * @since 1.1
 	 */
 	public function get_sections() {
 		if ( !count( $this->groups ) ) {
@@ -73,76 +66,11 @@ class fdmViewMenu extends fdmView {
 
 		foreach( $this->groups as $group ) {
 			foreach( $group as $section_id ) {
-				$section_query = new WP_Query( array(
-					'post_type'      	=> 'fdm-menu-item',
-					'posts_per_page' 	=> -1,
-					'order'				=> 'ASC',
-					'orderby'			=> 'menu_order',
-					'tax_query'     	=> array(
-						array(
-							'taxonomy' => 'fdm-menu-section',
-							'field'    => 'id',
-							'terms'    => $section_id,
-						),
-					),
-				));
-				if ( count( $section_query->posts ) ) {
-					$this->data['items'][$section_id] = $section_query->posts;
-					$section = get_term( $section_id, 'fdm-menu-section' );
-					$data = array(
-							'id'			=> $section_id,
-							'title'			=> $section->name,
-							'value'		=> $section->description
-					);
-					foreach( $section_query->posts as $post ) {
-						$data['posts'][] = $post->ID;
-					}
-					$this->sections[$data['id']] = new fdmViewSection( apply_filters( 'fdm_section_data', $data ) );
-				}
-			}
-		}
-	}
-
-	/**
-	 * Define the menu items for this menu
-	 */
-	public function get_items() {
-		if ( !count( $this->sections) ) {
-			return;
-		}
-
-		if ( !count( $this->data['items'] ) ) {
-			return;
-		}
-
-		foreach ( $this->data['items'] as $section ) {
-			foreach ( $section as $item ) {
-				if ( isset( $this->items[$item->ID] ) ) {
-					continue;
-				}
-				$data = array(
-					'id' 		=> array( 'id' => $item->ID ),
-					'title' 	=> array( 'value' => $item->post_title ),
-					'content' 	=> array( 'value' => apply_filters('the_content', $item->post_content) ),
+				$this->sections[$section_id] = new fdmViewSection(
+					array(
+						'id' => $section_id
+					)
 				);
-
-				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $item->ID ), 'fdm-item-thumb' );
-				if ( isset( $image[0] ) ) {
-					$data['image'] = array(
-						'url'	=> $image[0],
-						'title'	=> $item->post_title
-					);
-				}
-
-				if ( !get_option( 'fdm-disable-price' ) ) {
-					$data['price'] = array(
-						'value' => get_post_meta( $item->ID, 'fdm_item_price', true )
-					);
-				}
-
-				$data = apply_filters( 'fdm_item_data', $data );
-
-				$this->items[$data['id']['id']] = $data;
 			}
 		}
 	}
@@ -158,10 +86,10 @@ class fdmViewMenu extends fdmView {
 		}
 
 		$this->get_data();
-		if ( !count( $this->groups ) || !count( $this->sections ) || !count( $this->items ) ) {
+		if ( !count( $this->groups ) || !count( $this->sections ) ) {
 			return;
 		}
-		
+
 		// Add any dependent stylesheets or javascript
 		$this->enqueue_assets();
 
@@ -187,22 +115,9 @@ class fdmViewMenu extends fdmView {
 
 			<?php
 			foreach ( $group as $section ) :
-				$classes = $this->section_classes( $s, $section );
-				?>
+				$this->sections[$section]->order = $s;
+				echo $this->sections[$section]->render();
 
-				<ul<?php echo fdm_format_classes( $classes ); ?>>
-					<?php echo $this->sections[$section]->render(); ?>
-
-					<?php
-					foreach ( $this->sections[$section]->posts as $item_id ) {
-						$item = new fdmViewItem( $this->items[$item_id] );
-						echo $item->render();
-					}
-					?>
-
-				</ul>
-
-				<?php
 				$s++;
 			endforeach;
 			?>
@@ -277,14 +192,14 @@ class fdmViewMenu extends fdmView {
 
 		return apply_filters( 'fdm_menu_section_classes', $classes, $this, $i, $section_id );
 	}
-	
+
 	/**
 	 * Enqueue stylesheets
 	 */
 	public function enqueue_assets() {
-	
+
 		global $fdm_styles;
-		
+
 		foreach ( $fdm_styles as $style ) {
 			if ( $this->style == $style->id ) {
 				$style->enqueue_assets();

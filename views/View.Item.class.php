@@ -59,63 +59,68 @@ class fdmViewItem extends fdmView {
 		$elements_order = apply_filters( 'fdm_menu_item_elements_order', $elements_order, $this );
 		$classes = apply_filters( 'fdm_menu_item_classes', $classes, $this );
 
-		// Define the HTML element to use
-		$html_element = 'li';
-		if ( $this->singular ) {
-			$html_element = 'div';
-		}
-		
+		// Capture output
 		ob_start();
-		
-		$template = fdm_find_template( 'menu-item' );
+		$template = fdm_find_template( 'menu-item', $this );
 		if ( $template ) {
 			include( $template );
 		}
-		
 		$output = ob_get_clean();
-		return $output;
+
+		return apply_filters( 'fdm_menu_item_output', $output, $this );
 
 	}
-	
+
 	/**
 	 * Load item data
 	 * @since 1.1
-	 * @todo This duplicates code in View.Menu.class.php. That file should use
-	 * this class to retrieve the meta data
 	 */
 	public function load_item() {
-	
+
 		if ( !isset( $this->id ) ) {
 			return;
 		}
-		
-		$item = get_post( $this->id );
-		
-		$data = array(
-			'id' 		=> array( 'id' => $item->ID ),
-			'title' 	=> array( 'value' => $item->post_title ),
-			'content' 	=> array( 'value' => apply_filters('the_content', $item->post_content) ),
-		);
 
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $item->ID ), 'fdm-item-thumb' );
-		if ( isset( $image[0] ) ) {
-			$data['image'] = array(
-				'url'	=> $image[0],
-				'title'	=> $item->post_title
-			);
+		// If no title is set, we need to gather the core post data first
+		if ( !isset( $this->title ) ) {
+			$this->get_data_from_post();
+		}
+
+		if ( !isset( $this->image ) ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $this->id ), 'fdm-item-thumb' );
+			if ( isset( $image[0] ) ) {
+				$this->image = array(
+					'url'	=> $image[0],
+					'title'	=> $this->title
+				);
+			}
 		}
 
 		if ( !get_option( 'fdm-disable-price' ) ) {
-			$data['price'] = array(
-				'value' => get_post_meta( $item->ID, 'fdm_item_price', true )
+			$this->price = array(
+				'value' => get_post_meta( $this->id, 'fdm_item_price', true )
 			);
 		}
 
-		$data = apply_filters( 'fdm_item_data', $data );
-		
-		$this->parse_args( $data );
+		do_action( 'fdm_load_item', $this );
 	}
-	
+
+	/**
+	 * Retrieves data from a post object if it exists or calls the db for it if
+	 * not.
+	 *
+	 * @note This only retrieves core post data, not metadata. @sa load_item()
+	 * @since 1.1
+	 */
+	public function get_data_from_post() {
+		if ( !isset( $this->post ) ) {
+			$this->post = get_post( $this->id );
+		}
+
+		$this->title = array( 'value' => $this->post->post_title );
+		$this->content = array( 'value' => apply_filters('the_content', $this->post->post_content) );
+	}
+
 	/**
 	 * Check if this view is of a single item
 	 * @since 1.1

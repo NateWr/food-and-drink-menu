@@ -740,7 +740,7 @@ add_filter('plugin_action_links', 'fdm_plugin_action_links', 10, 2);
  *		$template = 'menu' and $layout = 'vertical', it will look for the
  *		menu-vertical.php template.
  */
-function fdm_find_template( $template, $layout = null ) {
+function fdm_find_template( $template, $object ) {
 
 	$locations = array(
 		get_stylesheet_directory() . '/' . FDM_TEMPLATE_DIR . '/',
@@ -748,8 +748,8 @@ function fdm_find_template( $template, $layout = null ) {
 		FDM_PLUGIN_DIR . '/' . FDM_TEMPLATE_DIR . '/'
 	);
 
-	if ( isset( $layout ) ) {
-		$template .= '-' . $layout;
+	if ( isset( $object->layout ) && $object->layout != 'classic' ) {
+		$template .= '-' . $object->layout;
 	}
 
 	foreach ( $locations as $loc ) {

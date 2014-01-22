@@ -15,6 +15,11 @@ class fdmView extends fdmBase {
 		'price'		=> 'fdmContentPrice',
 		'image'		=> 'fdmContentImage'
 	);
+	
+	// Menu layout type default
+	public $layout = 'classic';
+
+	public $style = 'base';
 
 	/**
 	 * Initialize the class
