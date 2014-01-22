@@ -8,29 +8,7 @@
 
 class fdmViewMenu extends fdmView {
 
-	public $max_columns = 2;
-
 	public $groups = array();
-	public $sections = array();
-	public $items = array();
-
-	// Store data to prevent duplicate database calls
-	public $data = array();
-
-	/**
-	 * Retrieve data if it hasn't been retrieved already
-	 * @since 1.1
-	 */
-	public function get_data() {
-		if ( !count( $this->groups ) ) {
-			$this->get_groups();
-		}
-
-		if ( !count( $this->sections ) ) {
-			$this->get_sections();
-		}
-	}
-
 
 	/**
 	 * Define the groups for this menu and attach section ids to them
@@ -56,26 +34,6 @@ class fdmViewMenu extends fdmView {
 	}
 
 	/**
-	 * Define the sections for this menu
-	 * @since 1.1
-	 */
-	public function get_sections() {
-		if ( !count( $this->groups ) ) {
-			return;
-		}
-
-		foreach( $this->groups as $group ) {
-			foreach( $group as $section_id ) {
-				$this->sections[$section_id] = new fdmViewSection(
-					array(
-						'id' => $section_id
-					)
-				);
-			}
-		}
-	}
-
-	/**
 	 * Render the view and enqueue required stylesheets
 	 * @since 1.1
 	 */
@@ -85,8 +43,8 @@ class fdmViewMenu extends fdmView {
 			return;
 		}
 
-		$this->get_data();
-		if ( !count( $this->groups ) || !count( $this->sections ) ) {
+		$this->get_groups();
+		if ( !count( $this->groups ) ) {
 			return;
 		}
 
@@ -94,45 +52,48 @@ class fdmViewMenu extends fdmView {
 		$this->enqueue_assets();
 
 		// Add css classes to the menu list
-		$classes = $this->menu_classes();
+		$this->classes = $this->menu_classes();
 
-		// Capture output to return as one string
-		// If we print directly here instead of capturing the output, the menu
-		// will appear above any other content in the page/post
+		$this->c = 0; // Columns count
+		$this->s = 0; // Section count
+
 		ob_start();
-		?>
-
-		<ul id="<?php echo fdm_global_unique_id(); ?>"<?php echo fdm_format_classes( $classes ); ?>>
-
-		<?php
-		$c = 0; // Columns count
-		$s = 0; // Section count
-		foreach ( $this->groups as $group ) :
-			$classes = $this->column_classes( $c, count( $this->groups ) );
-			?>
-
-			<li<?php echo fdm_format_classes( $classes ); ?>>
-
-			<?php
-			foreach ( $group as $section ) :
-				$this->sections[$section]->order = $s;
-				echo $this->sections[$section]->render();
-
-				$s++;
-			endforeach;
-			?>
-
-			</li>
-
-			<?php
-			$c++;
-		endforeach;
-		?>
-
-		</ul>
-
-		<?php
+		$template = fdm_find_template( 'menu', $this );
+		if ( $template ) {
+			include( $template );
+		}
 		$output = ob_get_clean();
+
+		return apply_filters( 'fdm_menu_output', $output, $this );
+	}
+
+	/**
+	 * Print the sections of a menu group
+	 *
+	 * @note This just cleans up the template a bit
+	 * @since 1.1
+	 */
+	public function print_group_sections() {
+
+		$output = '';
+
+		foreach ( $this->groups as $group ) {
+			foreach ( $group as $section_id ) {
+
+				$section = new fdmViewSection(
+					array(
+						'id' => $section_id,
+						'order' => $this->s
+					)
+				);
+
+				$output .= $section->render();
+
+				$this->s++;
+
+			}
+		}
+
 		return $output;
 	}
 
@@ -159,21 +120,24 @@ class fdmViewMenu extends fdmView {
 	 * Get the menu column css classes
 	 * @since 1.1
 	 */
-	public function column_classes( $i, $total, $classes = array() ) {
+	public function column_classes( $classes = array() ) {
 		$classes = array_merge(
 			$classes,
 			array(
 				'fdm-column',
-				'fdm-column-' . $i
+				'fdm-column-' . $this->c
 			)
 		);
 
 		// Add a last column class
-		if ( $i == ( $total - 1 ) ) {
+		if ( $this->c == ( count( $this->groups ) - 1 ) ) {
 			$classes[] = 'fdm-column-last';
 		}
 
-		return apply_filters( 'fdm_menu_column_classes', $classes, $this, $i, $total );
+		// Increment the column counter
+		$this->c++;
+
+		return apply_filters( 'fdm_menu_column_classes', $classes, $this );
 	}
 
 	/**
