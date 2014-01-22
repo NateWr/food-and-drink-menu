@@ -152,7 +152,7 @@ class fdmCustomPostTypes {
 	 * Add metaboxes to specify custom post type data
 	 * @since 1.0
 	 */
-	function add_meta_boxes() {
+	public function add_meta_boxes() {
 
 		$meta_boxes = array(
 
@@ -174,7 +174,17 @@ class fdmCustomPostTypes {
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'side',
 				'priority'	=> 'default'
-			)
+			),
+
+			// Add a box that shows menu item shortcode
+			'fdm_menu_shortcode' => array (
+				'id'		=>	'fdm_menu_item_shortcode',
+				'title'		=> __( 'Menu Item Shortcode', FDM_TEXTDOMAIN ),
+				'callback'	=> array( $this, 'show_menu_item_shortcode' ),
+				'post_type'	=> 'fdm-menu-item',
+				'context'	=> 'side',
+				'priority'	=> 'default'
+			),
 
 		);
 
@@ -214,15 +224,13 @@ class fdmCustomPostTypes {
 	 * Print the Menu Item price metabox HTML
 	 * @since 1.0
 	 */
-	function show_item_price() {
+	public function show_item_price() {
 
 		// Retrieve values for this if it exists
 		global $post;
 		$price = get_post_meta( $post->ID, 'fdm_item_price', true );
 
 		?>
-
-			<input type="hidden" name="fdm_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>">
 
 			<div class="fdm-input-controls fdm-input-side-panel">
 				<div class="fdm-input-control">
@@ -241,7 +249,7 @@ class fdmCustomPostTypes {
 	 * Print the Menu organizer HTML
 	 * @since 1.0
 	 */
-	function show_menu_organizer() {
+	public function show_menu_organizer() {
 
 		// Retrieve existing settings
 		global $post;
@@ -257,7 +265,6 @@ class fdmCustomPostTypes {
 
 		?>
 
-			<input type="hidden" name="fdm_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>">
 			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php echo $column_one; ?>">
 			<input type="hidden" id="fdm_menu_column_two" name="fdm_menu_column_two" value="<?php echo $column_two; ?>">
 
@@ -308,8 +315,9 @@ class fdmCustomPostTypes {
 	/**
 	 * Print the menu shortcode HTML on the edit page for easy reference
 	 * @since 1.0
+	 * @note We also add the fdm_nonce field here for security
 	 */
-	function show_menu_shortcode() {
+	public function show_menu_shortcode() {
 
 		// Retrieve post ID
 		global $post;
@@ -338,13 +346,57 @@ class fdmCustomPostTypes {
 
 		}
 
+		// Add an nonce here for security
+		?>
+		<input type="hidden" name="fdm_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>">
+		<?php
+	}
+
+	/**
+	 * Print the menu shortcode HTML on the edit page for easy reference
+	 * @since 1.0
+	 * @note We also add the fdm_nonce field here for security
+	 */
+	public function show_menu_item_shortcode() {
+
+		// Retrieve post ID
+		global $post;
+
+		// Check if menu is ready to be displayed
+		$status = get_post_status( $post->ID );
+
+		// Show advisory note when shortcode isn't ready
+		if ( $status != 'publish' ) {
+
+			?>
+
+			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu item in any post or page.', FDM_TEXTDOMAIN ); ?></p>
+
+			<?php
+
+		// Show the shortcode
+		} else {
+
+			?>
+
+				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', FDM_TEXTDOMAIN ); ?></p>
+				<div class="fdm-menu-shortcode">[fdm-menu-item id=<?php echo $post->ID; ?>]</div>
+
+			<?php
+
+		}
+
+		// Add an nonce here for security
+		?>
+		<input type="hidden" name="fdm_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>">
+		<?php
 	}
 
 	/**
 	 * Save the metabox data from menu items and menus
 	 * @since 1.0
 	 */
-	function save_meta( $post_id ) {
+	public function save_meta( $post_id ) {
 
 		// Verify nonce
 		if ( !isset( $_POST['fdm_nonce'] ) || !wp_verify_nonce( $_POST['fdm_nonce'], basename( __FILE__ ) ) ) {
@@ -365,7 +417,7 @@ class fdmCustomPostTypes {
 
 		// Array of values to fetch and store
 		$meta_ids = array();
-		
+
 		global $post;
 
 		// Define Menu Item data
@@ -381,7 +433,7 @@ class fdmCustomPostTypes {
 			$meta_ids['fdm_menu_column_one'] = 'sanitize_text_field';
 			$meta_ids['fdm_menu_column_two'] = 'sanitize_text_field';
 
-		}
+		} 
 
 		// Create filter so addons can add new data
 		$meta_ids = apply_filters( 'fdm_save_meta', $meta_ids );
