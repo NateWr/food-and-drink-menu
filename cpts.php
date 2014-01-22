@@ -365,16 +365,18 @@ class fdmCustomPostTypes {
 
 		// Array of values to fetch and store
 		$meta_ids = array();
+		
+		global $post;
 
 		// Define Menu Item data
-		if ( FDM_MENUITEM_POST_TYPE == $_POST['post_type'] ) {
+		if ( FDM_MENUITEM_POST_TYPE == $post->post_type ) {
 
 			$meta_ids['fdm_item_price'] = 'sanitize_text_field';
 
 		}
 
 		// Define Menu organizer metadata
-		if ( FDM_MENU_POST_TYPE == $_POST['post_type'] ) {
+		if ( FDM_MENU_POST_TYPE == $post->post_type ) {
 
 			$meta_ids['fdm_menu_column_one'] = 'sanitize_text_field';
 			$meta_ids['fdm_menu_column_two'] = 'sanitize_text_field';
