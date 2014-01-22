@@ -177,23 +177,6 @@ class fdmViewMenu extends fdmView {
 	}
 
 	/**
-	 * Get the menu section css classes
-	 * @since 1.1
-	 */
-	public function section_classes( $i, $section_id, $classes = array() ) {
-		$classes = array_merge(
-			$classes,
-			array(
-				'fdm-section',
-				'fdm-section-' . $i,
-				'fdm-sectionid-' . $section_id
-			)
-		);
-
-		return apply_filters( 'fdm_menu_section_classes', $classes, $this, $i, $section_id );
-	}
-
-	/**
 	 * Enqueue stylesheets
 	 */
 	public function enqueue_assets() {
