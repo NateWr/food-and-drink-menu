@@ -3,9 +3,9 @@
 <?php endif; ?>
 
 	<?php if ( $this->is_singular() ) : ?>
-	<div<?php echo fdm_format_classes( $classes ); ?>>
+	<div<?php echo fdm_format_classes( $this->classes ); ?>>
 	<?php else : ?>
-	<li<?php echo fdm_format_classes( $classes ); ?>>
+	<li<?php echo fdm_format_classes( $this->classes ); ?>>
 	<?php endif; ?>
 
 		<?php do_action( 'fdm_menu_item_before', $this ); ?>
