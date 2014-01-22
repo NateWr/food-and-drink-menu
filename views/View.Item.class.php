@@ -59,6 +59,9 @@ class fdmViewItem extends fdmView {
 		$this->elements_order = apply_filters( 'fdm_menu_item_elements_order', $elements_order, $this );
 		$this->classes = apply_filters( 'fdm_menu_item_classes', $classes, $this );
 
+		// Add any dependent stylesheets or javascript
+		$this->enqueue_assets();
+
 		// Capture output
 		ob_start();
 		$template = $this->find_template( 'menu-item' );

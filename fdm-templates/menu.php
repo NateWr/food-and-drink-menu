@@ -4,7 +4,7 @@
 
 	<li<?php echo fdm_format_classes( $this->column_classes() ); ?>>
 
-	<?php echo $this->print_group_sections(); ?>
+	<?php echo $this->print_group_section( $group ); ?>
 
 	</li>
 

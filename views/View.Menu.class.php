@@ -73,25 +73,23 @@ class fdmViewMenu extends fdmView {
 	 * @note This just cleans up the template a bit
 	 * @since 1.1
 	 */
-	public function print_group_sections() {
+	public function print_group_section( $group ) {
 
 		$output = '';
 
-		foreach ( $this->groups as $group ) {
-			foreach ( $group as $section_id ) {
+		foreach ( $group as $section_id ) {
 
-				$section = new fdmViewSection(
-					array(
-						'id' => $section_id,
-						'order' => $this->s
-					)
-				);
+			$section = new fdmViewSection(
+				array(
+					'id' => $section_id,
+					'order' => $this->s
+				)
+			);
 
-				$output .= $section->render();
+			$output .= $section->render();
 
-				$this->s++;
+			$this->s++;
 
-			}
 		}
 
 		return $output;
@@ -138,20 +136,6 @@ class fdmViewMenu extends fdmView {
 		$this->c++;
 
 		return apply_filters( 'fdm_menu_column_classes', $classes, $this );
-	}
-
-	/**
-	 * Enqueue stylesheets
-	 */
-	public function enqueue_assets() {
-
-		global $fdm_styles;
-
-		foreach ( $fdm_styles as $style ) {
-			if ( $this->style == $style->id ) {
-				$style->enqueue_assets();
-			}
-		}
 	}
 
 }

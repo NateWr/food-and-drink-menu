@@ -82,4 +82,18 @@ class fdmView extends fdmBase {
 		return false;
 	}
 
+	/**
+	 * Enqueue stylesheets
+	 */
+	public function enqueue_assets() {
+
+		global $fdm_controller;
+
+		foreach ( $fdm_controller->styles as $style ) {
+			if ( $this->style == $style->id ) {
+				$style->enqueue_assets();
+			}
+		}
+	}
+
 }
