@@ -296,6 +296,7 @@ function fdm_plugin_init() {
 	// Add filters on the menu style so we can apply the setting option
 	add_filter( 'fdm_menu_args', 'fdm_set_style' );
 	add_filter( 'fdm_shortcode_menu_atts', 'fdm_set_style' );
+	add_filter( 'fdm_shortcode_menu_item_atts', 'fdm_set_style' );
 
 }
 
@@ -587,8 +588,6 @@ function fdm_menu_shortcode( $atts ) {
 
 	// Extract the shortcode attributes
 	$args = shortcode_atts( $menu_atts, $atts );
-	
-	print_r($args);
 
 	// Render menu
 	fdm_load_view_files();
@@ -596,6 +595,32 @@ function fdm_menu_shortcode( $atts ) {
 	echo $menu->render();
 }
 add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
+
+/**
+ * Create a shortcode to display a menu item
+ * @since 1.1
+ */
+function fdmp_menu_item_shortcode( $atts ) {
+
+	// Define shortcode attributes
+	$menu_item_atts = array(
+		'id' => null,
+		'layout' => 'classic',
+		'singular' => true
+	);
+
+	// Create filter so addons can modify the accepted attributes
+	$menu_item_atts = apply_filters( 'fdm_shortcode_menu_item_atts', $menu_item_atts );
+
+	// Extract the shortcode attributes
+	$args = shortcode_atts( $menu_item_atts, $atts );
+
+	// Render menu
+	fdm_load_view_files();
+	$menuitem = new fdmViewItem( $args );
+	echo $menuitem->render();
+}
+add_shortcode( 'fdm-menu-item', 'fdmp_menu_item_shortcode' );
 
 /**
  * Print the menu on menu post type pages
@@ -619,15 +644,23 @@ function fdm_cpt_menu_content( $content ) {
 	$args = array(
 		'id'	=> $post->ID
 	);
+	if ( FDM_MENUITEM_POST_TYPE == $post->post_type ) {
+		$args['singular'] = true;
+	}
 	$args = apply_filters( 'fdm_menu_args', $args );
 
-	$menu = new fdmViewMenu( $args );
-	$output = $menu->render();
+	if ( FDM_MENU_POST_TYPE == $post->post_type ) {
+		$menu = new fdmViewMenu( $args );
+		$content .= $menu->render();
+	} else {
+		$menu = new fdmViewItem( $args );
+		$content = $menu->render();
+	}
 
 	// Restore this filter
     add_action( 'the_content', 'fdm_cpt_menu_content' );
 
-	return $content . $output;
+	return $content;
 
 }
 add_filter( 'the_content', 'fdm_cpt_menu_content' );
