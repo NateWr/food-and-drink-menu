@@ -58,7 +58,7 @@ class fdmViewMenu extends fdmView {
 		$this->s = 0; // Section count
 
 		ob_start();
-		$template = fdm_find_template( 'menu', $this );
+		$template = $this->find_template( 'menu' );
 		if ( $template ) {
 			include( $template );
 		}

@@ -61,7 +61,7 @@ class fdmViewItem extends fdmView {
 
 		// Capture output
 		ob_start();
-		$template = fdm_find_template( 'menu-item', $this );
+		$template = $this->find_template( 'menu-item' );
 		if ( $template ) {
 			include( $template );
 		}
@@ -78,15 +78,25 @@ class fdmViewItem extends fdmView {
 	 * @since 1.1
 	 */
 	public function print_elements() {
+	
+		$output = '';
+		
 		foreach( $this->elements_order as $element ) {
 			if ( in_array( $element, $this->elements ) ) {
-				$class = $this->content_map[$element];
-				if ( class_exists( $class ) ) {
-					$content = new $class( $this->{$element} );
-					$content->render();
+
+				// Load the template for this content type
+				$template = $this->find_template( $this->content_map[$element] );
+
+				ob_start();
+				if ( $template ) {
+					include( $template );
 				}
+				$element_output = ob_get_clean();
+
+				$output .= apply_filters( 'fdm_element_output_' . $element, $element_output, $this );
 			}
 		}
+		return $output;
 	}
 
 	/**
@@ -107,17 +117,12 @@ class fdmViewItem extends fdmView {
 		if ( !isset( $this->image ) ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $this->id ), 'fdm-item-thumb' );
 			if ( isset( $image[0] ) ) {
-				$this->image = array(
-					'url'	=> $image[0],
-					'title'	=> $this->title
-				);
+				$this->image = $image[0];
 			}
 		}
 
 		if ( !get_option( 'fdm-disable-price' ) ) {
-			$this->price = array(
-				'value' => get_post_meta( $this->id, 'fdm_item_price', true )
-			);
+			$this->price = get_post_meta( $this->id, 'fdm_item_price', true );
 		}
 
 		do_action( 'fdm_load_item', $this );
@@ -135,8 +140,8 @@ class fdmViewItem extends fdmView {
 			$this->post = get_post( $this->id );
 		}
 
-		$this->title = array( 'value' => $this->post->post_title );
-		$this->content = array( 'value' => apply_filters('the_content', $this->post->post_content) );
+		$this->title = $this->post->post_title;
+		$this->content = apply_filters('the_content', $this->post->post_content);
 	}
 
 	/**

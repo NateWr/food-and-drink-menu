@@ -8,12 +8,12 @@
 
 class fdmView extends fdmBase {
 
-	// Map types of content to the class which will render them
+	// Map types of content to the template which will render them
 	public $content_map = array(
-		'title'		=> 'fdmContentTitle',
-		'content'	=> 'fdmContentContent',
-		'price'		=> 'fdmContentPrice',
-		'image'		=> 'fdmContentImage'
+		'title'		=> 'content/title',
+		'content'	=> 'content/content',
+		'price'		=> 'content/price',
+		'image'		=> 'content/image'
 	);
 	
 	// Menu layout type default
@@ -49,6 +49,37 @@ class fdmView extends fdmBase {
 				'type'		=> 'render() called on wrong class'
 			)
 		);
+	}
+
+	/**
+	 * Load a template file for views
+	 *
+	 * First, it looks in the current theme's /fdm-templates/ directory. Then it
+	 * will check a parent theme's /fdm-templates/ directory. If nothing is found
+	 * there, it will retrieve the template from the plugin directory.
+
+	 * @since 1.1
+	 * @param string template Type of template to load (eg - menu, menu-item)
+	 */
+	function find_template( $template ) {
+
+		$locations = array(
+			get_stylesheet_directory() . '/' . FDM_TEMPLATE_DIR . '/',
+			get_template_directory() . '/' . FDM_TEMPLATE_DIR . '/',
+			FDM_PLUGIN_DIR . '/' . FDM_TEMPLATE_DIR . '/'
+		);
+
+		if ( isset( $this->layout ) && $this->layout != 'classic' ) {
+			$template .= '-' . $this->layout;
+		}
+
+		foreach ( $locations as $loc ) {
+			if ( file_exists( $loc . $template . '.php' ) ) {
+				return $loc . $template . '.php';
+			}
+		}
+
+		return false;
 	}
 
 }

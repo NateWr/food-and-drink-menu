@@ -42,7 +42,7 @@ class fdmViewSection extends fdmView {
 
 		// Capture output
 		ob_start();
-		$template = fdm_find_template( 'menu-section', $this );
+		$template = $this->find_template( 'menu-section' );
 		if ( $template ) {
 			include( $template );
 		}

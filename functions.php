@@ -160,7 +160,7 @@ function fdm_plugin_init() {
 	do_action( 'fdm_menu_item_post_register' );
 
 	// Define supported styles
-	require_once( 'views/Base.class.php' );
+	fdm_load_view_files();
 	global $fdm_styles;
 	$fdm_styles = array(
 		'base' => new fdmStyle(
@@ -683,9 +683,20 @@ function fdm_set_style( $args ) {
 /**
  * Load files needed for views
  * @since 1.1
+ * @note Can be filtered to add new classes as needed
  */
 function fdm_load_view_files() {
-	require_once( 'views/Base.class.php' );
+
+	$files = array(
+		'views/Base.class.php' // This will load all default classes
+	);
+
+	$files = apply_filters( 'fdm_load_view_files', $files );
+
+	foreach( $files as $file ) {
+		require_once( $file );
+	}
+
 }
 
 /**
@@ -726,37 +737,3 @@ function fdm_plugin_action_links( $links, $plugin ) {
 
 }
 add_filter('plugin_action_links', 'fdm_plugin_action_links', 10, 2);
-
-/**
- * Load a view's template file
- *
- * First, it looks in the current theme's /fdm-templates/ directory. Then it
- * will check a parent theme's /fdm-templates/ directory. If nothing is found
- * there, it will retrieve the template from the plugin directory.
-
- * @since 1.1
- * @param string template Type of template to load (eg - menu, menu-item)
- * @param string layout Optional layout of this template to use if available. If
- *		$template = 'menu' and $layout = 'vertical', it will look for the
- *		menu-vertical.php template.
- */
-function fdm_find_template( $template, $object ) {
-
-	$locations = array(
-		get_stylesheet_directory() . '/' . FDM_TEMPLATE_DIR . '/',
-		get_template_directory() . '/' . FDM_TEMPLATE_DIR . '/',
-		FDM_PLUGIN_DIR . '/' . FDM_TEMPLATE_DIR . '/'
-	);
-
-	if ( isset( $object->layout ) && $object->layout != 'classic' ) {
-		$template .= '-' . $object->layout;
-	}
-
-	foreach ( $locations as $loc ) {
-		if ( file_exists( $loc . $template . '.php' ) ) {
-			return $loc . $template . '.php';
-		}
-	}
-
-	return false;
-}

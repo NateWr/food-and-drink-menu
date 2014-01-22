@@ -7,11 +7,6 @@
  */
 
 // Load library classes
-require_once( 'Content.class.php' );
-require_once( 'Content.Content.class.php' );
-require_once( 'Content.Image.class.php' );
-require_once( 'Content.Price.class.php' );
-require_once( 'Content.Title.class.php' );
 require_once( 'Style.class.php' );
 require_once( 'View.class.php' );
 require_once( 'View.Item.class.php' );
