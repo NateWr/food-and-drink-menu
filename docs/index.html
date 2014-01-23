@@ -172,19 +172,24 @@
 	<a name="shortcode"></a>
 	<h3>Shortcode parameters</h3>
 	<p>This section is for advanced users who wish to use optional parameters with the shortcode.</p>
+	<p><em>At the moment, there are no custom options available for the menu shortcode. More will
+		be added in the future.</em></p>
 	<h4>Menu Shortcode</h4>
 	<p>Prints a full menu with all sections.</p>
-	<p><code>[fdm-menu id=1 layout=classic]</code></p>
+	<p><code>[fdm-menu id=1]</code></p>
 	<ul>
 		<li>
 			<strong>id</strong><br>
 			Accepts the id of the desired menu. Must be an integer.
 		</li>
+	</ul>
+	<h4>Menu Item Shortcode</h4>
+	<p>Prints a single menu item.</p>
+	<p><code>[fdm-menu-item id=1]</code></p>
+	<ul>
 		<li>
-			<strong>layout</strong><br>
-			Accepts either "classic" or "enlarged". Enlarged layouts will show a larger text size.
-			They are useful for single-column menus on large-width websites, where the image might
-			be very large.
+			<strong>id</strong><br>
+			Accepts the id of the desired menu. Must be an integer.
 		</li>
 	</ul>
 	
@@ -206,9 +211,6 @@
 		</li>
 		<li>
 			Google maps to show off local suppliers or ethical sourcing programs
-		</li>
-		<li>
-			Optionally display a single menu item instead of the whole menu
 		</li>
 	</ul>
 
