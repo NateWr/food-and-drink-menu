@@ -91,10 +91,20 @@ class fdmView extends fdmBase {
 
 		global $fdm_controller;
 
+		$enqueued = false;
 		foreach ( $fdm_controller->styles as $style ) {
 			if ( $this->style == $style->id ) {
 				$style->enqueue_assets();
+				$enqueued = true;
 			}
+		}
+		
+		// Fallback to basic style if the selected style does not exist
+		// This can happen if they have a custom style defined in a theme, then
+		// they switch themes. The setting will still be the custom style, but
+		// no entry in $fdm_controller->styles will exist for that style.
+		if ( !$enqueued && isset( $fdm_controller->styles['base'] ) ) {
+			$fdm_controller->styles['base']->enqueue_assets();
 		}
 	}
 
