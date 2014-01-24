@@ -35,7 +35,7 @@ Once you've saved the menu in the admin panel, it will give you the shortcode so
 
 = Developers =
 
-This plugin is packed with hooks so you can extend and customize it to your delight. A pro addon is coming soon at [Theme of the Crop](http://themeofthecrop.com/?utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
+This plugin is packed with hooks so you can extend and customize it to your delight. A pro addon is available at [Theme of the Crop](http://themeofthecrop.com/?utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
 
 This plugin is [on GitHub](https://github.com/NateWr/food-and-drink-menu "Food and Drink Menu at Github") so fork it up.
 
