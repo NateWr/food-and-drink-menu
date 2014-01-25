@@ -177,7 +177,7 @@ class fdmCustomPostTypes {
 			),
 
 			// Add a box that shows menu item shortcode
-			'fdm_menu_shortcode' => array (
+			'fdm_menu_item_shortcode' => array (
 				'id'		=>	'fdm_menu_item_shortcode',
 				'title'		=> __( 'Menu Item Shortcode', FDM_TEXTDOMAIN ),
 				'callback'	=> array( $this, 'show_menu_item_shortcode' ),
