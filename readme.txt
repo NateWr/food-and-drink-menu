@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.8.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
