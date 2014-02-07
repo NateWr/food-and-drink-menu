@@ -36,6 +36,10 @@ class fdmViewSection extends fdmView {
 
 		// Gather data if it's not already set
 		$this->load_section();
+		
+		if ( !isset( $this->items ) || ( is_array( $this->items ) && !count( $this->items ) ) ) {
+			return;
+		}
 
 		// Define the classes for this section
 		$this->set_classes();
@@ -59,8 +63,10 @@ class fdmViewSection extends fdmView {
 	 */
 	public function print_items() {
 		$output = '';
-		foreach ( $this->items as $item ) {
-			$output .= $item->render();
+		if ( isset( $this->items ) && is_array( $this->items ) ) {
+			foreach ( $this->items as $item ) {
+				$output .= $item->render();
+			}
 		}
 		return $output;
 	}
