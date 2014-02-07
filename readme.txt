@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.8.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -77,6 +77,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.1.4 (2014-02-07) =
+* Fix PHP error notice that appeared if an empty section was rendered (h/t Remco Verweij for reporting)
+
 = 1.1.3 (2014-02-03) =
 * Fix CSS error with the Classic style
 
@@ -105,6 +108,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+This update fixes a small error that would appear if a menu contained a section with no menu items.
 
 = 1.1.3 =
 This update fixes a problem with the Classic style which prevented the font from appearing on some browsers.
