@@ -78,7 +78,7 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 == Changelog ==
 
 = 1.1.4 (2014-02-07) =
-* Fix PHP error notice that appeared if an empty section was rendered (h/t Remco Verweij for reporting)
+* Fix PHP error notice that appeared if an empty section was rendered (h/t [Remco Verweij](https://github.com/verweijder) for reporting)
 
 = 1.1.3 (2014-02-03) =
 * Fix CSS error with the Classic style
