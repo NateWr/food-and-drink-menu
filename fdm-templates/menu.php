@@ -1,7 +1,11 @@
 <?php if ( $this->title ) : ?>
 <h3 class="fdm-menu-title"><?php echo $this->title; ?></h3>
 <?php endif; ?>
-<?php if ( $this->content ) { echo $this->content; } ?>
+<?php if ( $this->content ) : ?>
+<div class="fdm-menu-content">
+	<?php echo $this->content; ?>
+</div>
+<?php endif; ?>
 <ul id="<?php echo fdm_global_unique_id(); ?>"<?php echo fdm_format_classes( $this->classes ); ?>>
 
 <?php foreach ( $this->groups as $group ) :	?>

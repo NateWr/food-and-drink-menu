@@ -6,6 +6,7 @@
 
 @import url(http://fonts.googleapis.com/css?family=Tangerine:400,700);
 
+.fdm-menu-title,
 .fdm-section-header h3,
 .fdm-item-panel .fdm-item-title,
 .fdm-src-panel p.src-title {
@@ -13,9 +14,15 @@
 	font-size: 180%;
 	margin-bottom: 0;
 }
+.fdm-menu-title,
 .fdm-section-header h3 {
 	font-size: 250%;
 }
+.fdm-menu-title {
+	margin-bottom: 0.5em;
+	border-bottom: 1px solid #333;
+}
+.fdm-menu-content,
 .fdm-item-content,
 .fdm-item-price-wrapper,
 .fdm-item-src-desc,
