@@ -26,7 +26,8 @@
 .fdm-item-content,
 .fdm-item-price-wrapper,
 .fdm-item-src-desc,
-.fdm-section-header p {
+.fdm-section-header p,
+.fdm-menu-footer {
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif;
 	font-style: italic;
 }
@@ -34,4 +35,8 @@
 	border: 2px solid #000;
 	padding: 1px;
 	background-color: #666;
+}
+.fdm-menu-footer {
+	border-top: 1px solid #333;
+	padding-top: 0.5em;
 }

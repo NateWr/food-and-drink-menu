@@ -156,6 +156,16 @@ class fdmCustomPostTypes {
 
 		$meta_boxes = array(
 
+			// Add a menu footer WYSIWYG editor
+			'fdm_menu_footer' => array (
+				'id'		=>	'fdm_menu_footer',
+				'title'		=> __( 'Menu Footer', FDM_TEXTDOMAIN ),
+				'callback'	=> array( $this, 'show_menu_footer' ),
+				'post_type'	=> 'fdm-menu',
+				'context'	=> 'normal',
+				'priority'	=> 'core'
+			),
+
 			// Add a menu organizer
 			'fdm_menu_layout' => array (
 				'id'		=>	'fdm_menu_layout',
@@ -243,6 +253,25 @@ class fdmCustomPostTypes {
 			</div>
 
 		<?php
+	}
+
+	/**
+	 * Print the Menu footer HTML
+	 * @since 1.0
+	 */
+	public function show_menu_footer() {
+
+		// Retrieve existing settings
+		global $post;
+		$footer = apply_filters( 'the_content', get_post_meta( $post->ID, 'fdm_menu_footer_content', true ) );
+
+		wp_editor(
+			$footer,
+			'fdm_menu_footer_content',
+			array(
+				'textarea_rows' => 5
+			)
+		);
 	}
 
 	/**
@@ -432,8 +461,9 @@ class fdmCustomPostTypes {
 
 			$meta_ids['fdm_menu_column_one'] = 'sanitize_text_field';
 			$meta_ids['fdm_menu_column_two'] = 'sanitize_text_field';
+			$meta_ids['fdm_menu_footer_content'] = 'wp_kses_post';
 
-		} 
+		}
 
 		// Create filter so addons can add new data
 		$meta_ids = apply_filters( 'fdm_save_meta', $meta_ids );

@@ -19,3 +19,8 @@
 <?php endforeach; ?>
 
 </ul>
+<?php if ( $this->footer ) : ?>
+<div class="fdm-menu-footer">
+	<?php echo $this->footer; ?>
+</div>
+<?php endif; ?>

@@ -15,6 +15,7 @@ class fdmViewMenu extends fdmView {
 
 	public $title = '';
 	public $content = '';
+	public $footer = '';
 
 	/**
 	 * Get the post title and content to display
@@ -26,6 +27,8 @@ class fdmViewMenu extends fdmView {
 			$this->title = $this->post->post_title;
 			$this->content = apply_filters('the_content', $this->post->post_content);
 		}
+		
+		$this->footer = apply_filters('the_content', get_post_meta( $this->id, 'fdm_menu_footer_content', true ) );
 	}
 
 	/**

@@ -77,6 +77,10 @@
 	right: 0;
 	white-space: nowrap;
 }
+.fdm-menu-footer {
+	font-size: 85%;
+	font-style: italic;
+}
 
 /**
  * This media query is pegged to Bootstrap 3's breakpoint
