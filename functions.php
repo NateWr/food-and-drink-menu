@@ -13,7 +13,9 @@ function fdm_menu_shortcode( $atts ) {
 	// Define shortcode attributes
 	$menu_atts = array(
 		'id' => null,
-		'layout' => 'classic'
+		'layout' => 'classic',
+		'show_title' => false,
+		'show_content' => false,
 	);
 
 	// Create filter so addons can modify the accepted attributes

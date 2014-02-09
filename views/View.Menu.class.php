@@ -10,6 +10,24 @@ class fdmViewMenu extends fdmView {
 
 	public $groups = array();
 
+	public $show_title = false;
+	public $show_content = false;
+
+	public $title = '';
+	public $content = '';
+
+	/**
+	 * Get the post title and content to display
+	 * @since 1.1.5
+	 */
+	public function get_menu_post() {
+		if ( $this->show_title || $this->show_content ) {
+			$this->post = get_post( $this->id );
+			$this->title = $this->post->post_title;
+			$this->content = apply_filters('the_content', $this->post->post_content);
+		}
+	}
+
 	/**
 	 * Define the groups for this menu and attach section ids to them
 	 *
@@ -47,6 +65,8 @@ class fdmViewMenu extends fdmView {
 		if ( !count( $this->groups ) ) {
 			return;
 		}
+
+		$this->get_menu_post();
 
 		// Add any dependent stylesheets or javascript
 		$this->enqueue_assets();
