@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.8.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.1.4
+Stable tag: 1.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -20,7 +20,8 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Unlimited menus and menu items
 * Add a photo and price for each menu item
 * Menu sections can include guidance, such as "All entrees come with a side salad or fries"
-* Display your menu or menu item in pages and posts, or use the custom post type format
+* Add a footer to each menu for legal disclaimers or other notes
+* Display your menu or menu item in pages, posts and navigation menus or use the custom post type format
 * Use the widget to display your menu in a sidebar
 * Responsive menu layout to improve mobile viewing
 * Templates to easily customize the output of menus and menu items
@@ -77,6 +78,11 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.2 (2014-02-12) =
+* Add a POT file for easier language translations
+* Add support for displaying menu title and content when using a shortcode
+* Add support for menu footers to display legal notices or other content
+
 = 1.1.4 (2014-02-07) =
 * Fix PHP error notice that appeared if an empty section was rendered (h/t [Remco Verweij](https://github.com/verweijder) for reporting)
 
@@ -108,6 +114,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.2 =
+This update adds support for menu footers, so you can add legal notices or other content (ie - "All dishes prepared in a kitchen that contains nuts."). Shortcodes can now display menu titles and post content. A POT file was added to make language translations easier for you.
 
 = 1.1.4 =
 This update fixes a small error that would appear if a menu contained a section with no menu items.
