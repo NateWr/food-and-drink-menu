@@ -7,11 +7,11 @@
  */
 
 // Load library classes
-require_once( 'Style.class.php' );
-require_once( 'View.class.php' );
-require_once( 'View.Item.class.php' );
-require_once( 'View.Menu.class.php' );
-require_once( 'View.Section.class.php' );
+require_once( FDM_PLUGIN_DIR . '/views/Style.class.php' );
+require_once( FDM_PLUGIN_DIR . '/views/View.class.php' );
+require_once( FDM_PLUGIN_DIR . '/views/View.Item.class.php' );
+require_once( FDM_PLUGIN_DIR . '/views/View.Menu.class.php' );
+require_once( FDM_PLUGIN_DIR . '/views/View.Section.class.php' );
 
 class fdmBase {
 

@@ -67,7 +67,7 @@ add_shortcode( 'fdm-menu-item', 'fdm_menu_item_shortcode' );
 function fdm_load_view_files() {
 
 	$files = array(
-		'views/Base.class.php' // This will load all default classes
+		FDM_PLUGIN_DIR . '/views/Base.class.php' // This will load all default classes
 	);
 
 	$files = apply_filters( 'fdm_load_view_files', $files );
