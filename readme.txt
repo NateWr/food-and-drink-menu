@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.8.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -82,6 +82,10 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.2 (2014-04-01) =
+* Fix: errors in multisite. Use FDM_PLUGIN_DIR with require_once() calls
+* Fix: Notice thrown when the_content filter called outside of loop
+
 = 1.2 (2014-02-12) =
 * Add a POT file for easier language translations
 * Add support for displaying menu title and content when using a shortcode
@@ -118,6 +122,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+This update fixes an error that occurs when using the plugin with WordPress Multisite as well as a PHP Notice that could occur if the shortcode was called outside of the loop.
 
 = 1.2 =
 This update adds support for menu footers, so you can add legal notices or other content (ie - "All dishes prepared in a kitchen that contains nuts."). Shortcodes can now display menu titles and post content. A POT file was added to make language translations easier for you.
