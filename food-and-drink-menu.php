@@ -151,8 +151,7 @@ class fdmFoodAndDrinkMenu {
 	function append_to_content( $content ) {
 		global $post;
 
-		if ( ( FDM_MENU_POST_TYPE !== $post->post_type && FDM_MENUITEM_POST_TYPE !== $post->post_type )
-				|| !is_main_query() || !in_the_loop() ) {
+		if ( !is_main_query() || !in_the_loop() || ( FDM_MENU_POST_TYPE !== $post->post_type && FDM_MENUITEM_POST_TYPE !== $post->post_type ) ) {
 			return $content;
 		}
 
