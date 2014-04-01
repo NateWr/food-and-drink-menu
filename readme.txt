@@ -26,6 +26,10 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Responsive menu layout to improve mobile viewing
 * Templates to easily customize the output of menus and menu items
 
+= Examples =
+
+[The Wayfarer](http://thewayfarernyc.com/menu/dinner/)
+
 = How to use =
 
 Read the [documentation](http://themeofthecrop.com/docs/food-and-drink-menu?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "How to use the Food and Drink Menu plugin") for how to create your menus. Once you've created a menu you can add it to any menu on your site from the Appearance > Menus area. Alternatively, you can use the widget to add it to a sidebar or include it in any existing page or with a shortcode:
