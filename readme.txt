@@ -82,7 +82,10 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
-= 1.2 (2014-04-01) =
+= 1.2.2 (2014-04-23) =
+* Minor maintenance release
+
+= 1.2.1 (2014-04-01) =
 * Fix: errors in multisite. Use FDM_PLUGIN_DIR with require_once() calls
 * Fix: Notice thrown when the_content filter called outside of loop
 
@@ -122,6 +125,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+This minor update just indicates its been tested with WordPress 3.9.
 
 = 1.2.1 =
 This update fixes an error that occurs when using the plugin with WordPress Multisite as well as a PHP Notice that could occur if the shortcode was called outside of the loop.
