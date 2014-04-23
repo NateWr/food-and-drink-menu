@@ -9,11 +9,24 @@
  *
  * Created by Nate Wright
  *
- *
+ * @version 1.1.x This is a special release for a suite of products from Theme
+ *	of the Crop (http://themeofthecrop.com) to ensure a smooth upgrade when
+ *	the Food and Drink Menu upgrades its version of the library. This release
+ *	ensures that this version of the library's files are loaded even if another
+ *	version is loaded elsewhere.
  * @since 1.0
  * @package Simple Admin Pages
  * @license GNU GPL 2 or later
  */
+
+/**
+ * Always load the library files attached to this copy of SAP
+ *
+ * This fixes a compatibility bug if two versions of the library are being
+ * loaded by different plugins/themes. However, versions prior to 2.0 do not
+ * include this and can cause compatibility issues.
+ */
+require_once( 'classes/Library.class.php' );
 
 /**
  * Initialize the appropriate version of the libary.
@@ -29,14 +42,11 @@
 if ( !function_exists( 'sap_initialize_library' ) ) {
 
 	function sap_initialize_library( $args = array() ) {
-	
+
 		// Exit early if no version was provided
 		if ( !isset( $args['version'] ) ) {
 			return null;
 		}
-
-		// Load the library
-		require_once( 'classes/Library.class.php' );
 
 		// Set the textdomain for translation
 		if ( !defined( 'SAP_TEXTDOMAIN' ) ) {
