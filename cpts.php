@@ -137,6 +137,9 @@ class fdmCustomPostTypes {
 			'taxonomies' => array_keys( $menu_item_taxonomies )
 		);
 
+		// Create filter so addons can modify the arguments
+		$args = apply_filters( 'fdm_menu_item_args', $args );
+
 		// Add an action so addons can hook in before the menu is registered
 		do_action( 'fdm_menu_item_pre_register' );
 
