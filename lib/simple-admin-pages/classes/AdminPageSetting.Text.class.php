@@ -7,9 +7,15 @@
  * @package Simple Admin Pages
  */
 
-class sapAdminPageSettingText_1_1 extends sapAdminPageSetting_1_1 {
+class sapAdminPageSettingText_2_0_a_1 extends sapAdminPageSetting_2_0_a_1 {
 
 	public $sanitize_callback = 'sanitize_text_field';
+
+	/**
+	 * Placeholder string for the input field
+	 * @since 2.0
+	 */
+	public $placeholder = '';
 
 	/**
 	 * Display this setting
@@ -18,7 +24,7 @@ class sapAdminPageSettingText_1_1 extends sapAdminPageSetting_1_1 {
 	public function display_setting() {
 		?>
 
-		<input name="<?php echo $this->id; ?>" type="text" id="<?php echo $this->id; ?>" value="<?php echo $this->value; ?>" class="regular-text" />
+		<input name="<?php echo $this->get_input_name(); ?>" type="text" id="<?php echo $this->get_input_name(); ?>" value="<?php echo $this->value; ?>"<?php echo !empty( $this->placeholder ) ? ' placeholder="' . esc_attr( $this->placeholder ) . '"' : ''; ?> class="regular-text" />
 
 		<?php
 		

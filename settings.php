@@ -32,7 +32,7 @@ class fdmSettings {
 		// Insantiate the Simple Admin Library so that we can add a settings page
 		$sap = sap_initialize_library(
 			array(
-				'version'		=> '1.1', // Version of the library
+				'version'		=> '2.0.a.1', // Version of the library
 				'lib_url'		=> FDM_PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 			)
 		);
@@ -127,6 +127,9 @@ class fdmSettings {
 
 		// Create filter so addons can modify the settings page or add new pages
 		$sap = apply_filters( 'fdm_settings_page', $sap );
+		
+		// Backwards compatibility when the sap library went to version 2
+		$sap->port_data(2);
 
 		// Register all admin pages and settings with WordPress
 		$sap->add_admin_menus();
@@ -138,11 +141,12 @@ class fdmSettings {
 	 */
 	public function set_style( $args ) {
 
-		$style = get_option( 'fdm-style' );
-		if ( !$style ) {
-			$style = 'base';
+		$settings = get_option( 'food-and-drink-menu-settings' );
+		if ( !$settings['fdm-style'] ) {
+			$args['style'] = 'base';
+		} else {
+			$args['style'] = $settings['fdm-style'];
 		}
-		$args['style'] = $style;
 
 		return $args;
 	}

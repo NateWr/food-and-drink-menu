@@ -81,12 +81,14 @@ class fdmFoodAndDrinkMenu {
 	 * @since 1.1
 	 */
 	public function load_config() {
+	
+		$settings = get_option( 'food-and-drink-menu-settings' );
 
 		// Add a thumbnail size for menu items
-		if ( !$fdm_config_thumb_width = get_option( 'fdm-item-thumb-width' ) ) {
+		if ( !$fdm_config_thumb_width = $settings['fdm-item-thumb-width'] ) {
 			$fdm_config_thumb_width = 600;
 		}
-		if ( !$fdm_config_thumb_height = get_option( 'fdm-item-thumb-height' ) ) {
+		if ( !$fdm_config_thumb_height = $settings['fdm-item-thumb-height'] ) {
 			$fdm_config_thumb_height = 600;
 		}
 		add_image_size( 'fdm-item-thumb', intval( $fdm_config_thumb_width ), intval( $fdm_config_thumb_height ), true );

@@ -127,7 +127,8 @@ class fdmViewItem extends fdmView {
 			}
 		}
 
-		if ( !get_option( 'fdm-disable-price' ) ) {
+		$settings = get_option( 'food-and-drink-menu-settings' );
+		if ( !$settings['fdm-disable-price'] ) {
 			$this->price = get_post_meta( $this->id, 'fdm_item_price', true );
 		}
 

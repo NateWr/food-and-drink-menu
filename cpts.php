@@ -202,7 +202,8 @@ class fdmCustomPostTypes {
 		);
 
 		// Add menu item price metabox
-		if ( !get_option( 'fdm-disable-price' ) ) {
+		$settings = get_option( 'food-and-drink-menu-settings' );
+		if ( !$settings['fdm-disable-price'] ) {
 			$meta_boxes['fdm_menu_item_price'] = array (
 				'id'		=>	'fdm_item_price',
 				'title'		=> __( 'Price', FDM_TEXTDOMAIN ),

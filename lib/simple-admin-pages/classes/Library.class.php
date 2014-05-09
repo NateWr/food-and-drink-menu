@@ -1,5 +1,5 @@
 <?php
-
+if ( !class_exists( 'sapLibrary_2_0_a_1' ) ) {
 /**
  * This library class loads and provides access to the correct version of the
  * Simple Admin Pages library.
@@ -7,14 +7,10 @@
  * @since 1.0
  * @package Simple Admin Pages
  */
-
-
-if ( !class_exists( 'sapLibrary_1_1' ) ) {
-
-class sapLibrary_1_1 {
+class sapLibrary_2_0_a_1 {
 
 	// Version of the library
-	private $version = '1.1';
+	private $version = '2.0.a.1';
 
 	// A full URL to the library which is used to correctly link scripts and
 	// stylesheets.
@@ -80,7 +76,7 @@ class sapLibrary_1_1 {
 		$this->load_class( 'sapAdminPageSetting', 'AdminPageSetting.class.php' );
 
 		// Add the scripts to the admin pages
-		add_action( 'admin_print_styles', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 	}
 
@@ -149,9 +145,17 @@ class sapLibrary_1_1 {
 				require_once('AdminPageSetting.SelectTaxonomy.class.php');
 				return $this->get_versioned_classname( 'sapAdminPageSettingSelectTaxonomy' );
 
+			case 'editor' :
+				require_once('AdminPageSetting.Editor.class.php');
+				return $this->get_versioned_classname( 'sapAdminPageSettingEditor' );
+
 			case 'html' :
 				require_once('AdminPageSetting.HTML.class.php');
 				return $this->get_versioned_classname( 'sapAdminPageSettingHTML' );
+
+			case 'scheduler' :
+				require_once('AdminPageSetting.Scheduler.class.php');
+				return $this->get_versioned_classname( 'sapAdminPageSettingScheduler' );
 
 			case 'opening-hours' :
 				require_once('AdminPageSetting.OpeningHours.class.php');
@@ -202,6 +206,9 @@ class sapLibrary_1_1 {
 		if ( $menu_location == 'themes' ) {
 			$this->load_class( 'sapAdminPageThemes', 'AdminPage.Themes.class.php' );
 			$class = $this->get_versioned_classname( 'sapAdminPageThemes' );
+		} elseif ( $menu_location == 'submenu' ) {
+			$this->load_class( 'sapAdminPageSubmenu', 'AdminPage.Submenu.class.php' );
+			$class = $this->get_versioned_classname( 'sapAdminPageSubmenu' );
 		}
 
 		if ( class_exists( $class ) ) {
@@ -217,6 +224,12 @@ class sapLibrary_1_1 {
 	 * @todo perform some checks on args to ensure a valid section can be constructed
 	 */
 	public function add_section( $page, $args = array() ) {
+
+		if ( !isset( $this->pages[ $page ] ) ) {
+			return false;
+		} else {
+			$args['page'] = $page;
+		}
 
 		$class = $this->get_versioned_classname( 'sapAdminPageSection' );
 		if ( class_exists( $class ) ) {
@@ -235,6 +248,13 @@ class sapLibrary_1_1 {
 	 * @since 1.0
 	 */
 	public function add_setting( $page, $section, $type, $args = array() ) {
+
+		if ( !isset( $this->pages[ $page ] ) || !isset( $this->pages[ $page ]->sections[ $section ] ) ) {
+			return false;
+		} else {
+			$args['page'] = $page;
+			$args['tab'] = $this->pages[$page]->sections[ $section ]->get_page_slug();
+		}
 
 		$class = $this->get_setting_classname( $type );
 		if ( ( $class && class_exists( $class ) ) && is_subclass_of( $class, $this->get_versioned_classname( 'sapAdminPageSetting' ) ) ) {
@@ -279,14 +299,94 @@ class sapLibrary_1_1 {
 	}
 
 	/**
+	 * Port data from a previous version to the current version
+	 *
+	 * Version 2.0 of the library changes the structure of how it stores data.
+	 * In order to upgrade the version of the library your plugin/theme is
+	 * using, this method must be called after all of your pages and settings
+	 * have been declared but before you run add_admin_menus().
+	 *
+	 * This method will loop over all of the settings data and port any existing
+	 * data to the new data structure. It will check if the data has been ported
+	 * first before it updates the data. The old data will be removed to keep
+	 * the database clean.
+	 *
+	 * @var int target_version Which data version the library should update to.
+	 * @since 2.0
+	 */
+	public function port_data( $target_version, $delete_old_data = true ) {
+
+		// Port data to the storage structure in version 2
+		if ( $target_version == 2 ) {
+
+			foreach ( $this->pages as $page_id => $page ) {
+
+				// Skip if this page has already been ported
+				if ( get_option( $page_id ) !== false ) {
+					continue;
+				}
+
+				$page_values = array();
+
+				foreach ( $page->sections as $section ) {
+					foreach ( $section->settings as $setting ) {
+						$value = get_option( $setting->id );
+						if ( $value !== false ) {
+							$page_values[ $setting->id ] = $value;
+						}
+					}
+				}
+
+				if ( count( $page_values ) ) {
+					$result = add_option( $page_id, $page_values );
+
+					// Delete old data if the flag is set and the new data was
+					// saved successfully.
+					if ( $delete_old_data === true && $result !== false ) {
+						foreach( $page_values as $setting_id => $setting_value ) {
+							delete_option( $setting_id );
+						}
+					}
+
+					// Reset settings values
+					if ( $result === true ) {
+
+						foreach ( $page->sections as $section ) {
+							foreach ( $section->settings as $setting ) {
+								$setting->set_value();
+							}
+						}
+
+					}
+				}
+			}
+		}
+
+	}
+
+	/**
 	 * Enqueue the CSS stylesheet
 	 * @since 1.0
+	 * @todo complex settings should enqueue their assets only when loaded
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'esp-admin-style', $this->lib_url . 'css/admin.css' );
-		wp_enqueue_script( 'esp-admin-script', $this->lib_url . 'js/admin.js', array( 'jquery' ), '1.0', true );
+
+		// Load the pickadate library
+		wp_enqueue_style( 'pickadate-default', $this->lib_url . 'lib/pickadate/themes/default.css' );
+		wp_enqueue_style( 'pickadate-date', $this->lib_url . 'lib/pickadate/themes/default.date.css' );
+		wp_enqueue_style( 'pickadate-time', $this->lib_url . 'lib/pickadate/themes/default.time.css' );
+		wp_enqueue_script( 'pickadate', $this->lib_url . 'lib/pickadate/picker.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'pickadate-date', $this->lib_url . 'lib/pickadate/picker.date.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'pickadate-time', $this->lib_url . 'lib/pickadate/picker.time.js', array( 'jquery' ), '', true );
+		wp_enqueue_script( 'pickadate-legacy', $this->lib_url . 'lib/pickadate/legacy.js', array( 'jquery' ), '', true );
+		// @todo is there some way I can enqueue this for RTL languages
+		// wp_enqueue_style( 'pickadate-rtl', $this->lib_url . 'lib/pickadate/themes/rtl.css' );
+
+		// Default styles and scripts
+		wp_enqueue_style( 'sap-admin-style', $this->lib_url . 'css/admin.css' );
+		wp_enqueue_script( 'sap-admin-script', $this->lib_url . 'js/admin.js', array( 'jquery' ), '1.0', true );
 	}
-	
+
 	/**
 	 * Set an error
 	 * @since 1.0
@@ -303,5 +403,4 @@ class sapLibrary_1_1 {
 	}
 
 }
-
-} // End check to not declare class twice
+} // endif;
