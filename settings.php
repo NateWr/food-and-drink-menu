@@ -39,13 +39,14 @@ class fdmSettings {
 
 		// Create a page for the options under the Settings (options) menu
 		$sap->add_page(
-			'options', 				// Admin menu which this page should be added to
+			'submenu', 				// Admin menu which this page should be added to
 			array(					// Array of key/value pairs matching the AdminPage class constructor variables
 				'id'			=> 'food-and-drink-menu-settings',
-				'title'			=> __( 'Food and Drink Menu', FDM_TEXTDOMAIN ),
-				'menu_title'	=> __( 'Food and Drink Menu', FDM_TEXTDOMAIN ),
+				'title'			=> __( 'Settings', FDM_TEXTDOMAIN ),
+				'menu_title'	=> __( 'Settings', FDM_TEXTDOMAIN ),
 				'description'	=> '',
-				'capability'	=> 'manage_options'
+				'capability'	=> 'manage_options',
+				'parent_menu'	=> 'edit.php?post_type=fdm-menu'
 			)
 		);
 
