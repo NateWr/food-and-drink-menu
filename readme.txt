@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
-Tested Up To: 3.9
+Tested Up To: 3.9.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.2.2
+Stable tag: 1.3
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -82,6 +82,11 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.3 (2014-05-09) =
+* Update Simple Admin Pages library to version 2
+* Move settings page under the Menu tab
+* Fix i8n localization for a couple of strings
+
 = 1.2.2 (2014-04-23) =
 * Minor maintenance release
 
@@ -125,6 +130,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.3 =
+This update fixes a couple strings that could not be translated and upgrades a library powering the settings panel to improve performance slightly.
 
 = 1.2.2 =
 This minor update just indicates its been tested with WordPress 3.9.
