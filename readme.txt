@@ -26,6 +26,8 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Responsive menu layout to improve mobile viewing
 * Templates to easily customize the output of menus and menu items
 
+This plugin is part of a group of plugins in development for restaurants. Check out the [Restaurant Reservations](http://wordpress.org/plugins/restaurant-reservations/) plugin as well.
+
 = Examples =
 
 [The Wayfarer](http://thewayfarernyc.com/menu/dinner/)
