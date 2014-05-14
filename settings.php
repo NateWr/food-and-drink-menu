@@ -32,7 +32,7 @@ class fdmSettings {
 		// Insantiate the Simple Admin Library so that we can add a settings page
 		$sap = sap_initialize_library(
 			array(
-				'version'		=> '2.0.a.1', // Version of the library
+				'version'		=> '2.0.a.4', // Version of the library
 				'lib_url'		=> FDM_PLUGIN_URL . '/lib/simple-admin-pages/', // URL path to sap library
 			)
 		);
