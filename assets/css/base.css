@@ -26,6 +26,9 @@
 .fdm-menu .fdm-column {
 	margin-right: 3%;
 }
+.fdm-columns-1  .fdm-column {
+	margin-right: 0;
+}
 .fdm-columns-2 .fdm-column-last {
 	float: right;
 	margin-left: 3%;
