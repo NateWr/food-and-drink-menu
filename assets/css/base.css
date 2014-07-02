@@ -5,7 +5,7 @@
  */
 
 .fdm-menu.clearfix,
-.clearfix {
+.fdm-menu .clearfix {
 	clear: both;
 }
 
