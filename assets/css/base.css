@@ -4,6 +4,7 @@
  * @package Food and Drink Menu
  */
 
+.fdm-menu.clearfix,
 .clearfix {
 	clear: both;
 }
