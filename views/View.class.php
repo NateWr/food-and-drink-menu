@@ -90,6 +90,11 @@ class fdmView extends fdmBase {
 	public function enqueue_assets() {
 
 		global $fdm_controller;
+		
+		$settings = get_option( 'food-and-drink-menu-settings' );
+		if ( $settings['fdm-style'] == 'none' ) {
+			return;
+		}
 
 		$enqueued = false;
 		foreach ( $fdm_controller->styles as $style ) {
