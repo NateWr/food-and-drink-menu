@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.9.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -84,6 +84,11 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.3.2 (2014-07-03) =
+* Improve CSS formatting and reduce potential for conflicts
+* Fix: setting to load no CSS styles works again
+* Fix: menu shortcodes with show_title or show_content would automatically show both
+
 = 1.3.1 (2014-05-14) =
 * Update Simple Admin Pages library to improve compatibility with Restaurant Reservations plugin
 
@@ -135,6 +140,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.3.2 =
+This update fixes the shortcode show_title and show_content attributes, fixes the setting which allows you to load no CSS code, and reduces the chances for CSS conflicts.
 
 = 1.3.1 =
 This update is a minor maintenance release to update a library shared with the Restaurant Reservations plugin. If you use both plugins, please update.
