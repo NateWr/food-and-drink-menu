@@ -33,7 +33,6 @@ class fdmCustomPostTypes {
 
 		// Define the menu custom post type
 		$args = array(
-			'exclude_from_search' => true,
 			'labels' => array(
 				'name' => __( 'Menus', FDM_TEXTDOMAIN ),
 				'singular_name' => __( 'Menu', FDM_TEXTDOMAIN ),
@@ -108,7 +107,6 @@ class fdmCustomPostTypes {
 
 		// Define the Menu Item custom post type
 		$args = array(
-			'exclude_from_search' => true,
 			'labels' => array(
 				'name' => __( 'Menu Items', FDM_TEXTDOMAIN ),
 				'singular_name' => __( 'Menu Item', FDM_TEXTDOMAIN ),
