@@ -1,0 +1,547 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Food and Drink Menu v1.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-07-04 11:35:36+0000\n"
+"Last-Translator: hkjdmhadmin <pohlmann@hotel-oberkirch.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: cpts.php:38
+#@ fdmdomain
+msgid "Menus"
+msgstr "Speisekarten"
+
+#: cpts.php:39
+#: widgets/WidgetMenu.class.php:72
+#@ fdmdomain
+#@ default
+msgid "Menu"
+msgstr "Speisekarte"
+
+#: cpts.php:40
+#@ fdmdomain
+msgid "Add Menu"
+msgstr "Speisekarte erstellen"
+
+#: cpts.php:41
+#@ fdmdomain
+msgid "Add New Menu"
+msgstr "Neue Speisekarte"
+
+#: cpts.php:42
+#: cpts.php:117
+#@ fdmdomain
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: cpts.php:43
+#@ fdmdomain
+msgid "Edit Menu"
+msgstr "Speisekarte bearbeiten"
+
+#: cpts.php:44
+#@ fdmdomain
+msgid "New Menu"
+msgstr "Neue Speisekarte"
+
+#: cpts.php:45
+#: cpts.php:120
+#@ fdmdomain
+msgid "View"
+msgstr "Ansehen"
+
+#: cpts.php:46
+#@ fdmdomain
+msgid "View Menu"
+msgstr "Speisekarte ansehen"
+
+#: cpts.php:47
+#@ fdmdomain
+msgid "Search Menus"
+msgstr "Speisekarten suchen"
+
+#: cpts.php:48
+#@ fdmdomain
+msgid "No Menu found"
+msgstr "Keine Speisekarte gefunden"
+
+#: cpts.php:49
+#@ fdmdomain
+msgid "No Menu found in Trash"
+msgstr "Keine Speisekarte im Papierkorb gefunden"
+
+#: cpts.php:50
+#@ fdmdomain
+msgid "Parent Menu"
+msgstr "Übergeordnete Speisekarte"
+
+#: cpts.php:82
+#: cpts.php:310
+#: cpts.php:331
+#@ fdmdomain
+msgid "Menu Sections"
+msgstr "Speisekarten-Kapitel"
+
+#: cpts.php:83
+#: cpts.php:86
+#: cpts.php:91
+#@ fdmdomain
+msgid "Menu Section"
+msgstr "Speisekarten-Kapitel"
+
+#: cpts.php:84
+#@ fdmdomain
+msgid "Search Menu Sections"
+msgstr "Speisekarten-Kapitel durchsuchen"
+
+#: cpts.php:85
+#@ fdmdomain
+msgid "All Menu Sections"
+msgstr "Alle Speisekarten-Kapitel"
+
+#: cpts.php:87
+#@ fdmdomain
+msgid "Menu Section:"
+msgstr "Speisekarten-Kapitel:"
+
+#: cpts.php:88
+#@ fdmdomain
+msgid "Edit Menu Section"
+msgstr "Speisekarten-Kapitel bearbeiten"
+
+#: cpts.php:89
+#@ fdmdomain
+msgid "Update Menu Section"
+msgstr "Speisekarten-Kapitel aktualisieren"
+
+#: cpts.php:90
+#@ fdmdomain
+msgid "Add New Menu Section"
+msgstr "Neues Speisekarten-Kapitel hinzufügen"
+
+#: cpts.php:113
+#@ fdmdomain
+msgid "Menu Items"
+msgstr "Gerichte"
+
+#: cpts.php:114
+#: widgets/WidgetMenuItem.class.php:69
+#@ fdmdomain
+#@ default
+msgid "Menu Item"
+msgstr "Gericht"
+
+#: cpts.php:115
+#@ fdmdomain
+msgid "Add Menu Item"
+msgstr "Gericht hinzufügen"
+
+#: cpts.php:116
+#@ fdmdomain
+msgid "Add New Menu Item"
+msgstr "Neues Gericht hinzufügen"
+
+#: cpts.php:118
+#@ fdmdomain
+msgid "Edit Menu Item"
+msgstr "Gericht bearbeiten"
+
+#: cpts.php:119
+#@ fdmdomain
+msgid "New Menu Item"
+msgstr "Neues Gericht"
+
+#: cpts.php:121
+#@ fdmdomain
+msgid "View Menu Item"
+msgstr "Gericht ansehen"
+
+#: cpts.php:122
+#@ fdmdomain
+msgid "Search Menu Items"
+msgstr "Gericht suchen"
+
+#: cpts.php:123
+#@ fdmdomain
+msgid "No Menu Item found"
+msgstr "Kein Gericht gefunden"
+
+#: cpts.php:124
+#@ fdmdomain
+msgid "No Menu Item found in Trash"
+msgstr "Kein Gericht im Papierkorb gefunden"
+
+#: cpts.php:125
+#@ fdmdomain
+msgid "Parent Menu Item"
+msgstr "Übergeordnetes Gericht"
+
+#: cpts.php:165
+#@ fdmdomain
+msgid "Menu Footer"
+msgstr "Fußzeile der Speisekarte"
+
+#: cpts.php:175
+#@ fdmdomain
+msgid "Menu Layout"
+msgstr "Layout der Speisekarte"
+
+#: cpts.php:185
+#@ fdmdomain
+msgid "Menu Shortcode"
+msgstr "Speisekarten-Shortcode"
+
+#: cpts.php:195
+#@ fdmdomain
+msgid "Menu Item Shortcode"
+msgstr "Gericht-Shortcode"
+
+#: cpts.php:209
+#: cpts.php:251
+#: settings.php:95
+#@ fdmdomain
+msgid "Price"
+msgstr "Preis"
+
+#: cpts.php:304
+#@ fdmdomain
+msgid "Click on a Menu Section to add it to this menu."
+msgstr "Klicke auf ein Speisekarten-Kapitel, um es zu dieser Speisekarte hinzuzufügen"
+
+#: cpts.php:316
+#@ fdmdomain
+msgid "First Column"
+msgstr "Erste Spalte"
+
+#: cpts.php:325
+#@ fdmdomain
+msgid "Second Column"
+msgstr "Zweite Spalte"
+
+#: cpts.php:342
+#@ fdmdomain
+msgid "Hint: Leave the second column empty to display the menu in a single column."
+msgstr "Hinweis: Lasse die zweite Spalte leer, um die Speisekarte einspaltig anzuzeigen"
+
+#: cpts.php:366
+#@ fdmdomain
+msgid "Once this menu is published, look here to find the shortcode you will use to display this menu in any post or page."
+msgstr "Wenn die Speisekarte veröffentlicht ist, findest Du hier den Shortcode, den Du benutzen kannst, um diese Speisekarte in einem Beitrag oder auf einer Seite einzufügen"
+
+#: cpts.php:375
+#: cpts.php:415
+#@ fdmdomain
+msgid "Copy and paste the snippet below into any post or page in order to display this menu."
+msgstr "Kopiere den untenstehenden Code und füge ihn in einen Beitrag oder eine Seite ein, um diese Speisekarte dort anzuzeigen"
+
+#: cpts.php:406
+#@ fdmdomain
+msgid "Once this menu is published, look here to find the shortcode you will use to display this menu item in any post or page."
+msgstr "Wenn diese Speisekarte veröffentlicht ist, findest Du hier den Shortcode, um sie in irgendeinen Beitrag oder eine Seite einzufügen"
+
+#. translators: plugin header field 'Name'
+#: food-and-drink-menu.php:0
+#: widgets/WidgetMenu.class.php:19
+#@ fdmdomain
+msgid "Food and Drink Menu"
+msgstr "Speisen- und Getränke Karte"
+
+#. translators: plugin header field 'PluginURI'
+#: food-and-drink-menu.php:0
+#@ fdmdomain
+msgid "http://themeofthecrop.com"
+msgstr "http://themeofthecrop.com"
+
+#. translators: plugin header field 'Description'
+#: food-and-drink-menu.php:0
+#@ fdmdomain
+msgid "Create a menu for restaurants, cafes, bars and eateries and display it in templates, posts, pages and widgets."
+msgstr "Erstelle eine Speisekarte für Restaurants, Bars, Cafés und Kneipen und veröffentliche sie in Vorlagen (Templates), Beiträgen, Seiten und Widgets"
+
+#. translators: plugin header field 'Author'
+#: food-and-drink-menu.php:0
+#@ fdmdomain
+msgid "Nate Wright"
+msgstr "Nate Wright"
+
+#. translators: plugin header field 'AuthorURI'
+#: food-and-drink-menu.php:0
+#@ fdmdomain
+msgid "https://github.com/NateWr"
+msgstr "https://github.com/NateWr"
+
+#. translators: plugin header field 'Version'
+#: food-and-drink-menu.php:0
+#@ fdmdomain
+msgid "1.3.2"
+msgstr "1.3.2"
+
+#: food-and-drink-menu.php:102
+#@ fdmdomain
+msgid "Base formatting only"
+msgstr "Nur einfache Formatierung erlaubt"
+
+#: food-and-drink-menu.php:111
+#@ fdmdomain
+msgid "Classic style"
+msgstr "Klassischer Stil"
+
+#: food-and-drink-menu.php:121
+#@ fdmdomain
+msgid "Don't load any CSS styles"
+msgstr "Lade keinerlei CSS-Stile"
+
+#: food-and-drink-menu.php:235
+#@ fdmdomain
+msgid "View the help documentation for Food and Drink Menu"
+msgstr "Sieh Dir die Hilfs-Dokumentation für das Speisen- und Getränkekarten-Plugin an"
+
+#: food-and-drink-menu.php:235
+#@ fdmdomain
+msgid "Help"
+msgstr "Hilfe"
+
+#: food-and-drink-menu.php:238
+#@ fdmdomain
+msgid "Upgrade to Food and Drink Pro"
+msgstr "Upgrade auf die Pro-Version"
+
+#: food-and-drink-menu.php:238
+#@ fdmdomain
+msgid "Upgrade"
+msgstr "Upgrade"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:266
+#@ fdmdomain
+msgid "Add new scheduling rule"
+msgstr "Eine neue Zeitplan-Regel erstellen"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:293
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:306
+#@ fdmdomain
+msgctxt "Format of a scheduling rule"
+msgid "Weekly"
+msgstr "wöchentlich"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:295
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:314
+#@ fdmdomain
+msgctxt "Format of a scheduling rule"
+msgid "Monthly"
+msgstr "monatlich"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:297
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:322
+#@ fdmdomain
+msgctxt "Format of a scheduling rule"
+msgid "Date"
+msgstr "Datum"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:333
+#@ fdmdomain
+msgctxt "Label for selecting days of the week in a scheduling rule"
+msgid "Days of the week"
+msgstr "Tage der Woche"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:349
+#@ fdmdomain
+msgctxt "Label for selecting weeks of the month in a scheduling rule"
+msgid "Weeks of the month"
+msgstr "Wochen des Monats"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:365
+#@ fdmdomain
+msgid "Date"
+msgstr "Datum"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:380
+#@ fdmdomain
+msgctxt "Label to select time slot for a scheduling rule"
+msgid "Time"
+msgstr "Uhrzeit"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:385
+#@ fdmdomain
+msgctxt "Label to set a scheduling rule to last all day"
+msgid "All day"
+msgstr "ganztags"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:394
+#@ fdmdomain
+msgctxt "Label for the starting time of a scheduling rule"
+msgid "Start"
+msgstr "Beginn"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:402
+#@ fdmdomain
+msgctxt "Label for the ending time of a scheduling rule"
+msgid "End"
+msgstr "Ende"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:411
+#@ fdmdomain
+msgctxt "Prompt displayed when a scheduling rule is set without any time restrictions."
+msgid "All day long. Want to <a href=\"#\" data-format=\"time-slot\">set a time slot</a>?"
+msgstr "Ganztags. Möchtest Du einen  <a href=\"#\" data-format=\"time-slot\">Timeslot erstellen</a>?"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:430
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:433
+#@ fdmdomain
+msgid "Open and close this rule"
+msgstr "Diese Regel öffnen und schließen"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:436
+#@ fdmdomain
+msgid "Delete rule"
+msgstr "Diese Regel löschen"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:439
+#@ fdmdomain
+msgid "Delete scheduling rule"
+msgstr "Diese Zeitplan-Regel löschen"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:523
+#@ fdmdomain
+msgctxt "Brief default description of a scheduling rule when no weekdays or weeks are included in the rule."
+msgid "Never"
+msgstr "Niemals"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:524
+#@ fdmdomain
+msgctxt "Brief default description of a scheduling rule when all the weekdays/weeks are included in the rule."
+msgid "Every day"
+msgstr "täglich"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:525
+#@ fdmdomain
+msgctxt "Brief default description of a scheduling rule when some weekdays are included on only some weeks of the month. The {days} and {weeks} bits should be left alone and will be replaced by a comma-separated list of days (the first one) and weeks (the second one) in the following format: M, T, W on the first, second week of the month"
+msgid "{days} on the {weeks} week of the month"
+msgstr "{days} in den {weeks} Wochen des Monats"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:526
+#@ fdmdomain
+msgctxt "Brief description of a scheduling rule when some weeks of the month are included but all or no weekdays are selected.  {weeks}  should be left alone and will be replaced by a comma-separated list of weeks (the second one) in the following format: First, second week of the month"
+msgid "{weeks} week of the month"
+msgstr "{weeks} Woche des Monats"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:527
+#@ fdmdomain
+msgctxt "Brief default description of a scheduling rule when no times are set"
+msgid "All day"
+msgstr "ganztags"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:528
+#@ fdmdomain
+msgctxt "Brief default description of a scheduling rule when an end time is set but no start time. If the end time is 6pm, it will read: Ends at 6pm."
+msgid "Ends at"
+msgstr "Endet um"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:529
+#@ fdmdomain
+msgctxt "Brief default description of a scheduling rule when a start time is set but no end time. If the start time is 6pm, it will read: Starts at 6pm."
+msgid "Starts at"
+msgstr "Beginnt um:"
+
+#: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:530
+#@ fdmdomain
+msgctxt "Default separator between times of a scheduling rule."
+msgid "&mdash;"
+msgstr "&mdash;"
+
+#: settings.php:45
+#: settings.php:46
+#@ fdmdomain
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: settings.php:58
+#: settings.php:73
+#@ fdmdomain
+msgid "Style"
+msgstr "Stil"
+
+#: settings.php:59
+#@ fdmdomain
+msgid "Choose what style you would like to use for your menu."
+msgstr "Wähle den Stil aus, den Du für Deine Speisekarte verwenden möchtest"
+
+#: settings.php:74
+#@ fdmdomain
+msgid "Choose the styling for your menus."
+msgstr "Wähle das Styling der Speisekarten"
+
+#: settings.php:85
+#@ fdmdomain
+msgid "Disable Features"
+msgstr "Features ausstellen"
+
+#: settings.php:86
+#@ fdmdomain
+msgid "Choose what features of the menu items you wish to disable and hide from the admin interface."
+msgstr "Wähle aus, welche Features der Gerichte Du im Admin-Interface  ausstellen und verbergen möchtest"
+
+#: settings.php:96
+#@ fdmdomain
+msgid "Disable all pricing options for menu items."
+msgstr "Alle Preis-Optionen für Gerichte ausstellen"
+
+#: settings.php:105
+#@ fdmdomain
+msgid "Advanced Options"
+msgstr "Erweiterte Optionen"
+
+#: settings.php:114
+#@ fdmdomain
+msgid "Menu Item Photo Width"
+msgstr "Breite des Fotos des Gerichts"
+
+#: settings.php:115
+#@ fdmdomain
+msgid "The width in pixels of menu item thumbnails automatically generated by WordPress. Leave this field empty to preserve the default (600)."
+msgstr "Die Breite in Pixeln der automatisch von Wordpress generierten Thumbnails für die Gerichte. Lass das Feld leer, um die Standardeinstellung beizubehalten.(600)."
+
+#: settings.php:124
+#@ fdmdomain
+msgid "Menu Item Photo Height"
+msgstr "Höhe des Fotos des Gerichts"
+
+#: settings.php:125
+#@ fdmdomain
+msgid "The height in pixels of menu item thumbnails automatically generated by WordPress. Leave this field empty to preserve the default (600)."
+msgstr "Die Höhe in Pixeln der automatisch von Wordpress generierten Thumbnails für die Gerichte. Lass das Feld leer, um die Standardeinstellung beizubehalten.(600)."
+
+#: widgets/WidgetMenu.class.php:20
+#@ fdmdomain
+msgid "Display your food and drink menu."
+msgstr "Zeige Deine Speise- und Getränkekarte an"
+
+#: widgets/WidgetMenu.class.php:68
+#: widgets/WidgetMenuItem.class.php:65
+#@ default
+msgid "Title"
+msgstr ""
+
+#: widgets/WidgetMenuItem.class.php:19
+#@ fdmdomain
+msgid "Food and Drink Menu Item"
+msgstr "Speise- und Getränkekarten-Eintrag"
+
+#: widgets/WidgetMenuItem.class.php:20
+#@ fdmdomain
+msgid "Display a single item from your food and drink menu."
+msgstr "Zeige eine einzelne Speise aus Deiner Speise- und Getränkekarte an"
+
