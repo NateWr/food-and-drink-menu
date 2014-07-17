@@ -100,3 +100,15 @@
 #fdm_menu_layout p {
 	clear: both;
 }
+
+/**
+ * Admin post lists
+ */
+.fdm-cols td {
+	background: #ddd;
+	padding: 0.5em;
+	border-radius: 0.5em;
+}
+.fdm-cols td p:last-child {
+	margin-bottom: 0;
+}

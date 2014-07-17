@@ -17,6 +17,18 @@ class fdmCustomPostTypes {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_meta' ) );
 
+		// Add columns and filters to the admin list of menu items
+		add_filter( 'manage_fdm-menu-item_posts_columns', array( $this, 'menu_item_posts_columns' ) );
+		add_filter( 'manage_edit-fdm-menu-item_sortable_columns', array( $this, 'menu_item_posts_sortable_columns' ) );
+		add_action( 'pre_get_posts', array( $this, 'menu_item_posts_orderby' ) );
+		add_action( 'manage_fdm-menu-item_posts_custom_column', array( $this, 'menu_item_posts_columns_content' ), 10, 2 );
+		add_action( 'restrict_manage_posts', array( $this, 'menu_item_posts_filters' ) );
+		add_filter( 'parse_query', array( $this, 'menu_item_posts_filter_query' ) );
+
+		// Add columns and filters to the admin list of menus
+		add_filter( 'manage_fdm-menu_posts_columns', array( $this, 'menu_posts_columns' ) );
+		add_action( 'manage_fdm-menu_posts_custom_column', array( $this, 'menu_posts_columns_content' ), 10, 2 );
+
 	}
 
 	/**
@@ -293,7 +305,6 @@ class fdmCustomPostTypes {
 		foreach ( $terms as $term ) {
 			$sections_list .= '<li><a href="#" data-termid="' . $term->term_id . '">' . $term->name . ' (' . $term->count . ')</a></li>';
 		}
-
 		?>
 
 			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php echo $column_one; ?>">
@@ -481,6 +492,205 @@ class fdmCustomPostTypes {
 			}
 		}
 
+	}
+
+	/**
+	 * Add the menu section column header to the admin list of menu items
+	 * @since 1.4
+	 */
+	public function menu_item_posts_columns( $columns ) {
+		return array(
+			'cb'		=> '<input type="checkbox" />',
+			'title'		=> __( 'Title' ),
+			'price'		=> __( 'Price', FDM_TEXTDOMAIN ),
+			'sections'	=> __( 'Sections', FDM_TEXTDOMAIN ),
+			'shortcode'	=> __( 'Shortcode', FDM_TEXTDOMAIN ),
+			'date'		=> __( 'Date' ),
+		);
+	}
+
+	/**
+	 * Make new column headers sortable
+	 * @since 1.4
+	 */
+	public function menu_item_posts_sortable_columns( $columns ) {
+		$columns['price'] = 'price';
+
+		return $columns;
+	}
+
+	/**
+	 * Modify query rules to sort on new columns
+	 * @since 1.4
+	 */
+	public function menu_item_posts_orderby( $query ) {
+
+		if ( !is_admin() ) {
+			return;
+		}
+
+		$orderby = $query->get( 'orderby' );
+
+		if ( $orderby == 'price' ) {
+			$query->set( 'orderby', 'meta_value' );
+			$query->set( 'meta_key', 'fdm_item_price' );
+		}
+
+	}
+
+	/**
+	 * Add the menu sections to the admin list of menu items
+	 * @since 1.4
+	 */
+	public function menu_item_posts_columns_content( $column, $post ) {
+
+		if ( $column == 'price' ) {
+			echo get_post_meta( $post, 'fdm_item_price', true );
+		}
+
+		if ( $column == 'sections' ) {
+			$terms = wp_get_post_terms( $post, 'fdm-menu-section' );
+			$output = array();
+			foreach( $terms as $term ) {
+				$output[] = '<a href="' . admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $term->term_taxonomy_id . '&post_type=fdm-menu-item' ) . '">' . $term->name . '</a>';
+			}
+
+			echo join( __( ', ', 'Separator in list of Menu Sections', FDM_TEXTDOMAIN ), $output );
+		}
+
+		if ( $column == 'shortcode' ) {
+			echo '[fdm-menu-item id=' . $post . ']';
+		}
+	}
+
+	/**
+	 * Add a filter to view by menu section on the admin list of menu items
+	 * @since 1.4
+	 */
+	public function menu_item_posts_filters() {
+
+		if ( !is_admin() ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( $screen->post_type == 'fdm-menu-item' ) {
+
+			$terms = get_terms( 'fdm-menu-section' );
+
+			if ( !empty( $terms ) ) : ?>
+				<select name="section">
+					<option value=""><?php _e( 'All sections', FDM_TEXTDOMAIN ); ?></option>
+
+					<?php foreach( $terms as $term ) : ?>
+					<option value="<?php echo esc_attr( $term->term_id ); ?>"<?php if( !empty( $_GET['section'] ) && $_GET['section'] == $term->term_id ) : ?> selected="selected"<?php endif; ?>><?php echo esc_attr( $term->name ); ?></option>
+					<?php endforeach; ?>
+
+					<option value="-1"><?php _e( 'Unassigned items', FDM_TEXTDOMAIN ); ?></option>
+				</select>
+			<?php endif;
+		}
+	}
+
+	/**
+	 * Apply selected filters to the admin list of menu items
+	 * @since 1.4
+	 */
+	public function menu_item_posts_filter_query( $query ) {
+
+		if ( !is_admin() || $query->query['post_type'] !== FDM_MENUITEM_POST_TYPE ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( $screen->post_type == FDM_MENUITEM_POST_TYPE && !empty( $_GET['section'] ) ) {
+			$section = (int) $_GET['section'];
+
+			// Get menu items not assigned to any section
+			if ( $section === -1 ) {
+				$terms = get_terms( 'fdm-menu-section', array( 'fields' => 'ids' ) );
+				$query->query_vars['tax_query'] = array(
+					array(
+						'taxonomy'	=> 'fdm-menu-section',
+						'field'		=> 'id',
+						'terms'		=> $terms,
+						'operator'	=> 'NOT IN',
+					)
+				);
+
+			// Get menu items from a specific section
+			} else {
+				$query->query_vars['tax_query'] = array(
+					array(
+						'taxonomy'	=> 'fdm-menu-section',
+						'field'		=> 'id',
+						'terms'		=> $section,
+					)
+				);
+			}
+		}
+	}
+
+	/**
+	 * Add the menu sections column header to the admin list of menus
+	 * @since 1.4
+	 */
+	public function menu_posts_columns( $columns ) {
+		return array(
+			'cb'		=> '<input type="checkbox" />',
+			'title'		=> __( 'Title' ),
+			'sections'	=> __( 'Sections', FDM_TEXTDOMAIN ),
+			'shortcode'	=> __( 'Shortcode', FDM_TEXTDOMAIN ),
+			'date'		=> __( 'Date' ),
+		);
+	}
+
+	/**
+	 * Add the menu sections to the admin list of menu items
+	 * @since 1.4
+	 */
+	public function menu_posts_columns_content( $column, $post ) {
+
+		if ( $column == 'shortcode' ) {
+			echo '[fdm-menu id=' . $post . ']';
+		}
+
+		if ( $column == 'sections' ) {
+			$post_meta = get_post_meta( $post );
+
+			$col1 = !empty( $post_meta['fdm_menu_column_one'] ) ? array_filter( explode( ',', $post_meta['fdm_menu_column_one'][0] ) ) : array();
+			$col2 = !empty( $post_meta['fdm_menu_column_two'] ) ? array_filter( explode( ',', $post_meta['fdm_menu_column_two'][0] ) ) : array();
+
+			if ( !empty( $col1 ) || !empty( $col2 ) ) :
+				$terms = get_terms( 'fdm-menu-section', array( 'include' => array_merge( $col1, $col2 ), 'fields' => 'id=>name' ) );
+				?>
+
+				<table class="fdm-cols">
+					<tr>
+						<td>
+					<?php foreach( $col1 as $id ) : ?>
+							<p>
+								<a href="<?php echo admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=fdm-menu-item' ); ?>">
+								<?php echo $terms[ $id ]; ?>
+								</a>
+							</p>
+					<?php endforeach; ?>
+						</td>
+						<td>
+					<?php foreach( $col2 as $id ) : ?>
+							<p>
+								<a href="<?php echo admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=fdm-menu-item' ); ?>">
+									<?php echo $terms[ $id ]; ?>
+								</a>
+							</p>
+					<?php endforeach; ?>
+						</td>
+					</tr>
+				</table>
+
+			<?php endif;
+
+		}
 	}
 
 }
