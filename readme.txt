@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.9.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.3.2
+Stable tag: 1.4
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -84,6 +84,11 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.4 (2014-07-18) =
+* Add support for menu and menu item archives, including taxonomies
+* Add columns and filters to the admin list of menus and menu items
+* Updated .pot file for translation
+
 = 1.3.2 (2014-07-03) =
 * Improve CSS formatting and reduce potential for conflicts
 * Fix: setting to load no CSS styles works again
@@ -140,6 +145,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.4 =
+This update adds filters and columns to the list of menus and menu items in the admin panel, to help those who manage a lot of menu items. It also adds support for archive pages, so you can now link to a list of all items in a Menu Section (and Item Flag for Pro users).
 
 = 1.3.2 =
 This update fixes the shortcode show_title and show_content attributes, fixes the setting which allows you to load no CSS code, and reduces the chances for CSS conflicts.

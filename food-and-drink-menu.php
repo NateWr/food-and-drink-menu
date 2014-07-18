@@ -3,7 +3,7 @@
  * Plugin Name: Food and Drink Menu
  * Plugin URI: http://themeofthecrop.com
  * Description: Create a menu for restaurants, cafes, bars and eateries and display it in templates, posts, pages and widgets.
- * Version: 1.3.2
+ * Version: 1.4
  * Author: Nate Wright
  * Author URI: https://github.com/NateWr
  * Requires at least: 3.8
@@ -31,7 +31,7 @@ class fdmFoodAndDrinkMenu {
 		define( 'FDM_VERSION', 3 );
 		define( 'FDM_MENU_POST_TYPE', 'fdm-menu' );
 		define( 'FDM_MENUITEM_POST_TYPE', 'fdm-menu-item' );
-		
+
 		// Load template functions
 		require_once( FDM_PLUGIN_DIR . '/functions.php' );
 
@@ -81,7 +81,7 @@ class fdmFoodAndDrinkMenu {
 	 * @since 1.1
 	 */
 	public function load_config() {
-	
+
 		$settings = get_option( 'food-and-drink-menu-settings' );
 
 		// Add a thumbnail size for menu items
