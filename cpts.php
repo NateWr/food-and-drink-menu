@@ -88,7 +88,7 @@ class fdmCustomPostTypes {
 
 			// Create menu sections (desserts, entrees, etc)
 			'fdm-menu-section'	=> array(
-				'hierarchy'	=> true,
+				'hierarchical'	=> true,
 				'labels' 	=> array(
 					'name' => __( 'Menu Sections', FDM_TEXTDOMAIN ),
 					'singular_name' => __( 'Menu Section', FDM_TEXTDOMAIN ),
