@@ -20,7 +20,7 @@
 
 </ul>
 <?php if ( $this->footer ) : ?>
-<div class="fdm-menu-footer">
+<div class="fdm-menu-footer clearfix">
 	<?php echo $this->footer; ?>
 </div>
 <?php endif; ?>
