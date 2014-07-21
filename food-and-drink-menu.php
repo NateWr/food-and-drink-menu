@@ -132,7 +132,7 @@ class fdmFoodAndDrinkMenu {
 	 * @since 1.1
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( FDM_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . "/languages" );
+		load_plugin_textdomain( FDM_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . "/languages/" );
 	}
 
 	/**
