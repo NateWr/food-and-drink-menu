@@ -165,21 +165,21 @@ class fdmFoodAndDrinkMenu {
 		fdm_load_view_files();
 
 		$args = array(
-			'id'	=> $post->ID
+			'id'	=> $post->ID,
+			'show_content'	=> true
 		);
 		if ( FDM_MENUITEM_POST_TYPE == $post->post_type ) {
 			$args['singular'] = true;
 		}
 		$args = apply_filters( 'fdm_menu_args', $args );
 
-		// Add the content to a menu post type but replace it for single menu items
+		// Initialize and render the view
 		if ( FDM_MENU_POST_TYPE == $post->post_type ) {
 			$menu = new fdmViewMenu( $args );
-			$content .= $menu->render();
 		} else {
 			$menu = new fdmViewItem( $args );
-			$content = $menu->render();
 		}
+		$content = $menu->render();
 
 		// Restore this filter
 		add_action( 'the_content', array( $this, 'append_to_content' ) );
