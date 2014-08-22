@@ -30,11 +30,11 @@ class fdmViewMenu extends fdmView {
 			}
 
 			if( $this->show_content ) {
-				$this->content = wpautop( $this->post->post_content );
+				$this->content = do_shortcode( wpautop( $this->post->post_content ) );
 			}
 		}
 
-		$this->footer = wpautop( get_post_meta( $this->id, 'fdm_menu_footer_content', true ) );
+		$this->footer = do_shortcode( wpautop( get_post_meta( $this->id, 'fdm_menu_footer_content', true ) ) );
 	}
 
 	/**
