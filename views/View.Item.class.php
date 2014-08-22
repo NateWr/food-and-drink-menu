@@ -148,7 +148,7 @@ class fdmViewItem extends fdmView {
 		}
 
 		$this->title = $this->post->post_title;
-		$this->content = apply_filters('the_content', $this->post->post_content);
+		$this->content = wpautop($this->post->post_content);
 	}
 
 	/**

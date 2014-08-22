@@ -276,7 +276,7 @@ class fdmCustomPostTypes {
 
 		// Retrieve existing settings
 		global $post;
-		$footer = apply_filters( 'the_content', get_post_meta( $post->ID, 'fdm_menu_footer_content', true ) );
+		$footer = get_post_meta( $post->ID, 'fdm_menu_footer_content', true );
 
 		wp_editor(
 			$footer,
