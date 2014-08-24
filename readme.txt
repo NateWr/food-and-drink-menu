@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 3.9.1
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -87,6 +87,11 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 
 == Changelog ==
 
+= 1.4.1 (2014-08-24) =
+* Fix: nested `the_content` filters cause plugin conflicts
+* Fix: Menu Section taxonomy should not be hierarchical
+* Update Simple Admin Pages library to v2.0.a.7
+
 = 1.4 (2014-07-18) =
 * Add support for menu and menu item archives, including taxonomies
 * Add columns and filters to the admin list of menus and menu items
@@ -148,6 +153,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.4.1 =
+This update fixes a conflict with some plugins which would prevent the menus from displaying properly.
 
 = 1.4 =
 This update adds filters and columns to the list of menus and menu items in the admin panel, to help those who manage a lot of menu items. It also adds support for archive pages, so you can now link to a list of all items in a Menu Section (and Item Flag for Pro users).
