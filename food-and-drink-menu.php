@@ -6,8 +6,6 @@
  * Version: 1.4.1
  * Author: Nate Wright
  * Author URI: https://github.com/NateWr
- * Requires at least: 3.8
- * Tested up to: 3.9.2
  *
  * Text Domain: fdmdomain
  * Domain Path: /languages/
