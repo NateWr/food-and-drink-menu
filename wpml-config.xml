@@ -1,0 +1,15 @@
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1">fdm-menu</custom-type>
+    <custom-type translate="1">fdm-menu-item</custom-type>
+  </custom-types>
+  <taxonomies>
+    <taxonomy translate="1">fdm-menu-section</taxonomy>
+  </taxonomies>
+  <custom-fields>
+    <custom-field action="translate">fdm_item_price</custom-field>
+    <custom-field action="copy">fdm_menu_column_one</custom-field>
+    <custom-field action="copy">fdm_menu_column_two</custom-field>
+    <custom-field action="translate">fdm_menu_footer_content</custom-field>
+  </custom-fields>
+</wpml-config>

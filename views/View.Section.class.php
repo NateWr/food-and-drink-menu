@@ -90,7 +90,7 @@ class fdmViewSection extends fdmView {
 			'tax_query'     	=> array(
 				array(
 					'taxonomy' => 'fdm-menu-section',
-					'field'    => 'id',
+					'field'    => 'term_id',
 					'terms'    => $this->id,
 				),
 			),

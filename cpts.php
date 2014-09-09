@@ -597,7 +597,7 @@ class fdmCustomPostTypes {
 	 */
 	public function menu_item_posts_filter_query( $query ) {
 
-		if ( !is_admin() || ( !empty( $query->query['post_type'] ) && $query->query['post_type'] !== FDM_MENUITEM_POST_TYPE ) ) {
+		if ( !is_admin() || ( !empty( $query->query['post_type'] ) && $query->query['post_type'] !== FDM_MENUITEM_POST_TYPE ) || !function_exists( 'get_current_screen' ) ) {
 			return;
 		}
 
