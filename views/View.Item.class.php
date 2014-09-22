@@ -5,13 +5,22 @@
  *
  * @since 1.1
  */
-
 class fdmViewItem extends fdmView {
 
-	// The elements to display for this item
+	/**
+	 * Post type to render
+	 */
+	public $post_type = FDM_MENUITEM_POST_TYPE;
+
+	/**
+	 * Which content elements to display for this item
+	 */
 	public $elements = array( 'title' );
 
-	// Whether or not this is printed on its own or part of a menu
+	/**
+	 * Whether or not we're rendering this item on its own or as part of
+	 * a menu.
+	 */
 	public $singular = false;
 
 	/**
@@ -111,16 +120,16 @@ class fdmViewItem extends fdmView {
 	 */
 	public function load_item() {
 
-		if ( !isset( $this->id ) ) {
+		if ( empty( $this->id ) ) {
 			return;
 		}
 
 		// If no title is set, we need to gather the core post data first
-		if ( !isset( $this->title ) ) {
+		if ( empty( $this->title ) ) {
 			$this->get_data_from_post();
 		}
 
-		if ( !isset( $this->image ) ) {
+		if ( empty( $this->image ) ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $this->id ), 'fdm-item-thumb' );
 			if ( isset( $image[0] ) ) {
 				$this->image = $image[0];
@@ -143,12 +152,21 @@ class fdmViewItem extends fdmView {
 	 * @since 1.1
 	 */
 	public function get_data_from_post() {
-		if ( !isset( $this->post ) ) {
-			$this->post = get_post( $this->id );
+
+		// Get the post data. Use WP_Query() and not get_post()
+		// to improve compatibility with WPML
+		if ( empty( $this->post ) ) {
+			$this->get_this_post();
 		}
 
-		$this->title = $this->post->post_title;
-		$this->content = do_shortcode( wpautop($this->post->post_content) );
+		if ( !empty( $this->post ) ) {
+			$this->title = $this->post->post_title;
+			$this->content = do_shortcode( wpautop($this->post->post_content) );
+
+			// Update the ID in case it's been modified by WPML or
+			// other query-modifying plugins
+			$this->id = $this->post->ID;
+		}
 	}
 
 	/**

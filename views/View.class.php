@@ -5,10 +5,16 @@
  *
  * @since 1.1
  */
-
 class fdmView extends fdmBase {
 
-	// Map types of content to the template which will render them
+	/**
+	 * Post type to render
+	 */
+	public $post_type = null;
+
+	/**
+	 * Map types of content to the template which will render them
+	 */
 	public $content_map = array(
 		'title'		=> 'content/title',
 		'content'	=> 'content/content',
@@ -16,9 +22,14 @@ class fdmView extends fdmBase {
 		'image'		=> 'content/image'
 	);
 	
-	// Menu layout type default
+	/**
+	 * Default menu layout
+	 */
 	public $layout = 'classic';
 
+	/**
+	 * Default menu style
+	 */
 	public $style = 'base';
 
 	/**
@@ -111,6 +122,42 @@ class fdmView extends fdmBase {
 		if ( !$enqueued && isset( $fdm_controller->styles['base'] ) ) {
 			$fdm_controller->styles['base']->enqueue_assets();
 		}
+	}
+
+	/**
+	 * Retrieve a post in a filter-friendly way
+	 *
+	 * This function stands in for the get_post() function with a query
+	 * that can be filtered by plugins like WPML. It also resets a
+	 * view's ID after making the call so that any further requests for
+	 * post meta point to the appropriate post.
+	 */
+	public function get_this_post() {
+
+		if ( empty( $this->id ) || empty( $this->post_type ) ) {
+			return;
+		}
+
+		$p = new WP_Query(
+			array(
+				'p' => $this->id,
+				'post_type' => $this->post_type
+			)
+		);
+
+		while ( $p->have_posts() ) {
+			$p->next_post();
+			$this->post = $p->post;
+		}
+
+		wp_reset_postdata();
+
+		// Update the ID if it's been modified by WPML or
+		// other query-modifying plugins
+		if ( $this->post->ID !== $this->id ) {
+			$this->id = $this->post->ID;
+		}
+
 	}
 
 }

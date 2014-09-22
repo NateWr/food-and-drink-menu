@@ -5,16 +5,41 @@
  *
  * @since 1.1
  */
-
 class fdmViewMenu extends fdmView {
 
+	/**
+	 * Post type to render
+	 */
+	public $post_type = FDM_MENU_POST_TYPE;
+
+	/**
+	 * Groups of Menu Sections to render
+	 */
 	public $groups = array();
 
+	/**
+	 * Default display to show or hide title in shortcode
+	 */
 	public $show_title = false;
+
+	/**
+	 * Default display to show or hide content in shortcode
+	 */
 	public $show_content = false;
 
+	/**
+	 * Title of the menu
+	 */
 	public $title = '';
+
+	/**
+	 * Content displayed above the menu
+	 */
 	public $content = '';
+
+	/**
+	 * Footer displayed below the menu
+	 */
 	public $footer = '';
 
 	/**
@@ -22,8 +47,10 @@ class fdmViewMenu extends fdmView {
 	 * @since 1.1.5
 	 */
 	public function get_menu_post() {
+
+		$this->get_this_post();
+
 		if ( $this->show_title || $this->show_content ) {
-			$this->post = get_post( $this->id );
 
 			if ( $this->show_title ) {
 				$this->title = $this->post->post_title;
