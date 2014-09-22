@@ -77,7 +77,6 @@ class fdmWidgetMenuItem extends WP_Widget {
 					)
 				);
 
-				// Loop over all promotion post types
 				while( $items->have_posts() ) :
 					$items->next_post();
 
