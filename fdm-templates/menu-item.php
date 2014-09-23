@@ -2,13 +2,13 @@
 <div id="<?php echo fdm_global_unique_id(); ?>" class="fdm-menu fdm-menu-item">
 <?php endif; ?>
 
-	<?php echo $this->print_elements( 'header' ); ?>
-
 	<?php if ( $this->is_singular() ) : ?>
 	<div<?php echo fdm_format_classes( $this->classes ); ?>>
 	<?php else : ?>
 	<li<?php echo fdm_format_classes( $this->classes ); ?>>
 	<?php endif; ?>
+
+		<?php echo $this->print_elements( 'header' ); ?>
 
 		<div class="fdm-item-panel">
 
