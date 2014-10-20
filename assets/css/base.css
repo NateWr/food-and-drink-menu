@@ -25,15 +25,14 @@
 	float: left;
 }
 .fdm-menu .fdm-column {
-	margin-right: 3%;
+	margin: 0 3% 0 0;
 }
 .fdm-columns-1  .fdm-column {
 	margin-right: 0;
 }
 .fdm-columns-2 .fdm-column-last {
 	float: right;
-	margin-left: 3%;
-	margin-right: 0;
+	margin: 0 0 0 3%;
 }
 .fdm-section-header {
 	border-bottom: 1px solid #333;
