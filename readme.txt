@@ -5,7 +5,7 @@ Plugin URL: http://themeofthecrop.com
 Requires at Least: 3.5
 Tested Up To: 4.0
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 Donate link: http://themeofthecrop.com
 
@@ -25,12 +25,9 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Use the widget to display your menu in a sidebar
 * Responsive menu layout to improve mobile viewing
 * Templates to easily customize the output of menus and menu items
+* Compatible with WPML for multi-language sites
 
 This plugin is part of a group of plugins in development for restaurants. Check out the [Restaurant Reservations](http://wordpress.org/plugins/restaurant-reservations/), [Good Reviews for WordPress](http://wordpress.org/plugins/good-reviews-wp/) and [Business Profile](http://wordpress.org/plugins/business-profile/) plugins as well.
-
-= Examples =
-
-[The Wayfarer](http://thewayfarernyc.com/menu/dinner/)
 
 = How to use =
 
@@ -43,8 +40,9 @@ Once you've saved the menu in the admin panel, it will give you the shortcode so
 = Tutorials =
 * [Customize the menu templates](http://themeofthecrop.com/2014/01/28/customize-restaurant-menu-templates/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
 * [Create a complex menu layout](http://themeofthecrop.com/2014/07/31/achieve-complex-menu-layouts-food-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
+* [Style each section differently](http://themeofthecrop.com/2014/08/19/give-section-restaurant-menu-unique-style/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
 
-More tutorials will follow, so follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://plus.google.com/+Themeofthecrop) for more details.
+Follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://plus.google.com/+Themeofthecrop), or [sign up](http://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) to my mailing list for more tutorials and tips.
 
 = Developers =
 This plugin is packed with hooks so you can extend and customize it to your delight. A pro addon is available at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
@@ -86,6 +84,10 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.4.2 (2014-11-04) =
+* Improved compatibility with WPML for multi-language sites
+* Minor tweaks to reduce CSS conflicts in menu layout
 
 = 1.4.1 (2014-08-24) =
 * Fix: nested `the_content` filters cause plugin conflicts
@@ -153,6 +155,9 @@ It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.4.2 =
+This update brings Food and Drink Menu in full compliance with the WPML plugin for multi-language sites.
 
 = 1.4.1 =
 This update fixes a conflict with some plugins which would prevent the menus from displaying properly.

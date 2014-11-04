@@ -3,7 +3,7 @@
  * Plugin Name: Food and Drink Menu
  * Plugin URI: http://themeofthecrop.com
  * Description: Create a menu for restaurants, cafes, bars and eateries and display it in templates, posts, pages and widgets.
- * Version: 1.4.1
+ * Version: 1.4.2
  * Author: Nate Wright
  * Author URI: https://github.com/NateWr
  *
