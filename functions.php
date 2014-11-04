@@ -89,7 +89,7 @@ function fdm_global_unique_id() {
 }
 
 /**
- * Tranform an array of CSS classes into an HTML attribute
+ * Transform an array of CSS classes into an HTML attribute
  * @since 1.0
  */
 function fdm_format_classes($classes) {
@@ -97,5 +97,3 @@ function fdm_format_classes($classes) {
 		return ' class="' . join(" ", $classes) . '"';
 	}
 }
-
-
