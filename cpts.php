@@ -573,7 +573,7 @@ class fdmCustomPostTypes {
 		}
 
 		$screen = get_current_screen();
-		if ( $screen->post_type == 'fdm-menu-item' ) {
+		if ( is_object( $screen ) && $screen->post_type == 'fdm-menu-item' ) {
 
 			$terms = get_terms( 'fdm-menu-section' );
 
@@ -602,7 +602,7 @@ class fdmCustomPostTypes {
 		}
 
 		$screen = get_current_screen();
-		if ( $screen->post_type == FDM_MENUITEM_POST_TYPE && !empty( $_GET['section'] ) ) {
+		if ( is_object( $screen ) && $screen->post_type == FDM_MENUITEM_POST_TYPE && !empty( $_GET['section'] ) ) {
 			$section = (int) $_GET['section'];
 
 			// Get menu items not assigned to any section
