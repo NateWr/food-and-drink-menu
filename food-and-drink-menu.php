@@ -62,6 +62,11 @@ class fdmFoodAndDrinkMenu {
 
 		// Add links to plugin listing
 		add_filter('plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2);
+
+		// Backwards compatibility for new taxonomy term splitting
+		// in 4.2
+		// https://make.wordpress.org/core/2015/02/16/taxonomy-term-splitting-in-4-2-a-developer-guide/
+		add_action( 'split_shared_term', array( $this, 'compat_split_shared_term' ), 10, 4 );
 	}
 
 	/**
@@ -239,6 +244,56 @@ class fdmFoodAndDrinkMenu {
 
 		return $links;
 
+	}
+
+	/**
+	 * Update menu section term ids when shared terms are split
+	 *
+	 * Backwards compatibility for new taxonomy term splitting
+	 * introduced in 4.2. Shared terms in different taxonomies
+	 * were created in versions prior to 4.1 and will be
+	 * automatically split in 4.2, with their term ids being
+	 * updated. This function will update the term ids used to
+	 * link menu sections to menus.
+	 *
+	 * https://make.wordpress.org/core/2015/02/16/taxonomy-term-splitting-in-4-2-a-developer-guide/
+	 *
+	 * @since 1.4.3
+	 */
+	public function compat_split_shared_term( $old_term_id, $new_term_id, $term_taxonomy_id, $taxonomy ) {
+
+		if ( $taxonomy !== 'fdm-menu-section' ) {
+			return;
+		}
+
+		$posts = new WP_Query( array(
+			'post_type' => 'fdm-menu',
+			'posts_per_page'	=> 1000,
+		) );
+
+		$cols = array( 'one', 'two' );
+		while( $posts->have_posts() ) {
+			$posts->the_post();
+
+			foreach( $cols as $col ) {
+				$updated = false;
+				$menu_sections = get_post_meta( get_the_ID(), 'fdm_menu_column_' . $col, true );
+
+				if ( !empty( $menu_sections ) ) {
+					$term_ids = explode( ',', $menu_sections );
+					foreach( $term_ids as $key => $term_id ) {
+						if ( $term_id == $old_term_id ) {
+							$term_ids[ $key ] = $new_term_id;
+							$updated = true;
+						}
+					}
+				}
+
+				if ( $updated ) {
+					update_post_meta( get_the_ID(), 'fdm_menu_column_' . $col, join( ',', $term_ids ) );
+				}
+			}
+		}
 	}
 
 }
