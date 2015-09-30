@@ -668,20 +668,24 @@ class fdmCustomPostTypes {
 					<tr>
 						<td>
 					<?php foreach( $col1 as $id ) : ?>
+						<?php if ( isset( $terms[ $id ] ) ) : ?>
 							<p>
 								<a href="<?php echo admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=fdm-menu-item' ); ?>">
 								<?php echo $terms[ $id ]; ?>
 								</a>
 							</p>
+						<?php endif; ?>
 					<?php endforeach; ?>
 						</td>
 						<td>
 					<?php foreach( $col2 as $id ) : ?>
+						<?php if ( isset( $terms[ $id ] ) ) : ?>
 							<p>
 								<a href="<?php echo admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=fdm-menu-item' ); ?>">
 									<?php echo $terms[ $id ]; ?>
 								</a>
 							</p>
+						<?php endif; ?>
 					<?php endforeach; ?>
 						</td>
 					</tr>
