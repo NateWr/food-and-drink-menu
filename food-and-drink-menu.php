@@ -298,4 +298,5 @@ class fdmFoodAndDrinkMenu {
 
 }
 
+global $fdm_controller;
 $fdm_controller = new fdmFoodAndDrinkMenu();
