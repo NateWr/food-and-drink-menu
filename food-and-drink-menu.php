@@ -219,8 +219,7 @@ class fdmFoodAndDrinkMenu {
 			// Don't override an existing orderby setting. This prevents other
 			// orderby options from breaking.
 			if ( !$query->get ( 'orderby' ) ) {
-				$query->set( 'orderby', 'menu_order' );
-				$query->set( 'order', 'ASC' );
+				$query->set( 'orderby', array( 'menu_order' => 'ASC', 'post_date' => 'DESC' ) );
 			}
 		}
 
