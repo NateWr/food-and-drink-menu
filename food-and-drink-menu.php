@@ -234,7 +234,7 @@ class fdmFoodAndDrinkMenu {
 
 		if ( $plugin == FDM_PLUGIN_FNAME ) {
 
-			$links['help'] = '<a href="http://doc.themeofthecrop.com/plugins/food-and-drink-menu/docs?utm_source=Plugin&utm_medium=Plugin%Help&utm_campaign=Food%20and%20Drink%20Menu" title="' . __( 'View the help documentation for Food and Drink Menu', FDM_TEXTDOMAIN ) . '">' . __( 'Help', FDM_TEXTDOMAIN ) . '</a>';
+			$links['help'] = '<a href="http://doc.themeofthecrop.com/plugins/food-and-drink-menu?utm_source=Plugin&utm_medium=Plugin%Help&utm_campaign=Food%20and%20Drink%20Menu" title="' . __( 'View the help documentation for Food and Drink Menu', FDM_TEXTDOMAIN ) . '">' . __( 'Help', FDM_TEXTDOMAIN ) . '</a>';
 
 			if ( !defined( 'FDMP_VERSION' ) ) {
 				$links['upgrade'] = '<a href="' . FDM_UPGRADE_URL . '" title="' . __( 'Upgrade to Food and Drink Pro', FDM_TEXTDOMAIN ) . '">' . __( 'Upgrade', FDM_TEXTDOMAIN ) . '</a>';
