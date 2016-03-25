@@ -31,11 +31,7 @@ This plugin is part of a group of plugins in development for restaurants. Check 
 
 = How to use =
 
-Read the [documentation](http://themeofthecrop.com/docs/food-and-drink-menu?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "How to use the Food and Drink Menu plugin") for how to create your menus. Once you've created a menu you can add it to any menu on your site from the Appearance > Menus area. Alternatively, you can use the widget to add it to a sidebar or include it in any existing page or with a shortcode:
-
-`[fdm-menu id=123]`
-
-Once you've saved the menu in the admin panel, it will give you the shortcode so you don't need to go hunting for the id.
+Read the [help guide](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) for help creating and displaying your menus.
 
 = Tutorials =
 * [Customize the menu templates](http://themeofthecrop.com/2014/01/28/customize-restaurant-menu-templates/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
@@ -45,7 +41,9 @@ Once you've saved the menu in the admin panel, it will give you the shortcode so
 Follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://plus.google.com/+Themeofthecrop), or [sign up](http://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) to my mailing list for more tutorials and tips.
 
 = Developers =
-This plugin is packed with hooks so you can extend and customize it to your delight. A pro addon is available at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
+This plugin is packed with hooks so you can extend and customize it to your delight. Take a look at the [Developer Documentation](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/developer/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
+
+A pro addon is available at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
 
 This plugin is [on GitHub](https://github.com/NateWr/food-and-drink-menu "Food and Drink Menu at Github") so fork it up.
 
@@ -60,7 +58,7 @@ This plugin is [on GitHub](https://github.com/NateWr/food-and-drink-menu "Food a
 
 = Where can I find more documentation? =
 
-There is a full readme file available in the /docs/ folder. You can also learn more at [Theme of the Crop](http://themeofthecrop.com/plugins/food-and-drink-menu?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Full information about the WordPress restaurant menu plugin").
+Read the [help guide](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) for help creating and displaying your menus. If you want to extend the plugin, take a look at the [developer documentation](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/developer/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
 = I want more features =
 
@@ -73,6 +71,10 @@ A Pro version is available which features:
 * Google maps to show off local suppliers or ethical sourcing programs
 
 It can be purchased at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin").
+
+= More questions and answers =
+
+Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/user/faq?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
 
 == Screenshots ==
 
