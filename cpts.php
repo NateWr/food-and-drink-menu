@@ -483,7 +483,7 @@ class fdmCustomPostTypes {
 		// Save the metadata
 		foreach ($meta_ids as $meta_id => $sanitize_callback) {
 			$cur = get_post_meta( $post_id, $meta_id, true );
-			$new = call_user_func( $sanitize_callback, $_POST[$meta_id] );
+			$new = isset( $_POST[$meta_id] ) ? call_user_func( $sanitize_callback, $_POST[$meta_id] ) : '';
 			if ( $new && $new != $cur ) {
 				update_post_meta( $post_id, $meta_id, $new );
 			} elseif ( $new == '' && $cur ) {
