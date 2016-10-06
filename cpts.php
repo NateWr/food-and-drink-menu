@@ -46,19 +46,19 @@ class fdmCustomPostTypes {
 		// Define the menu custom post type
 		$args = array(
 			'labels' => array(
-				'name' => __( 'Menus', FDM_TEXTDOMAIN ),
-				'singular_name' => __( 'Menu', FDM_TEXTDOMAIN ),
-				'add_new' => __( 'Add Menu', FDM_TEXTDOMAIN ),
-				'add_new_item' => __( 'Add New Menu', FDM_TEXTDOMAIN ),
-				'edit' => __( 'Edit', FDM_TEXTDOMAIN ),
-				'edit_item' => __( 'Edit Menu', FDM_TEXTDOMAIN ),
-				'new_item' => __( 'New Menu', FDM_TEXTDOMAIN ),
-				'view' => __( 'View', FDM_TEXTDOMAIN ),
-				'view_item' => __( 'View Menu', FDM_TEXTDOMAIN ),
-				'search_items' => __( 'Search Menus', FDM_TEXTDOMAIN ),
-				'not_found' => __( 'No Menu found', FDM_TEXTDOMAIN ),
-				'not_found_in_trash' => __( 'No Menu found in Trash', FDM_TEXTDOMAIN ),
-				'parent' => __( 'Parent Menu', FDM_TEXTDOMAIN )
+				'name' => __( 'Menus', 'food-and-drink-menu' ),
+				'singular_name' => __( 'Menu', 'food-and-drink-menu' ),
+				'add_new' => __( 'Add Menu', 'food-and-drink-menu' ),
+				'add_new_item' => __( 'Add New Menu', 'food-and-drink-menu' ),
+				'edit' => __( 'Edit', 'food-and-drink-menu' ),
+				'edit_item' => __( 'Edit Menu', 'food-and-drink-menu' ),
+				'new_item' => __( 'New Menu', 'food-and-drink-menu' ),
+				'view' => __( 'View', 'food-and-drink-menu' ),
+				'view_item' => __( 'View Menu', 'food-and-drink-menu' ),
+				'search_items' => __( 'Search Menus', 'food-and-drink-menu' ),
+				'not_found' => __( 'No Menu found', 'food-and-drink-menu' ),
+				'not_found_in_trash' => __( 'No Menu found in Trash', 'food-and-drink-menu' ),
+				'parent' => __( 'Parent Menu', 'food-and-drink-menu' )
 			),
 			'menu_position' => 15,
 			'public' => true,
@@ -89,25 +89,25 @@ class fdmCustomPostTypes {
 			// Create menu sections (desserts, entrees, etc)
 			'fdm-menu-section'	=> array(
 				'labels' 	=> array(
-					'name' => __( 'Menu Sections', FDM_TEXTDOMAIN ),
-					'singular_name' => __( 'Menu Section', FDM_TEXTDOMAIN ),
-					'search_items' => __( 'Search Menu Sections', FDM_TEXTDOMAIN ),
-					'all_items' => __( 'All Menu Sections', FDM_TEXTDOMAIN ),
-					'parent_item' => __( 'Menu Section', FDM_TEXTDOMAIN ),
-					'parent_item_colon' => __( 'Menu Section:', FDM_TEXTDOMAIN ),
-					'edit_item' => __( 'Edit Menu Section', FDM_TEXTDOMAIN ),
-					'update_item' => __( 'Update Menu Section', FDM_TEXTDOMAIN ),
-					'add_new_item' => __( 'Add New Menu Section', FDM_TEXTDOMAIN ),
-					'new_item_name' => __( 'Menu Section', FDM_TEXTDOMAIN ),
-					'no_terms' => __( 'No menu sections', FDM_TEXTDOMAIN ),
-					'items_list_navigation' => __( 'Menu sections list navigation', FDM_TEXTDOMAIN ),
-					'items_list' => __( 'Menu sections list', FDM_TEXTDOMAIN ),
-					'archives' => __( 'Menu Archives', FDM_TEXTDOMAIN ),
-					'insert_into_item' => __( 'Insert into menu', FDM_TEXTDOMAIN ),
-					'uploaded_to_this_item' => __( 'Uploaded to this menu', FDM_TEXTDOMAIN ),
-					'filter_items_list' => __( 'Filter menu list', FDM_TEXTDOMAIN ),
-					'item_list_navigation' => __( 'Menu list navigation', FDM_TEXTDOMAIN ),
-					'items_list' => __( 'Menu list', FDM_TEXTDOMAIN ),
+					'name' => __( 'Menu Sections', 'food-and-drink-menu' ),
+					'singular_name' => __( 'Menu Section', 'food-and-drink-menu' ),
+					'search_items' => __( 'Search Menu Sections', 'food-and-drink-menu' ),
+					'all_items' => __( 'All Menu Sections', 'food-and-drink-menu' ),
+					'parent_item' => __( 'Menu Section', 'food-and-drink-menu' ),
+					'parent_item_colon' => __( 'Menu Section:', 'food-and-drink-menu' ),
+					'edit_item' => __( 'Edit Menu Section', 'food-and-drink-menu' ),
+					'update_item' => __( 'Update Menu Section', 'food-and-drink-menu' ),
+					'add_new_item' => __( 'Add New Menu Section', 'food-and-drink-menu' ),
+					'new_item_name' => __( 'Menu Section', 'food-and-drink-menu' ),
+					'no_terms' => __( 'No menu sections', 'food-and-drink-menu' ),
+					'items_list_navigation' => __( 'Menu sections list navigation', 'food-and-drink-menu' ),
+					'items_list' => __( 'Menu sections list', 'food-and-drink-menu' ),
+					'archives' => __( 'Menu Archives', 'food-and-drink-menu' ),
+					'insert_into_item' => __( 'Insert into menu', 'food-and-drink-menu' ),
+					'uploaded_to_this_item' => __( 'Uploaded to this menu', 'food-and-drink-menu' ),
+					'filter_items_list' => __( 'Filter menu list', 'food-and-drink-menu' ),
+					'item_list_navigation' => __( 'Menu list navigation', 'food-and-drink-menu' ),
+					'items_list' => __( 'Menu list', 'food-and-drink-menu' ),
 				)
 			)
 
@@ -128,29 +128,29 @@ class fdmCustomPostTypes {
 		// Define the Menu Item custom post type
 		$args = array(
 			'labels' => array(
-				'name' => __( 'Menu Items', FDM_TEXTDOMAIN ),
-				'singular_name' => __( 'Menu Item', FDM_TEXTDOMAIN ),
-				'add_new' => __( 'Add Menu Item', FDM_TEXTDOMAIN ),
-				'add_new_item' => __( 'Add New Menu Item', FDM_TEXTDOMAIN ),
-				'edit' => __( 'Edit', FDM_TEXTDOMAIN ),
-				'edit_item' => __( 'Edit Menu Item', FDM_TEXTDOMAIN ),
-				'new_item' => __( 'New Menu Item', FDM_TEXTDOMAIN ),
-				'view' => __( 'View', FDM_TEXTDOMAIN ),
-				'view_item' => __( 'View Menu Item', FDM_TEXTDOMAIN ),
-				'search_items' => __( 'Search Menu Items', FDM_TEXTDOMAIN ),
-				'not_found' => __( 'No Menu Item found', FDM_TEXTDOMAIN ),
-				'not_found_in_trash' => __( 'No Menu Item found in Trash', FDM_TEXTDOMAIN ),
-				'parent' => __( 'Parent Menu Item', FDM_TEXTDOMAIN ),
-				'featured_image' => __( 'Item Photo', FDM_TEXTDOMAIN ),
-				'set_featured_image' => __( 'Set item photo', FDM_TEXTDOMAIN ),
-				'remove_featured_image' => __( 'Remove item photo', FDM_TEXTDOMAIN ),
-				'use_featured_image' => __( 'Use as item photo', FDM_TEXTDOMAIN ),
-				'archives' => __( 'Menu Item Archives', FDM_TEXTDOMAIN ),
-				'insert_into_item' => __( 'Insert into menu item', FDM_TEXTDOMAIN ),
-				'uploaded_to_this_item' => __( 'Uploaded to this menu item', FDM_TEXTDOMAIN ),
-				'filter_items_list' => __( 'Filter menu items list', FDM_TEXTDOMAIN ),
-				'item_list_navigation' => __( 'Menu items list navigation', FDM_TEXTDOMAIN ),
-				'items_list' => __( 'Menu items list', FDM_TEXTDOMAIN ),
+				'name' => __( 'Menu Items', 'food-and-drink-menu' ),
+				'singular_name' => __( 'Menu Item', 'food-and-drink-menu' ),
+				'add_new' => __( 'Add Menu Item', 'food-and-drink-menu' ),
+				'add_new_item' => __( 'Add New Menu Item', 'food-and-drink-menu' ),
+				'edit' => __( 'Edit', 'food-and-drink-menu' ),
+				'edit_item' => __( 'Edit Menu Item', 'food-and-drink-menu' ),
+				'new_item' => __( 'New Menu Item', 'food-and-drink-menu' ),
+				'view' => __( 'View', 'food-and-drink-menu' ),
+				'view_item' => __( 'View Menu Item', 'food-and-drink-menu' ),
+				'search_items' => __( 'Search Menu Items', 'food-and-drink-menu' ),
+				'not_found' => __( 'No Menu Item found', 'food-and-drink-menu' ),
+				'not_found_in_trash' => __( 'No Menu Item found in Trash', 'food-and-drink-menu' ),
+				'parent' => __( 'Parent Menu Item', 'food-and-drink-menu' ),
+				'featured_image' => __( 'Item Photo', 'food-and-drink-menu' ),
+				'set_featured_image' => __( 'Set item photo', 'food-and-drink-menu' ),
+				'remove_featured_image' => __( 'Remove item photo', 'food-and-drink-menu' ),
+				'use_featured_image' => __( 'Use as item photo', 'food-and-drink-menu' ),
+				'archives' => __( 'Menu Item Archives', 'food-and-drink-menu' ),
+				'insert_into_item' => __( 'Insert into menu item', 'food-and-drink-menu' ),
+				'uploaded_to_this_item' => __( 'Uploaded to this menu item', 'food-and-drink-menu' ),
+				'filter_items_list' => __( 'Filter menu items list', 'food-and-drink-menu' ),
+				'item_list_navigation' => __( 'Menu items list navigation', 'food-and-drink-menu' ),
+				'items_list' => __( 'Menu items list', 'food-and-drink-menu' ),
 			),
 			'menu_position' => 15,
 			'public' => true,
@@ -190,7 +190,7 @@ class fdmCustomPostTypes {
 			// Add a menu footer WYSIWYG editor
 			'fdm_menu_footer' => array (
 				'id'		=>	'fdm_menu_footer',
-				'title'		=> __( 'Menu Footer', FDM_TEXTDOMAIN ),
+				'title'		=> __( 'Menu Footer', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_footer' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'normal',
@@ -200,7 +200,7 @@ class fdmCustomPostTypes {
 			// Add a menu organizer
 			'fdm_menu_layout' => array (
 				'id'		=>	'fdm_menu_layout',
-				'title'		=> __( 'Menu Layout', FDM_TEXTDOMAIN ),
+				'title'		=> __( 'Menu Layout', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_organizer' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'normal',
@@ -210,7 +210,7 @@ class fdmCustomPostTypes {
 			// Add a box that shows menu shortcode
 			'fdm_menu_shortcode' => array (
 				'id'		=>	'fdm_menu_shortcode',
-				'title'		=> __( 'Menu Shortcode', FDM_TEXTDOMAIN ),
+				'title'		=> __( 'Menu Shortcode', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_shortcode' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'side',
@@ -220,7 +220,7 @@ class fdmCustomPostTypes {
 			// Add a box that shows menu item shortcode
 			'fdm_menu_item_shortcode' => array (
 				'id'		=>	'fdm_menu_item_shortcode',
-				'title'		=> __( 'Menu Item Shortcode', FDM_TEXTDOMAIN ),
+				'title'		=> __( 'Menu Item Shortcode', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_item_shortcode' ),
 				'post_type'	=> 'fdm-menu-item',
 				'context'	=> 'side',
@@ -234,7 +234,7 @@ class fdmCustomPostTypes {
 		if ( !$settings['fdm-disable-price'] ) {
 			$meta_boxes['fdm_menu_item_price'] = array (
 				'id'		=>	'fdm_item_price',
-				'title'		=> __( 'Price', FDM_TEXTDOMAIN ),
+				'title'		=> __( 'Price', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_item_price' ),
 				'post_type'	=> 'fdm-menu-item',
 				'context'	=> 'side',
@@ -276,7 +276,7 @@ class fdmCustomPostTypes {
 
 			<div class="fdm-input-controls fdm-input-side-panel">
 				<div class="fdm-input-control">
-					<label for="fdm_item_price"><?php echo __( 'Price', FDM_TEXTDOMAIN ); ?></label>
+					<label for="fdm_item_price"><?php echo __( 'Price', 'food-and-drink-menu' ); ?></label>
 					<input type="text" name="fdm_item_price" id="fdm_item_price" value="<?php echo esc_attr( $price ); ?>">
 				</div>
 
@@ -328,19 +328,19 @@ class fdmCustomPostTypes {
 			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php echo $column_one; ?>">
 			<input type="hidden" id="fdm_menu_column_two" name="fdm_menu_column_two" value="<?php echo $column_two; ?>">
 
-			<p><?php echo __( 'Click on a Menu Section to add it to this menu.', FDM_TEXTDOMAIN ); ?></p>
+			<p><?php echo __( 'Click on a Menu Section to add it to this menu.', 'food-and-drink-menu' ); ?></p>
 
 			<div id="fdm-menu-organizer">
 
 				<div id="fdm-menu-column-one">
 					<div class="fdm-column fdm-options">
-						<h4><?php echo __( 'Menu Sections', FDM_TEXTDOMAIN ); ?></h4>
+						<h4><?php echo __( 'Menu Sections', 'food-and-drink-menu' ); ?></h4>
 						<ul>
 							<?php echo $sections_list; ?>
 						</ul>
 					</div>
 					<div class="fdm-column fdm-added">
-						<h4><?php echo __( 'First Column', FDM_TEXTDOMAIN ); ?></h4>
+						<h4><?php echo __( 'First Column', 'food-and-drink-menu' ); ?></h4>
 						<ul>
 						<!-- List filled with values on page load. see admin.js -->
 						</ul>
@@ -349,13 +349,13 @@ class fdmCustomPostTypes {
 
 				<div id="fdm-menu-column-two">
 					<div class="fdm-column fdm-added">
-						<h4><?php echo __( 'Second Column', FDM_TEXTDOMAIN ); ?></h4>
+						<h4><?php echo __( 'Second Column', 'food-and-drink-menu' ); ?></h4>
 						<ul>
 						<!-- List filled with values on page load. see admin.js -->
 						</ul>
 					</div>
 					<div class="fdm-column fdm-options">
-						<h4><?php echo __( 'Menu Sections', FDM_TEXTDOMAIN ); ?></h4>
+						<h4><?php echo __( 'Menu Sections', 'food-and-drink-menu' ); ?></h4>
 						<ul>
 							<?php echo $sections_list; ?>
 						</ul>
@@ -366,7 +366,7 @@ class fdmCustomPostTypes {
 
 			</div>
 
-			<p><?php echo __( 'Hint: Leave the second column empty to display the menu in a single column.', FDM_TEXTDOMAIN ); ?></p>
+			<p><?php echo __( 'Hint: Leave the second column empty to display the menu in a single column.', 'food-and-drink-menu' ); ?></p>
 
 		<?php
 
@@ -390,7 +390,7 @@ class fdmCustomPostTypes {
 
 			?>
 
-			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu in any post or page.', FDM_TEXTDOMAIN ); ?></p>
+			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu in any post or page.', 'food-and-drink-menu' ); ?></p>
 
 			<?php
 
@@ -399,7 +399,7 @@ class fdmCustomPostTypes {
 
 			?>
 
-				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', FDM_TEXTDOMAIN ); ?></p>
+				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', 'food-and-drink-menu' ); ?></p>
 				<div class="fdm-menu-shortcode">[fdm-menu id=<?php echo $post->ID; ?>]</div>
 
 			<?php
@@ -430,7 +430,7 @@ class fdmCustomPostTypes {
 
 			?>
 
-			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu item in any post or page.', FDM_TEXTDOMAIN ); ?></p>
+			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu item in any post or page.', 'food-and-drink-menu' ); ?></p>
 
 			<?php
 
@@ -439,7 +439,7 @@ class fdmCustomPostTypes {
 
 			?>
 
-				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', FDM_TEXTDOMAIN ); ?></p>
+				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', 'food-and-drink-menu' ); ?></p>
 				<div class="fdm-menu-shortcode">[fdm-menu-item id=<?php echo $post->ID; ?>]</div>
 
 			<?php
@@ -520,9 +520,9 @@ class fdmCustomPostTypes {
 		return array(
 			'cb'		=> '<input type="checkbox" />',
 			'title'		=> __( 'Title' ),
-			'price'		=> __( 'Price', FDM_TEXTDOMAIN ),
-			'sections'	=> __( 'Sections', FDM_TEXTDOMAIN ),
-			'shortcode'	=> __( 'Shortcode', FDM_TEXTDOMAIN ),
+			'price'		=> __( 'Price', 'food-and-drink-menu' ),
+			'sections'	=> __( 'Sections', 'food-and-drink-menu' ),
+			'shortcode'	=> __( 'Shortcode', 'food-and-drink-menu' ),
 			'date'		=> __( 'Date' ),
 		);
 	}
@@ -573,7 +573,7 @@ class fdmCustomPostTypes {
 				$output[] = '<a href="' . admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $term->term_taxonomy_id . '&post_type=fdm-menu-item' ) . '">' . $term->name . '</a>';
 			}
 
-			echo join( __( ', ', 'Separator in list of Menu Sections', FDM_TEXTDOMAIN ), $output );
+			echo join( __( ', ', 'Separator in list of Menu Sections', 'food-and-drink-menu' ), $output );
 		}
 
 		if ( $column == 'shortcode' ) {
@@ -598,13 +598,13 @@ class fdmCustomPostTypes {
 
 			if ( !empty( $terms ) ) : ?>
 				<select name="section">
-					<option value=""><?php _e( 'All sections', FDM_TEXTDOMAIN ); ?></option>
+					<option value=""><?php _e( 'All sections', 'food-and-drink-menu' ); ?></option>
 
 					<?php foreach( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"<?php if( !empty( $_GET['section'] ) && $_GET['section'] == $term->term_id ) : ?> selected="selected"<?php endif; ?>><?php echo esc_attr( $term->name ); ?></option>
 					<?php endforeach; ?>
 
-					<option value="-1"><?php _e( 'Unassigned items', FDM_TEXTDOMAIN ); ?></option>
+					<option value="-1"><?php _e( 'Unassigned items', 'food-and-drink-menu' ); ?></option>
 				</select>
 			<?php endif;
 		}
@@ -657,8 +657,8 @@ class fdmCustomPostTypes {
 		return array(
 			'cb'		=> '<input type="checkbox" />',
 			'title'		=> __( 'Title' ),
-			'sections'	=> __( 'Sections', FDM_TEXTDOMAIN ),
-			'shortcode'	=> __( 'Shortcode', FDM_TEXTDOMAIN ),
+			'sections'	=> __( 'Sections', 'food-and-drink-menu' ),
+			'shortcode'	=> __( 'Shortcode', 'food-and-drink-menu' ),
 			'date'		=> __( 'Date' ),
 		);
 	}

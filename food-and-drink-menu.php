@@ -20,7 +20,7 @@ class fdmFoodAndDrinkMenu {
 	 */
 	public function __construct() {
 		// Common strings
-		define( 'FDM_TEXTDOMAIN', 'fdmdomain' );
+		define( 'FDM_DOMAIN', 'food-and-drink-menu' );
 		define( 'FDM_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'FDM_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 		define( 'FDM_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
@@ -44,6 +44,9 @@ class fdmFoodAndDrinkMenu {
 		// Load settings
 		require_once( FDM_PLUGIN_DIR . '/settings.php' );
 		$this->settings = new fdmSettings();
+
+		// Load compatibility sections
+		require_once( FDM_PLUGIN_DIR . '/compatibility.php' );
 
 		// Call when the plugin is activated
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
@@ -102,7 +105,7 @@ class fdmFoodAndDrinkMenu {
 			'base' => new fdmStyle(
 				array(
 					'id'	=> 'base',
-					'label'	=> __( 'Base formatting only', FDM_TEXTDOMAIN ),
+					'label'	=> __( 'Base formatting only', 'food-and-drink-menu' ),
 					'css'	=> array(
 						'base' => FDM_PLUGIN_URL . '/assets/css/base.css'
 					)
@@ -111,7 +114,7 @@ class fdmFoodAndDrinkMenu {
 			'classic' => new fdmStyle(
 				array(
 					'id'	=> 'classic',
-					'label'	=> __( 'Classic style', FDM_TEXTDOMAIN ),
+					'label'	=> __( 'Classic style', 'food-and-drink-menu' ),
 					'css'	=> array(
 						'base' => FDM_PLUGIN_URL . '/assets/css/base.css',
 						'classic' => FDM_PLUGIN_URL . '/assets/css/classic.css'
@@ -121,7 +124,7 @@ class fdmFoodAndDrinkMenu {
 			'none' => new fdmStyle(
 				array(
 					'id'	=> 'none',
-					'label'	=> __( 'Don\'t load any CSS styles', FDM_TEXTDOMAIN ),
+					'label'	=> __( 'Don\'t load any CSS styles', 'food-and-drink-menu' ),
 					'css'	=> array( )
 				)
 			),
@@ -135,7 +138,7 @@ class fdmFoodAndDrinkMenu {
 	 * @since 1.1
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( FDM_TEXTDOMAIN, false, plugin_basename( dirname( __FILE__ ) ) . "/languages/" );
+		load_plugin_textdomain( 'food-and-drink-menu', false, plugin_basename( dirname( __FILE__ ) ) . "/languages/" );
 	}
 
 	/**
@@ -234,10 +237,10 @@ class fdmFoodAndDrinkMenu {
 
 		if ( $plugin == FDM_PLUGIN_FNAME ) {
 
-			$links['help'] = '<a href="http://doc.themeofthecrop.com/plugins/food-and-drink-menu?utm_source=Plugin&utm_medium=Plugin%Help&utm_campaign=Food%20and%20Drink%20Menu" title="' . __( 'View the help documentation for Food and Drink Menu', FDM_TEXTDOMAIN ) . '">' . __( 'Help', FDM_TEXTDOMAIN ) . '</a>';
+			$links['help'] = '<a href="http://doc.themeofthecrop.com/plugins/food-and-drink-menu?utm_source=Plugin&utm_medium=Plugin%Help&utm_campaign=Food%20and%20Drink%20Menu" title="' . __( 'View the help documentation for Food and Drink Menu', 'food-and-drink-menu' ) . '">' . __( 'Help', 'food-and-drink-menu' ) . '</a>';
 
 			if ( !defined( 'FDMP_VERSION' ) ) {
-				$links['upgrade'] = '<a href="' . FDM_UPGRADE_URL . '" title="' . __( 'Upgrade to Food and Drink Pro', FDM_TEXTDOMAIN ) . '">' . __( 'Upgrade', FDM_TEXTDOMAIN ) . '</a>';
+				$links['upgrade'] = '<a href="' . FDM_UPGRADE_URL . '" title="' . __( 'Upgrade to Food and Drink Pro', 'food-and-drink-menu' ) . '">' . __( 'Upgrade', 'food-and-drink-menu' ) . '</a>';
 			}
 		}
 

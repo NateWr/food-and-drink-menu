@@ -16,8 +16,8 @@ class fdmWidgetMenu extends WP_Widget {
 
 		parent::__construct(
 			'fdm_widget_menu',
-			__('Food and Drink Menu', FDM_TEXTDOMAIN),
-			array( 'description' => __( 'Display your food and drink menu.', FDM_TEXTDOMAIN ), )
+			__('Food and Drink Menu', 'food-and-drink-menu'),
+			array( 'description' => __( 'Display your food and drink menu.', 'food-and-drink-menu' ), )
 		);
 
 	}
