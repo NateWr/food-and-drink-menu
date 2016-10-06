@@ -27,7 +27,7 @@ class fdmSettings {
 	 */
 	public function load_settings_panel() {
 
-		require_once('lib/simple-admin-pages/simple-admin-pages.php');
+		require_once( FDM_PLUGIN_DIR . '/lib/simple-admin-pages/simple-admin-pages.php');
 
 		// Insantiate the Simple Admin Library so that we can add a settings page
 		$sap = sap_initialize_library(
@@ -128,7 +128,7 @@ class fdmSettings {
 
 		// Create filter so addons can modify the settings page or add new pages
 		$sap = apply_filters( 'fdm_settings_page', $sap );
-		
+
 		// Backwards compatibility when the sap library went to version 2
 		$sap->port_data(2);
 

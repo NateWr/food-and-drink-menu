@@ -31,22 +31,22 @@ class fdmFoodAndDrinkMenu {
 		define( 'FDM_MENUITEM_POST_TYPE', 'fdm-menu-item' );
 
 		// Load template functions
-		require_once( FDM_PLUGIN_DIR . '/functions.php' );
+		require_once( FDM_PLUGIN_DIR . '/includes/template-functions.php' );
 
 		// Call when plugin is initialized on every page load
 		add_action( 'init', array( $this, 'load_config' ) );
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		// Load custom post types
-		require_once( FDM_PLUGIN_DIR . '/cpts.php' );
+		require_once( FDM_PLUGIN_DIR . '/includes/class-custom-post-types.php' );
 		$this->cpts = new fdmCustomPostTypes();
 
 		// Load settings
-		require_once( FDM_PLUGIN_DIR . '/settings.php' );
+		require_once( FDM_PLUGIN_DIR . '/includes/class-settings.php' );
 		$this->settings = new fdmSettings();
 
 		// Load compatibility sections
-		require_once( FDM_PLUGIN_DIR . '/compatibility.php' );
+		require_once( FDM_PLUGIN_DIR . '/includes/compatibility.php' );
 
 		// Call when the plugin is activated
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
@@ -64,7 +64,7 @@ class fdmFoodAndDrinkMenu {
 		add_filter( 'the_content', array( $this, 'append_to_content' ) );
 
 		// Add links to plugin listing
-		add_filter('plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2);
+		add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2);
 
 		// Backwards compatibility for new taxonomy term splitting
 		// in 4.2
