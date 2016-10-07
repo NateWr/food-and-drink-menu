@@ -1,3 +1,5 @@
 <div class="fdm-item-price-wrapper">
-	<span class="fdm-item-price"><?php echo $this->price; ?></span>
+	<?php foreach( $this->prices as $price ) : ?>
+		<div class="fdm-item-price"><?php echo $price; ?></div>
+	<?php endforeach; ?>
 </div>

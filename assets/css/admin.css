@@ -12,6 +12,7 @@
 
 /* Input controls for custom post type options */
 .fdm-input-control {
+	position: relative;
 	margin: 1em 0;
 }
 .fdm-input-control:last-child {
@@ -32,6 +33,41 @@
 	display: inline;
 	width: auto;
 }
+.fdm-input-control .fdm-input-delete {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	width: 20px;
+	height: 22px;
+	transform: translateY(-50%);
+	padding: 0  0.5em;
+	background: #eee;
+	border-left: 1px solid #ddd;
+	color: red;
+	text-align: center;
+	text-decoration: none;
+	overflow: hidden;
+}
+.fdm-input-control .fdm-input-delete:before {
+	content: "×";
+	width: 20px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+}
+.fdm-input-control .fdm-input-delete:hover,
+.fdm-input-control .fdm-input-delete:focus {
+	background: red;
+}
+.fdm-input-control .fdm-input-delete:hover:before,
+.fdm-input-control .fdm-input-delete:focus:before {
+	color: #fff;
+}
+#fdm-input-prices .fdm-input-control:first-child .fdm-input-delete {
+	display: none;
+}
+
 
 /**
  * Menu Organizer
