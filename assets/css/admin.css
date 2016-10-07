@@ -12,7 +12,10 @@
 
 /* Input controls for custom post type options */
 .fdm-input-control {
-	margin: 20px 0;
+	margin: 1em 0;
+}
+.fdm-input-control:last-child {
+	margin-bottom: 0;
 }
 .fdm-input-control label {
 	width: 100%;
