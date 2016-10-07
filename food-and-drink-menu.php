@@ -52,7 +52,8 @@ class fdmFoodAndDrinkMenu {
 		register_activation_hook( __FILE__, array( $this, 'rewrite_flush' ) );
 
 		// Load admin assets
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+		add_action( 'admin_print_scripts-post-new.php', array( $this, 'enqueue_admin_assets' ) );
+		add_action( 'admin_print_scripts-post.php', array( $this, 'enqueue_admin_assets' ) );
 
 		// Register the widget
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
@@ -200,6 +201,13 @@ class fdmFoodAndDrinkMenu {
 	 * @todo only enqueue these on relevant pages
 	 */
 	public function enqueue_admin_assets() {
+
+		global $post_type;
+
+		if ( $post_type != FDM_MENU_POST_TYPE && $post_type != FDM_MENUITEM_POST_TYPE ) {
+			return;
+		}
+
 		wp_enqueue_script( 'fdm-admin', FDM_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/assets/css/admin.css', array(), '1.0' );
 
