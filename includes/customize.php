@@ -143,15 +143,11 @@ function fdm_customize_is_menu_post() {
 }
 
 /**
- * Enqueue assets for the customizer
+ * Enqueue assets for the customize pane
  *
  * @since 1.5
  */
 function fdm_customize_enqueue_control_assets() {
-
-	if ( empty( $_GET['fdm_menu'] ) ) {
-		return;
-	}
 
 	// In versions prior to WP 4.7, it's possible that this dependency is
 	// missing. Fixed in https://core.trac.wordpress.org/ticket/38107
@@ -160,20 +156,45 @@ function fdm_customize_enqueue_control_assets() {
 		wp_enqueue_script( 'wp-util' );
 	}
 
-	wp_enqueue_script( 'fdm-customize-control', FDM_PLUGIN_URL . '/assets/js/customize.js', array( 'customize-controls' ), 1.5 );
-
-
-
-
-			// Pass settings to the script
-// 			global $wp_customize;
-// 			wp_localize_script(
-// 				'content-layout-control-js',
-// 				'CLC_Control_Settings',
-// 				array(
-// 					'root' 	=> home_url( rest_get_url_prefix() ),
-// 					'nonce'	=> wp_create_nonce( 'wp_rest' ),
-// 				)
-// 			);
+	wp_enqueue_script( 'fdm-customize-control', FDM_PLUGIN_URL . '/assets/js/fdm-customize-control.js', array( 'customize-controls' ), 1.5 );
 }
 add_action( 'customize_controls_enqueue_scripts', 'fdm_customize_enqueue_control_assets' );
+
+/**
+ * Enqueue assets for the preview pane
+ *
+ * @since 1.5
+ */
+function fdm_customize_enqueue_preview_assets() {
+
+	// In versions prior to WP 4.7, it's possible that this dependency is
+	// missing. Fixed in https://core.trac.wordpress.org/ticket/38107
+	global $wp_version;
+	if ( version_compare( $wp_version, 4.7, '<' ) ) {
+		wp_enqueue_script( 'wp-util' );
+	}
+
+	// Enqueue assets and data for which the current post is needed
+	add_action( 'wp_footer', 'fdm_customize_load_preview_data', 1 );
+}
+add_action( 'customize_preview_init', 'fdm_customize_enqueue_preview_assets' );
+
+/**
+ * Load data about the menu being viewed in the preview pane
+ *
+ * @since 1.5
+ */
+function fdm_customize_load_preview_data() {
+
+	if ( !fdm_customize_is_menu_post() ) {
+		return;
+	}
+
+	$data = array(
+		'post_id' => get_the_ID(),
+		'post_type' => get_post_type(),
+	);
+
+	wp_enqueue_script( 'fdm-customize-preview', FDM_PLUGIN_URL . '/assets/js/fdm-customize-preview.js', array( 'customize-preview' ), 1.5 );
+	wp_localize_script( 'fdm-customize-preview', 'fdm_previewed_item', $data );
+}

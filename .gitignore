@@ -1,2 +1,3 @@
 node_modules
-assets/js/customize.js
+assets/js/fdm-customize-control.js
+assets/js/fdm-customize-preview.js
