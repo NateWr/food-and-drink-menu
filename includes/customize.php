@@ -73,9 +73,38 @@ function fdm_customize_register( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
-		'fdm-menu-column-1-section',
+		'fdm-menu-column-0-section',
 		array(
 			'title' => __( 'First Column', 'food-and-drink-menu' ),
+			'panel' => 'fdm-menu',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fdm-menu-column-0',
+		array(
+			'sanitize_callback' => '__return_true', // @todo implement sanitization
+			'type' => 'fdm-menu-column',
+			'transport' => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new FDM_WP_Customize_Menu_Group(
+			$wp_customize,
+			'fdm-menu-column-0',
+			array(
+				'label'     => __( 'First Column', 'food-and-drink-menu' ),
+				'section'   => 'fdm-menu-column-0-section',
+				'setting'   => 'fdm-menu-column-0',
+			)
+		)
+	);
+
+	$wp_customize->add_section(
+		'fdm-menu-column-1-section',
+		array(
+			'title' => __( 'Second Column', 'food-and-drink-menu' ),
 			'panel' => 'fdm-menu',
 		)
 	);
@@ -94,38 +123,9 @@ function fdm_customize_register( $wp_customize ) {
 			$wp_customize,
 			'fdm-menu-column-1',
 			array(
-				'label'     => __( 'First Column', 'food-and-drink-menu' ),
+				'label'     => __( 'Second Column', 'food-and-drink-menu' ),
 				'section'   => 'fdm-menu-column-1-section',
 				'setting'   => 'fdm-menu-column-1',
-			)
-		)
-	);
-
-	$wp_customize->add_section(
-		'fdm-menu-column-2-section',
-		array(
-			'title' => __( 'Second Column', 'food-and-drink-menu' ),
-			'panel' => 'fdm-menu',
-		)
-	);
-
-	$wp_customize->add_setting(
-		'fdm-menu-column-2',
-		array(
-			'sanitize_callback' => '__return_true', // @todo implement sanitization
-			'type' => 'fdm-menu-column',
-			'transport' => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new FDM_WP_Customize_Menu_Group(
-			$wp_customize,
-			'fdm-menu-column-2',
-			array(
-				'label'     => __( 'Second Column', 'food-and-drink-menu' ),
-				'section'   => 'fdm-menu-column-2-section',
-				'setting'   => 'fdm-menu-column-2',
 			)
 		)
 	);
@@ -148,15 +148,7 @@ function fdm_customize_is_menu_post() {
  * @since 1.5
  */
 function fdm_customize_enqueue_control_assets() {
-
-	// In versions prior to WP 4.7, it's possible that this dependency is
-	// missing. Fixed in https://core.trac.wordpress.org/ticket/38107
-	global $wp_version;
-	if ( version_compare( $wp_version, 4.7, '<' ) ) {
-		wp_enqueue_script( 'wp-util' );
-	}
-
-	wp_enqueue_script( 'fdm-customize-control', FDM_PLUGIN_URL . '/assets/js/fdm-customize-control.js', array( 'customize-controls' ), 1.5 );
+	wp_enqueue_script( 'fdm-customize-control', FDM_PLUGIN_URL . '/assets/js/fdm-customize-control.js', array( 'customize-controls', 'backbone', 'wp-util', 'wp-backbone' ), 1.5, true );
 }
 add_action( 'customize_controls_enqueue_scripts', 'fdm_customize_enqueue_control_assets' );
 
@@ -166,13 +158,6 @@ add_action( 'customize_controls_enqueue_scripts', 'fdm_customize_enqueue_control
  * @since 1.5
  */
 function fdm_customize_enqueue_preview_assets() {
-
-	// In versions prior to WP 4.7, it's possible that this dependency is
-	// missing. Fixed in https://core.trac.wordpress.org/ticket/38107
-	global $wp_version;
-	if ( version_compare( $wp_version, 4.7, '<' ) ) {
-		wp_enqueue_script( 'wp-util' );
-	}
 
 	// Enqueue assets and data for which the current post is needed
 	add_action( 'wp_footer', 'fdm_customize_load_preview_data', 1 );
@@ -190,11 +175,46 @@ function fdm_customize_load_preview_data() {
 		return;
 	}
 
-	$data = array(
-		'post_id' => get_the_ID(),
-		'post_type' => get_post_type(),
+	$menu = new fdmViewMenu(
+		array(
+			'id' => get_the_ID(),
+			'show_title' => true,
+			'show_content' => true,
+		)
+	);
+	$menu->get_menu_post();
+
+	$return = array(
+		'ID' => $menu->id,
+		'title' => $menu->title,
+		'content' => $menu->content,
+		'footer' => $menu->footer,
+		'post_type' => $menu->post->post_type,
 	);
 
-	wp_enqueue_script( 'fdm-customize-preview', FDM_PLUGIN_URL . '/assets/js/fdm-customize-preview.js', array( 'customize-preview' ), 1.5 );
-	wp_localize_script( 'fdm-customize-preview', 'fdm_previewed_item', $data );
+	$menu->get_groups();
+	foreach( $menu->groups as $group_i => $group ) {
+		foreach( $group as $section_id ) {
+
+			$section = new fdmViewSection( array( 'id' => $section_id ) );
+			$section->load_section();
+
+			$section_array = array(
+				'title' => $section->title,
+				'description' => $section->description,
+			);
+
+			foreach( $section->items as $item ) {
+				$section_array['items'][] = array(
+					'ID' => $item->id,
+					'title' => $item->post->post_title,
+				);
+			}
+
+			$return['groups'][$group_i][$section_id] = $section_array;
+		}
+	}
+
+	wp_enqueue_script( 'fdm-customize-preview', FDM_PLUGIN_URL . '/assets/js/fdm-customize-preview.js', array( 'customize-preview' ), 1.5, true );
+	wp_localize_script( 'fdm-customize-preview', 'fdm_previewed_item', $return );
 }

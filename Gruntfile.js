@@ -24,6 +24,7 @@ module.exports = function(grunt) {
 						'assets/js/src/menu-organizer.js',
 					],
 					'assets/js/fdm-customize-control.js': [
+						'assets/js/src/customize-menu-section.js',
 						'assets/js/src/customize-menu-group-control.js',
 					],
 					'assets/js/fdm-customize-preview.js': [

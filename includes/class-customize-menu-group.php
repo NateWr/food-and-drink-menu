@@ -54,6 +54,18 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 
 		$i18n = array(
 			'add_section' => __( 'Add Section', 'food-and-drink-menu' ),
+			'section_name' => __( 'Section Name', 'food-and-drink-menu' ),
+			'section_description' => __( 'Section Description', 'food-and-drink-menu' ),
+			'remove_item' => __( 'Remove Item', 'food-and-drink-menu' ),
+			'remove' => __( 'Remove', 'food-and-drink-menu' ),
+			'reorder_items_desc' => __( 'Drag and drop menu items to reorder them within this section.', 'food-and-drink-menu' ),
+			'no_menu_items' => sprintf(
+				__( 'No Menu Items have been added to this section yet. %sLearn how to assign items to sections%s.', 'food-and-drink-menu' ),
+				'<a href="http://doc.themeofthecrop.com/plugins/food-and-drink-menu/user/getting-started/create-menu">',
+				'</a>'
+			),
+			'loading_sections' => __( 'Loading Menu Sections', 'food-and-drink-menu' ),
+			'loading_items' => __( 'Loading Menu Items', 'food-and-drink-menu' ),
 		);
 
 		if ( isset( $args ) && is_array( $args ) && isset( $args['i18n'] ) ) {
@@ -73,7 +85,11 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 	public function content_template() {
 		?>
 
-		<ul class="fdm-section-list"></ul>
+		<ul id="fdm-menu-section-list-<?php echo absint( $this->id ); ?>" class="fdm-section-list">
+			<li class="loading">
+				{{ data.i18n.loading_sections }}
+			</li>
+		</ul>
 
 		<div class="buttons">
 			<a href="#" class="fdm-add-section button-secondary">
@@ -113,7 +129,8 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 	 */
 	public function load_control_template() {
 		?>
-		<script type="text/html" id="tmpl-fdm-menu-group"><?php include( FDM_PLUGIN_DIR . '/js/templates/menu-group.js' ); ?></script>
+		<script type="text/html" id="tmpl-fdm-menu-section"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/menu-section.js' ); ?></script>
+		<script type="text/html" id="tmpl-fdm-menu-section-item"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/menu-section-item.js' ); ?></script>
 		<?php
 	}
 
