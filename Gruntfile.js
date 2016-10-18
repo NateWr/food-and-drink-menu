@@ -8,6 +8,18 @@ module.exports = function(grunt) {
 		// Load grunt project configuration
 		pkg: grunt.file.readJSON('package.json'),
 
+		// Configure less CSS compiler
+		less: {
+			build: {
+				options: {
+					ieCompat: true
+				},
+				files: {
+					'assets/css/customize.css': 'assets/css/less/customize.less',
+				}
+			},
+		},
+
 		// Configure JSHint
 		jshint: {
 			test: {
@@ -36,6 +48,10 @@ module.exports = function(grunt) {
 
 		// Watch for changes on some files and auto-compile them
 		watch: {
+			less: {
+				files: 'assets/css/less/**/*.less',
+				tasks: ['less'],
+			},
 			js: {
 				files: 'assets/js/src/**/*.js',
 				tasks: ['jshint', 'concat'],
@@ -46,6 +62,7 @@ module.exports = function(grunt) {
 	// Load tasks
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).

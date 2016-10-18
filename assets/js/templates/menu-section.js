@@ -15,6 +15,11 @@
 				<span class="customize-control-title"><?php esc_html_e( $this->i18n['section_description'] ); ?></span>
 				<textarea data-clc-setting-link="content">{{ data.description }}</textarea>
 			</label>
+			<# if ( !data.collection.length ) { #>
+				<div class="placeholder">
+					<?php esc_html_e( $this->i18n['no_menu_items'] ); ?>
+				</div>
+			<# } #>
 			<ul class="fdm-menu-item-list"></ul>
 		</div>
 	</div>

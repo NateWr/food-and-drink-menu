@@ -149,6 +149,7 @@ function fdm_customize_is_menu_post() {
  */
 function fdm_customize_enqueue_control_assets() {
 	wp_enqueue_script( 'fdm-customize-control', FDM_PLUGIN_URL . '/assets/js/fdm-customize-control.js', array( 'customize-controls', 'backbone', 'wp-util', 'wp-backbone' ), 1.5, true );
+	wp_enqueue_style( 'fdm-customize-control', FDM_PLUGIN_URL . '/assets/css/customize.css', array(), 1.5 );
 }
 add_action( 'customize_controls_enqueue_scripts', 'fdm_customize_enqueue_control_assets' );
 

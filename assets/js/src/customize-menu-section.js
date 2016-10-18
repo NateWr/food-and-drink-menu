@@ -22,6 +22,7 @@
 		template: wp.template( 'fdm-menu-section' ),
 
 		events: {
+			'click .fdm-toggle-component-form': 'toggleForm',
 			'click .fdm-remove-menu-section': 'removeSection',
 		},
 
@@ -55,6 +56,15 @@
 			for( var key in this.collectionViews ) {
 				this.collectionViews[key].remove();
 			}
+		},
+
+		/**
+		 * Open and close the section form
+		 *
+		 * @since 1.5
+		 */
+		toggleForm: function() {
+			$( '.control, .footer', this.$el ).toggleClass( 'is-open' );
 		},
 
 		removeSection: function() {
