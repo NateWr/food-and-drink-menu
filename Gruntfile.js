@@ -23,6 +23,9 @@ module.exports = function(grunt) {
 						'assets/js/src/menu-item-prices.js',
 						'assets/js/src/menu-organizer.js',
 					],
+					'assets/js/customize.js': [
+						'assets/js/src/customize-menu-group-control.js',
+					],
 				}
 			}
 		},
