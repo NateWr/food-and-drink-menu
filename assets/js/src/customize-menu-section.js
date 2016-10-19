@@ -23,12 +23,13 @@
 
 		events: {
 			'click .fdm-toggle-component-form': 'toggleForm',
+			'blur [data-fdm-setting-link]': 'updateSection',
 			'click .fdm-remove-menu-section': 'removeSection',
 		},
 
 		initialize: function( options ) {
 			// Store reference to control
-			_.extend( this, _.pick( options, 'control' ) );
+			_.extend( this, _.pick( options, 'control', 'title', 'description' ) );
 
 			this.listenTo(this.collection, 'add remove reset', this.render);
 		},
@@ -65,6 +66,27 @@
 		 */
 		toggleForm: function() {
 			$( '.control, .footer', this.$el ).toggleClass( 'is-open' );
+		},
+
+		/**
+		 * Update menu section setting in the parent control whenever the
+		 * title or description has changed
+		 *
+		 * @since 1.5
+		 */
+		updateSection: function( event ) {
+			var target = $( event.target ),
+				setting = target.data( 'fdm-setting-link' ),
+				val = target.val(),
+				atts = {};
+
+			if ( this[setting] === val ) {
+				return;
+			}
+
+			this[setting] = val;
+
+			this.control.container.trigger( 'menu-section-updated.fdm' );
 		},
 
 		removeSection: function() {

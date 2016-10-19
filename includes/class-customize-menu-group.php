@@ -41,7 +41,7 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 		}
 
 		add_action( 'customize_controls_print_footer_scripts', array( $this, 'load_control_template' ) );
-		add_action( 'customize_update_content_layout', array( $this, 'save_to_post_content' ), 10, 2 );
+		add_action( 'customize_update_fdm_menu_group', array( $this, 'save_to_post_content' ), 10, 2 );
 	}
 
 	/**
@@ -141,13 +141,40 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 	 */
 	public function save_to_post_content( $value, $setting ) {
 
-		if ( !is_array( $value ) ) {
+		// @todo implement proper capability check
+		if ( empty( $value ) || !current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		// @todo implement custom capability
-		if ( !current_user_can( 'manage_options' ) ) {
-			return;
+		foreach ( $value as $post_id => $section ) {
+			foreach( $section as $section_id => $section_details ) {
+
+				$term_updates = array(
+					'description' => $section_details['description'],
+				);
+
+				// Remove any section title post meta which may exist when the
+				// section title is submitted empty.
+				if ( empty( $section_details['title'] ) ) {
+					delete_post_meta( $post_id, 'fdm_menu_section_' . $section_id );
+
+				// Check for term name clashes. When a name can't be saved
+				// directly to the section name, save it as post meta for
+				// the current menu.
+				} else {
+					$term_exists = term_exists( $section_details['title'], 'fdm-menu-section' );
+					if ( $term_exists !== null && $term_exists['term_id'] != $section_id ) {
+						update_post_meta( $post_id, 'fdm_menu_section_' . $section_id, $section_details['title'] );
+					} else {
+						delete_post_meta( $post_id, 'fdm_menu_section_' . $section_id );
+						$term_updates['name'] = $section_details['title'];
+					}
+				}
+
+				if ( !empty( $term_updates ) ) {
+					wp_update_term( $section_id, 'fdm-menu-section', $term_updates );
+				}
+			}
 		}
 	}
 }

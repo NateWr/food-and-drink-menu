@@ -56,8 +56,9 @@
 
 			control.group_number = this.id.replace( /^\D+/g, '');
 
-			_.bindAll( control, 'onPageRefresh' );
+			_.bindAll( control, 'onPageRefresh', 'updateSetting' );
 			api.previewer.bind( 'previewer-reset.fdm', control.onPageRefresh );
+			control.container.on( 'menu-section-updated.fdm', control.updateSetting );
 		},
 
 		/**
@@ -88,6 +89,7 @@
 					title: group[section_id].title,
 					description: group[section_id].description,
 					collection: new Backbone.Collection( group[section_id].items ),
+					control: control,
 				});
 				list.append( control.menu_sections[section_id].render().el );
 			}
@@ -107,6 +109,42 @@
 			for ( var key in this.menu_sections ) {
 				this.menu_sections[key].remove();
 			}
+		},
+
+		/**
+		 * Update the setting value
+		 *
+		 * Store the setting when saving or during full page reloads of the
+		 * preview.
+		 *
+		 * @since 1.5
+		 */
+		updateSetting: function() {
+			this.edited_posts[this.post_id] = this.generateCurrentSetting();
+			this.setting( [] ); // Clear it to ensure the change gets noticed
+			this.setting( this.edited_posts );
+		},
+
+		/**
+		 * Compile the current setting values
+		 *
+		 * Loops through the group details to compile setting values to be saved
+		 * for the current post.
+		 *
+		 * @since 1.5
+		 */
+		generateCurrentSetting: function() {
+			var setting = {},
+				section_id;
+
+			for ( section_id in this.menu_sections ) {
+				setting[section_id] = {
+					'title': this.menu_sections[section_id].title,
+					'description': this.menu_sections[section_id].description,
+				};
+			}
+
+			return setting;
 		}
 	});
 

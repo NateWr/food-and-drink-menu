@@ -83,8 +83,8 @@ function fdm_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fdm-menu-column-0',
 		array(
-			'sanitize_callback' => '__return_true', // @todo implement sanitization
-			'type' => 'fdm-menu-column',
+			'sanitize_callback' => 'fdm_customize_sanitize_menu_group',
+			'type' => 'fdm_menu_group',
 			'transport' => 'postMessage',
 		)
 	);
@@ -112,8 +112,8 @@ function fdm_customize_register( $wp_customize ) {
 	$wp_customize->add_setting(
 		'fdm-menu-column-1',
 		array(
-			'sanitize_callback' => '__return_true', // @todo implement sanitization
-			'type' => 'fdm-menu-column',
+			'sanitize_callback' => 'fdm_customize_sanitize_menu_group',
+			'type' => 'fdm_menu_group',
 			'transport' => 'postMessage',
 		)
 	);
@@ -197,7 +197,7 @@ function fdm_customize_load_preview_data() {
 	foreach( $menu->groups as $group_i => $group ) {
 		foreach( $group as $section_id ) {
 
-			$section = new fdmViewSection( array( 'id' => $section_id ) );
+			$section = new fdmViewSection( array( 'id' => $section_id, 'menu' => $menu ) );
 			$section->load_section();
 
 			$section_array = array(
@@ -218,4 +218,42 @@ function fdm_customize_load_preview_data() {
 
 	wp_enqueue_script( 'fdm-customize-preview', FDM_PLUGIN_URL . '/assets/js/fdm-customize-preview.js', array( 'customize-preview' ), 1.5, true );
 	wp_localize_script( 'fdm-customize-preview', 'fdm_previewed_item', $return );
+}
+
+/**
+ * Sanitize values for the FDM_WP_Customize_Menu_Group control setting
+ *
+ * @since 1.5
+ */
+function fdm_customize_sanitize_menu_group( $value ) {
+
+	if ( empty( $value ) ) {
+		return array();
+	}
+
+	$sanitized = array();
+
+	foreach( $value as $post_id => $section ) {
+
+		$post_id = absint( $post_id );
+		if ( get_post_status( $post_id ) === false ) {
+			continue;
+		}
+
+		$sanitized[$post_id] = array();
+		foreach( $section as $section_id => $section_details ) {
+
+			$section_id = absint( $section_id );
+			if ( !term_exists( $section_id, 'fdm-menu-section' ) ) {
+				continue;
+			}
+
+			$sanitized[$post_id][$section_id] = array(
+				'title' => empty( $section_details['title'] ) ? '' : sanitize_text_field( $section_details['title'] ),
+				'description' => empty( $section_details['description'] ) ? '' : sanitize_text_field( $section_details['description'] ),
+			);
+		}
+	}
+
+	return $sanitized;
 }

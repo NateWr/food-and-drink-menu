@@ -138,7 +138,8 @@ class fdmViewMenu extends fdmView {
 			$section = new fdmViewSection(
 				array(
 					'id' => $section_id,
-					'order' => $this->s
+					'order' => $this->s,
+					'menu' => $this,
 				)
 			);
 

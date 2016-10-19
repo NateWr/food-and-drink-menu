@@ -36,7 +36,7 @@ class fdmViewSection extends fdmView {
 
 		// Gather data if it's not already set
 		$this->load_section();
-		
+
 		if ( !isset( $this->items ) || ( is_array( $this->items ) && !count( $this->items ) ) ) {
 			return;
 		}
@@ -54,7 +54,7 @@ class fdmViewSection extends fdmView {
 
 		return apply_filters( 'fdm_menu_section_output', $output, $this );
 	}
-	
+
 	/**
 	 * Print the menu items in this section
 	 *
@@ -110,10 +110,17 @@ class fdmViewSection extends fdmView {
 			);
 		}
 
-		if ( !$this->title ) {
-			$section = get_term( $this->id, 'fdm-menu-section' );
-			$this->title = $section->name;
-			$this->description = $section->description;
+		$section = get_term( $this->id, 'fdm-menu-section' );
+		$this->title = $section->name;
+		$this->description = $section->description;
+
+		// Load any custom title that has been set for display in this menu
+		if ( isset( $this->menu ) && get_class( $this->menu ) == 'fdmViewMenu' ) {
+			$menu_post_meta = get_post_meta( $this->menu->id );
+
+			if ( isset( $menu_post_meta['fdm_menu_section_' . $this->id ] ) ) {
+				$this->title = $menu_post_meta['fdm_menu_section_' . $this->id ][0];
+			}
 		}
 
 		do_action( 'fdm_load_section', $this );
