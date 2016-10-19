@@ -1,7 +1,7 @@
 <li class="fdm-customize-section">
 	<div class="header">
 		<h4 class="title">
-			{{ data.title }}
+			{{{ data.title }}}
 		</h4>
 		<a href="#" class="fdm-toggle-component-form"></a>
 	</div>
@@ -9,11 +9,11 @@
 		<div class="setting">
 			<label>
 				<span class="customize-control-title"><?php esc_html_e( $this->i18n['section_name'] ); ?></span>
-				<input type="text" value="{{ data.title }}" data-clc-setting-link="title">
+				<input type="text" value="{{{ data.title }}}" data-fdm-setting-link="title">
 			</label>
 			<label>
 				<span class="customize-control-title"><?php esc_html_e( $this->i18n['section_description'] ); ?></span>
-				<textarea data-clc-setting-link="content">{{ data.description }}</textarea>
+				<textarea data-fdm-setting-link="description">{{{ data.description }}}</textarea>
 			</label>
 			<# if ( !data.collection.length ) { #>
 				<div class="placeholder">
