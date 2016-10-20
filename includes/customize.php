@@ -332,6 +332,7 @@ function fdm_customize_rest_menu( WP_REST_Request $request ) {
 
 	if ( !empty( $fdm_controller->customizer_preview['fdm-menu-column-0'] ) || !empty( $fdm_controller->customizer_preview['fdm-menu-column-1'] ) ) {
 		add_filter( 'get_post_metadata', 'fdm_customize_menu_preview_data', 10, 4 );
+		add_action( 'fdm_load_section', 'fdm_customize_section_preview_data' );
 	}
 
 	fdm_load_view_files();
@@ -390,6 +391,34 @@ function fdm_customize_menu_preview_data( $value, $post_id = 0, $meta_key = '', 
 				$new_sections[] = $section['id'];
 			}
 			return join( ',', $new_sections );
+		}
+	}
+}
+
+/**
+ * Override menu section data to insert live preview data
+ *
+ * @param fdmViewSection $section
+ * @since 1.5
+ */
+function fdm_customize_section_preview_data( $section ) {
+
+	global $fdm_controller;
+	$data = $fdm_controller->customizer_preview;
+	if ( $data['id'] != $section->menu->id ) {
+		return;
+	}
+
+	// Use section titles and descriptions from preview data
+	foreach( $data as $menu_group ) {
+		if ( empty( $menu_group['sections'] ) ) {
+			continue;
+		}
+		foreach( $menu_group['sections'] as $section_preview ) {
+			if ( $section->id == $section_preview['id'] ) {
+				$section->title = $section_preview['title'];
+				$section->description = $section_preview['description'];
+			}
 		}
 	}
 }
