@@ -57,7 +57,7 @@
 			control.group_number = this.id.replace( /^\D+/g, '');
 			control.edited_posts = {};
 
-			_.bindAll( control, 'onPageRefresh', 'updateSetting', 'sortingComplete', 'getSection' );
+			_.bindAll( control, 'onPageRefresh', 'updateSetting', 'sortingComplete', 'getSection', 'updatePreview' );
 			api.previewer.bind( 'previewer-reset.fdm', control.onPageRefresh );
 			control.container.on( 'menu-section-updated.fdm', control.updateSetting );
 		},
@@ -70,16 +70,16 @@
 		onPageRefresh: function( data ) {
 			var group;
 
-			this.reset();
+			var control = this;
+
+			control.reset();
 
 			if ( typeof data == 'undefined' || data === null ) {
-				this.post_id = 0;
+				control.post_id = 0;
 				return;
 			}
 
-			var control = this;
-
-			this.post_id = data.ID;
+			control.post_id = data.ID;
 
 			group = data.groups[control.group_number];
 			control.menu_sections = [];
@@ -96,6 +96,8 @@
 			}
 
 			control.renderSections();
+
+			control.updatePreview();
 		},
 
 		/**
@@ -157,6 +159,7 @@
 
 			this.setting( [] ); // Clear it to ensure the change gets noticed
 			this.setting( this.edited_posts );
+			this.updatePreview();
 		},
 
 		/**
@@ -203,6 +206,23 @@
 		 */
 		getSection: function( id ) {
 			return _.find( this.menu_sections, function( section ) { return section.id === id; } );
+		},
+
+		/**
+		 * Send an event to the preview to refresh the menu view
+		 *
+		 * @since 1.5
+		 */
+		updatePreview: function() {
+			var settings = wp.customize.get(),
+				data = {};
+			for ( var i in settings ) {
+				if ( i.substring(0, 15 ) == 'fdm-menu-column' && typeof settings[i][this.post_id] !== 'undefined' ) {
+					data[i] = settings[i][this.post_id];
+				}
+			}
+			data.id = this.post_id;
+			wp.customize.previewer.send( 'refresh-menu.fdm', data );
 		}
 	});
 

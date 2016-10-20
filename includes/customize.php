@@ -185,7 +185,7 @@ function fdm_customize_load_preview_data() {
 	);
 	$menu->get_menu_post();
 
-	$return = array(
+	$previewed_item = array(
 		'ID' => $menu->id,
 		'title' => $menu->title,
 		'content' => $menu->content,
@@ -213,17 +213,36 @@ function fdm_customize_load_preview_data() {
 				);
 			}
 
-			if ( !isset( $return['groups'][$group_i] ) ) {
-				$return['groups'][$group_i] = array();
+			if ( !isset( $previewed_item['groups'][$group_i] ) ) {
+				$previewed_item['groups'][$group_i] = array();
 			}
 
-			$return['groups'][$group_i][] = $section_array;
+			$previewed_item['groups'][$group_i][] = $section_array;
 		}
 	}
 
 	wp_enqueue_script( 'fdm-customize-preview', FDM_PLUGIN_URL . '/assets/js/fdm-customize-preview.js', array( 'customize-preview' ), 1.5, true );
-	wp_localize_script( 'fdm-customize-preview', 'fdm_previewed_item', $return );
+	wp_localize_script( 'fdm-customize-preview', 'fdm_previewed_item', $previewed_item );
+	wp_localize_script( 'fdm-customize-preview', 'fdm_preview_config', array(
+		'rest_url' => esc_url_raw( rest_url() ),
+		'nonce' => wp_create_nonce( 'wp_rest' ),
+	) );
 }
+
+/**
+ * Wrap the menu in an element with a unique ID so that it can be refreshed
+ *
+ * @since 1.5
+ */
+function fdm_customize_wrap_menu_output( $html, $menu ) {
+
+	if ( !is_customize_preview() ) {
+		return $html;
+	}
+
+	return '<div data-fdm-menu-preview="' . esc_attr( $menu->id ) . '">' . esc_html( 'Loading', 'food-and-drink-menu' ) . '</div>';
+}
+add_filter( 'fdm_menu_output', 'fdm_customize_wrap_menu_output', 10, 2 );
 
 /**
  * Sanitize values for the FDM_WP_Customize_Menu_Group control setting
@@ -259,7 +278,6 @@ function fdm_customize_sanitize_menu_group( $value ) {
 
 			$section_id = absint( $section['id'] );
 			if ( !term_exists( $section_id, 'fdm-menu-section' ) ) {
-				error_log( 'continue 3' );
 				continue;
 			}
 
@@ -274,4 +292,104 @@ function fdm_customize_sanitize_menu_group( $value ) {
 	}
 
 	return $sanitized;
+}
+
+/**
+ * Register a REST API endpoint to retrieve customized menu HTML
+ *
+ * @since 1.5
+ */
+function fdm_customize_rest_endpoints() {
+
+	register_rest_route(
+		'food-and-drink-menu/1.0',
+		'/menu',
+		array(
+			'methods' => 'POST',
+			'callback' => 'fdm_customize_rest_menu',
+			'args' => array(
+				'id' => array(
+					'validate_callback' => 'fdm_rest_validate_menu_post_id',
+					'sanitize_callback' => 'absint',
+				)
+			)
+		)
+	);
+}
+add_action( 'rest_api_init', 'fdm_customize_rest_endpoints' );
+
+/**
+ * Respond to requests to the /menu REST endpoint
+ *
+ * @since 1.5
+ * @param $request WP_Rest_Request
+ */
+function fdm_customize_rest_menu( WP_REST_Request $request ) {
+
+	// Global store of live preview data
+	global $fdm_controller;
+	$fdm_controller->customizer_preview = $request->get_params();
+
+	if ( !empty( $fdm_controller->customizer_preview['fdm-menu-column-0'] ) || !empty( $fdm_controller->customizer_preview['fdm-menu-column-1'] ) ) {
+		add_filter( 'get_post_metadata', 'fdm_customize_menu_preview_data', 10, 4 );
+	}
+
+	fdm_load_view_files();
+	$menu = new fdmViewMenu( array( 'id' => $fdm_controller->customizer_preview['id'] ) );
+
+	return array(
+		'id' => $fdm_controller->customizer_preview['id'],
+		'html' => $menu->render(),
+		'menu' => $menu,
+	);
+}
+
+/**
+ * Validate a menu post ID passed to the rest API
+ *
+ * @since 1.5
+ */
+function fdm_rest_validate_menu_post_id( $param, WP_REST_Request $request, $key ) {
+	return is_numeric( $param ) && FDM_MENU_POST_TYPE === get_post_type( $param );
+}
+
+/**
+ * Override menu post metadata to insert live preview data
+ *
+ * @param null $value The metadata value to return
+ * @param int $post_id
+ * @param string $meta_key The meta key being retrieved
+ * @param bool $single Whether to return only teh first value of the specified meta key.
+ * @since 1.5
+ */
+function fdm_customize_menu_preview_data( $value, $post_id = 0, $meta_key = '', $single = false ) {
+
+	if ( $meta_key != 'fdm_menu_column_one' && $meta_key != 'fdm_menu_column_two' ) {
+		return;
+	}
+
+	if ( get_post_type( $post_id ) !== FDM_MENU_POST_TYPE ) {
+		return;
+	}
+
+	global $fdm_controller;
+	$data = $fdm_controller->customizer_preview;
+	if ( $data['id'] != $post_id ) {
+		return;
+	}
+
+	$key_map = array(
+		'fdm_menu_column_one' => 'fdm-menu-column-0',
+		'fdm_menu_column_two' => 'fdm-menu-column-1',
+	);
+
+	$new_sections = array();
+	foreach( $key_map as $i_meta_key => $data_key ) {
+		if ( $meta_key == $i_meta_key && !empty( $data[$data_key] ) && !empty( $data[$data_key]['sections'] ) ) {
+			foreach( $data[$data_key]['sections'] as $section ) {
+				$new_sections[] = $section['id'];
+			}
+			return join( ',', $new_sections );
+		}
+	}
 }

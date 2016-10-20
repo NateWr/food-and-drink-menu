@@ -58,6 +58,32 @@
 			api.fdm.preview.sendCurrent();
 		});
 
+		// Refresh the menu's HTML code
+		api.preview.bind( 'refresh-menu.fdm', function( data ) {
+
+			$.ajax( {
+				url: fdm_preview_config.rest_url + 'food-and-drink-menu/1.0/menu',
+				method: 'POST',
+				beforeSend: function( xhr ) {
+					xhr.setRequestHeader( 'X-WP-Nonce', fdm_preview_config.nonce );
+				},
+				data: data
+			} )
+				.done( function( r ) {
+					var $menu;
+
+					if ( r === false ) {
+						return;
+					}
+
+					$menu = $( r.html );
+					$menu.attr( 'data-fdm-menu-preview', r.id );
+
+					$( '[data-fdm-menu-preview="' + r.id + '"]' ).replaceWith( $menu );
+				}
+			);
+		});
+
 	} );
 
 }( wp.customize, jQuery ) );
