@@ -39,11 +39,11 @@
 		post_id: 0,
 
 		/**
-		 * Object hash of post setting values
+		 * Object of menu posts and their edited values
 		 *
 		 * @since 1.5
 		 */
-		edited_posts: {},
+		edited_posts: null,
 
 		/**
 		 * Load and render the control settings
@@ -55,8 +55,9 @@
 			var control = this;
 
 			control.group_number = this.id.replace( /^\D+/g, '');
+			control.edited_posts = {};
 
-			_.bindAll( control, 'onPageRefresh', 'updateSetting' );
+			_.bindAll( control, 'onPageRefresh', 'updateSetting', 'sortingComplete', 'getSection' );
 			api.previewer.bind( 'previewer-reset.fdm', control.onPageRefresh );
 			control.container.on( 'menu-section-updated.fdm', control.updateSetting );
 		},
@@ -67,8 +68,7 @@
 		 * @since 1.5
 		 */
 		onPageRefresh: function( data ) {
-			var list = $( '.fdm-section-list', this.selector ).empty(),
-				group;
+			var group;
 
 			this.reset();
 
@@ -83,16 +83,19 @@
 
 			group = data.groups[control.group_number];
 			control.menu_sections = [];
-			for ( var section_id in group ) {
-				control.menu_sections[section_id] = new api.fdm.MenuSectionView({
-					id: section_id,
-					title: group[section_id].title,
-					description: group[section_id].description,
-					collection: new Backbone.Collection( group[section_id].items ),
-					control: control,
-				});
-				list.append( control.menu_sections[section_id].render().el );
+			for ( var i in group ) {
+				control.menu_sections.push(
+					new api.fdm.MenuSectionView({
+						id: group[i].id,
+						title: group[i].title,
+						description: group[i].description,
+						collection: new Backbone.Collection( group[i].items ),
+						control: control,
+					})
+				);
 			}
+
+			control.renderSections();
 		},
 
 		/**
@@ -112,6 +115,26 @@
 		},
 
 		/**
+		 * Render the section views
+		 *
+		 * @since 1.5
+		 */
+		renderSections: function() {
+			var list = $( '.fdm-section-list', this.selector ).empty();
+
+			_.each( this.menu_sections, function( section_view ) {
+				list.append( section_view.render().el );
+			} );
+
+			list.sortable( {
+				placeholder: 'fdm-section-list-placeholder',
+				delay: '150',
+				handle: '.header',
+				update: this.sortingComplete,
+			} );
+		},
+
+		/**
 		 * Update the setting value
 		 *
 		 * Store the setting when saving or during full page reloads of the
@@ -120,7 +143,18 @@
 		 * @since 1.5
 		 */
 		updateSetting: function() {
-			this.edited_posts[this.post_id] = this.generateCurrentSetting();
+			var control = this;
+
+
+			if ( typeof this.edited_posts[control.post_id] === 'undefined' ) {
+				this.edited_posts[control.post_id] = {
+					id: this.post_id,
+					group: this.id,
+				};
+			}
+
+			this.edited_posts[control.post_id].sections = this.generateCurrentSetting();
+
 			this.setting( [] ); // Clear it to ensure the change gets noticed
 			this.setting( this.edited_posts );
 		},
@@ -134,17 +168,41 @@
 		 * @since 1.5
 		 */
 		generateCurrentSetting: function() {
-			var setting = {},
-				section_id;
+			var setting = [];
 
-			for ( section_id in this.menu_sections ) {
-				setting[section_id] = {
-					'title': this.menu_sections[section_id].title,
-					'description': this.menu_sections[section_id].description,
-				};
+			for ( var i in this.menu_sections ) {
+				setting.push( {
+					'id': this.menu_sections[i].id,
+					'title': this.menu_sections[i].title,
+					'description': this.menu_sections[i].description,
+				} );
 			}
 
 			return setting;
+		},
+
+		/**
+		 * Triggered when a menu section has been resorted via drag-and-drop
+		 *
+		 * @since 1.5
+		 */
+		sortingComplete: function( event, ui ) {
+			var menu_sections = [],
+				control = this;
+			$( '.fdm-section-list > li', this.selector ).each( function() {
+				menu_sections.push( control.getSection( $( this ).attr('id' ) ) );
+			} );
+			this.menu_sections = menu_sections;
+			this.updateSetting();
+		},
+
+		/**
+		 * Retrieve a section by it's ID
+		 *
+		 * @since 1.5
+		 */
+		getSection: function( id ) {
+			return _.find( this.menu_sections, function( section ) { return section.id === id; } );
 		}
 	});
 

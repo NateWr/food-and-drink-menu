@@ -21,6 +21,10 @@
 
 		template: wp.template( 'fdm-menu-section' ),
 
+		tagName: 'li',
+
+		className: 'fdm-customize-section',
+
 		events: {
 			'click .fdm-toggle-component-form': 'toggleForm',
 			'blur [data-fdm-setting-link]': 'updateSection',

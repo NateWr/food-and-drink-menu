@@ -201,6 +201,7 @@ function fdm_customize_load_preview_data() {
 			$section->load_section();
 
 			$section_array = array(
+				'id' => $section_id,
 				'title' => $section->title,
 				'description' => $section->description,
 			);
@@ -212,7 +213,11 @@ function fdm_customize_load_preview_data() {
 				);
 			}
 
-			$return['groups'][$group_i][$section_id] = $section_array;
+			if ( !isset( $return['groups'][$group_i] ) ) {
+				$return['groups'][$group_i] = array();
+			}
+
+			$return['groups'][$group_i][] = $section_array;
 		}
 	}
 
@@ -233,26 +238,39 @@ function fdm_customize_sanitize_menu_group( $value ) {
 
 	$sanitized = array();
 
-	foreach( $value as $post_id => $section ) {
+	foreach( $value as $post ) {
 
-		$post_id = absint( $post_id );
-		if ( get_post_status( $post_id ) === false ) {
+		$post_id = isset( $post['id'] ) ? absint( $post['id'] ) : 0;
+		if ( get_post_status( $post_id ) === false || empty( $post['group'] ) || empty( $post['sections'] ) ) {
 			continue;
 		}
 
-		$sanitized[$post_id] = array();
-		foreach( $section as $section_id => $section_details ) {
+		if ( $post['group'] != 'fdm-menu-column-0' && $post['group'] != 'fdm-menu-column-1' ) {
+			continue;
+		}
 
-			$section_id = absint( $section_id );
+		$sanitized_post = array(
+			'id' => $post_id,
+			'group' => $post['group'],
+			'sections' => array(),
+		);
+
+		foreach( $post['sections'] as $section ) {
+
+			$section_id = absint( $section['id'] );
 			if ( !term_exists( $section_id, 'fdm-menu-section' ) ) {
+				error_log( 'continue 3' );
 				continue;
 			}
 
-			$sanitized[$post_id][$section_id] = array(
-				'title' => empty( $section_details['title'] ) ? '' : sanitize_text_field( $section_details['title'] ),
-				'description' => empty( $section_details['description'] ) ? '' : sanitize_text_field( $section_details['description'] ),
+			$sanitized_post['sections'][] = array(
+				'id' => $section_id,
+				'title' => empty( $section['title'] ) ? '' : sanitize_text_field( $section['title'] ),
+				'description' => empty( $section['description'] ) ? '' : sanitize_text_field( $section['description'] ),
 			);
 		}
+
+		$sanitized[] = $sanitized_post;
 	}
 
 	return $sanitized;

@@ -141,40 +141,54 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 	 */
 	public function save_to_post_content( $value, $setting ) {
 
+		// Only save content for the setting this control is attached to.
+		if ( $setting->id !== $this->setting->id ) {
+			return;
+		}
+
 		// @todo implement proper capability check
 		if ( empty( $value ) || !current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		foreach ( $value as $post_id => $section ) {
-			foreach( $section as $section_id => $section_details ) {
+		foreach ( $value as $post ) {
+
+			// List of section IDs to assign to the menu
+			$section_list = array();
+
+			foreach ( $post['sections'] as $section ) {
+
+				$section_list[] = $section['id'];
 
 				$term_updates = array(
-					'description' => $section_details['description'],
+					'description' => $section['description'],
 				);
 
 				// Remove any section title post meta which may exist when the
 				// section title is submitted empty.
-				if ( empty( $section_details['title'] ) ) {
-					delete_post_meta( $post_id, 'fdm_menu_section_' . $section_id );
+				if ( empty( $section['title'] ) ) {
+					delete_post_meta( $post['id'], 'fdm_menu_section_' . $section['id'] );
 
 				// Check for term name clashes. When a name can't be saved
 				// directly to the section name, save it as post meta for
 				// the current menu.
 				} else {
-					$term_exists = term_exists( $section_details['title'], 'fdm-menu-section' );
-					if ( $term_exists !== null && $term_exists['term_id'] != $section_id ) {
-						update_post_meta( $post_id, 'fdm_menu_section_' . $section_id, $section_details['title'] );
+					$term_exists = term_exists( $section['title'], 'fdm-menu-section' );
+					if ( $term_exists !== null && $term_exists['term_id'] != $section['id'] ) {
+						update_post_meta( $post['id'], 'fdm_menu_section_' . $section['id'], $section['title'] );
 					} else {
-						delete_post_meta( $post_id, 'fdm_menu_section_' . $section_id );
-						$term_updates['name'] = $section_details['title'];
+						delete_post_meta( $post['id'], 'fdm_menu_section_' . $section['id'] );
+						$term_updates['name'] = $section['title'];
 					}
 				}
 
 				if ( !empty( $term_updates ) ) {
-					wp_update_term( $section_id, 'fdm-menu-section', $term_updates );
+					wp_update_term( $section['id'], 'fdm-menu-section', $term_updates );
 				}
 			}
 		}
+
+		$column_meta_key = $this->id == 'fdm-menu-column-0' ? 'fdm_menu_column_one' : 'fdm_menu_column_two';
+		update_post_meta( $post['id'], $column_meta_key, join( ',', $section_list ) );
 	}
 }
