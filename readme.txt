@@ -27,23 +27,25 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Templates to easily customize the output of menus and menu items
 * Compatible with WPML for multi-language sites
 
-This plugin is part of a group of plugins in development for restaurants. Check out the [Restaurant Reservations](http://wordpress.org/plugins/restaurant-reservations/), [Good Reviews for WordPress](http://wordpress.org/plugins/good-reviews-wp/) and [Business Profile](http://wordpress.org/plugins/business-profile/) plugins as well.
+Get discounts, specials, dietary icons and more in the [Pro addon](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
+
+[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) helps you build better restaurant websites. Find the [best WordPress restaurant themes](https://themeofthecrop.com/themes/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) and plugins for restaurants to [take online reservations](https://themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
 = How to use =
 
 Read the [help guide](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) for help creating and displaying your menus, advanced tutorials and more.
 
 = Tutorials =
-* [Customize the menu templates](http://themeofthecrop.com/2014/01/28/customize-restaurant-menu-templates/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
-* [Create a complex menu layout](http://themeofthecrop.com/2014/07/31/achieve-complex-menu-layouts-food-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
-* [Style each section differently](http://themeofthecrop.com/2014/08/19/give-section-restaurant-menu-unique-style/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
+* [Customize the menu templates](https://themeofthecrop.com/2014/01/28/customize-restaurant-menu-templates/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
+* [Create a complex menu layout](https://themeofthecrop.com/2014/07/31/achieve-complex-menu-layouts-food-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
+* [Style each section differently](https://themeofthecrop.com/2014/08/19/give-section-restaurant-menu-unique-style/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
 
-Follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://plus.google.com/+Themeofthecrop), or [sign up](http://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) to my mailing list for more tutorials and tips.
+Follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://plus.google.com/+Themeofthecrop), or [sign up](https://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) to my mailing list for more tutorials and tips.
 
 = Developers =
 This plugin is packed with hooks so you can extend and customize it to your delight. Take a look at the [Developer Documentation](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/developer/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
-A pro addon is available at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
+A pro addon that supports discounts, specials, dietary icons and more is available at [Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
 
 This plugin is [on GitHub](https://github.com/NateWr/food-and-drink-menu "Food and Drink Menu at Github") so fork it up.
 
