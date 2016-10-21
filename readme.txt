@@ -45,8 +45,6 @@ Follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://
 = Developers =
 This plugin is packed with hooks so you can extend and customize it to your delight. Take a look at the [Developer Documentation](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/developer/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
-A pro addon that supports discounts, specials, dietary icons and more is available at [Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin"), but you can create your own addons too.
-
 This plugin is [on GitHub](https://github.com/NateWr/food-and-drink-menu "Food and Drink Menu at Github") so fork it up.
 
 == Installation ==
