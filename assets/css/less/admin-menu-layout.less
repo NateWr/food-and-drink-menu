@@ -92,9 +92,31 @@
 		bottom: 1px;
 		border-right: none;
 		border-left: 1px solid #ddd;
+		text-decoration: none;
 
-		.dashicons {
-			line-height: 1.5em;
+		&:before {
+			display: inline-block;
+			content: "\f464";
+		    width: 20px;
+		    height: 20px;
+		    font-size: 20px;
+		    line-height: 1.5em;
+		    font-family: dashicons;
+		    text-decoration: inherit;
+		    font-weight: normal;
+		    font-style: normal;
+		    vertical-align: top;
+		    text-align: center;
+		    -webkit-transition: color .1s ease-in 0;
+		    transition: color .1s ease-in 0;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+		}
+
+		&:hover,
+		&:focus {
+			background: #0073aa;
+			color: #fff;
 		}
 	}
 
@@ -104,6 +126,10 @@
 		background: #fff;
 		color: #777;
 	}
+}
+
+#fdm-menu-sections-list .fdm-edit-section-name {
+	display: none;
 }
 
 .fdm-menu-sections-placeholder {
@@ -120,4 +146,18 @@
 	padding: 1em;
 	background: #fafafa;
 	border-top: 1px solid #ddd;
+}
+
+// Modal for editing menu section titles
+#fdm-menu-section-modal {
+
+	label {
+		display: inline-block;
+		margin-bottom: 0.5em;
+		font-weight: bold;
+	}
+
+	.description {
+		margin: 1em 0 2em;
+	}
 }

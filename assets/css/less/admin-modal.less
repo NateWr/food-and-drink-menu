@@ -1,0 +1,60 @@
+/**
+ * Styles for modals in the admin
+ *
+ * @since 1.5
+ */
+
+.fdm-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 9999;
+	overflow-y: auto;
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0, visibility 0 0.3s;
+	-moz-transition: opacity 0.3s 0, visibility 0 0.3s;
+	transition: opacity 0.3s 0, visibility 0 0.3s;
+}
+
+.fdm-modal.is-visible {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: opacity 0.3s 0, visibility 0 0;
+	-moz-transition: opacity 0.3s 0, visibility 0 0;
+	transition: opacity 0.3s 0, visibility 0 0;
+}
+
+.fdm-modal.is-visible .fdm-modal-content {
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	-o-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.fdm-modal .fdm-modal-content {
+	position: relative;
+	width: 90%;
+	max-width: 20em;
+	padding: 2em;
+	background: #FFF;
+	margin: 3em auto 4em;
+	cursor: auto;
+	border-radius: 0.25em;
+	-webkit-transform: translateY(-30px);
+	-moz-transform: translateY(-30px);
+	-ms-transform: translateY(-30px);
+	-o-transform: translateY(-30px);
+	transform: translateY(-30px);
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	transition-property: transform;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}

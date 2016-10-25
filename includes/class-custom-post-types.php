@@ -336,6 +336,12 @@ class fdmCustomPostTypes {
 
 		// Retrieve sections and store in HTML lists
 		$sections = get_terms( 'fdm-menu-section', array( 'hide_empty' => false ) );
+		foreach( $sections as $section ) {
+			$alt_title = get_post_meta( $post->ID, 'fdm_menu_section_' . $section->term_id, true );
+			if ( $alt_title ) {
+				$section->name = $alt_title;
+			}
+		}
 		?>
 
 			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php esc_attr_e( $column_one ); ?>">
@@ -365,10 +371,9 @@ class fdmCustomPostTypes {
 								<li data-term-id="<?php esc_attr_e( $section->term_id ); ?>">
 									<div class="fdm-title">
 										<span class="fdm-term-count"><?php esc_html_e( $section->count ); ?></span>
-										<?php esc_html_e( $section->name ); ?>
+										<span class="fdm-term-name"><?php esc_html_e( $section->name ); ?></span>
 									</div>
 									<a href="#" class="fdm-edit-section-name">
-										<span class="dashicons dashicons-edit"></span>
 										<span class="screen-reader-text">
 											<?php esc_html_e( 'Edit Section Name', 'food-and-drink-menu' ); ?>
 										</span>
@@ -522,6 +527,17 @@ class fdmCustomPostTypes {
 			$meta_ids['fdm_menu_column_two'] = 'sanitize_text_field';
 			$meta_ids['fdm_menu_footer_content'] = 'wp_kses_post';
 
+			// Custom section names for each menu
+			$sections = array_filter(
+				array_merge(
+					isset( $_POST['fdm_menu_column_one'] ) ? explode( ',', $_POST['fdm_menu_column_one'] ) : array(),
+					isset( $_POST['fdm_menu_column_two'] ) ? explode( ',', $_POST['fdm_menu_column_one'] ) : array()
+				)
+			);
+			foreach( $sections as $section_id ) {
+				$meta_ids['fdm_menu_section_' . absint( $section_id )] = 'sanitize_text_field';
+			}
+
 		}
 
 		// Create filter so addons can add new data
@@ -548,7 +564,6 @@ class fdmCustomPostTypes {
 				}
 			}
 		}
-
 	}
 
 	/**

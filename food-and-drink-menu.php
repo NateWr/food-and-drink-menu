@@ -198,7 +198,6 @@ class fdmFoodAndDrinkMenu {
 	/**
 	 * Enqueue the admin-only CSS and Javascript
 	 * @since 1.0
-	 * @todo only enqueue these on relevant pages
 	 */
 	public function enqueue_admin_assets() {
 
@@ -216,6 +215,44 @@ class fdmFoodAndDrinkMenu {
 		if ( $wp_version < 3.8 ) {
 			wp_enqueue_style( 'fdm-admin-compat-3.8', FDM_PLUGIN_URL . '/assets/css/admin-compat-3.8.css', array(), '1.0' );
 		}
+
+		add_action( 'admin_footer', array( $this, 'print_modals' ) );
+	}
+
+	/**
+	 * Print modals used in the menu editing screens
+	 *
+	 * @since 1.5
+	 */
+	public function print_modals() {
+		?>
+
+		<div id="fdm-menu-section-modal" class="fdm-modal">
+			<div class="fdm-modal-content">
+				<div class="field">
+					<label for="fdm-menu-section-modal-name">
+						<?php esc_html_e( 'Section Name', 'food-and-drink-menu' ); ?>
+					</label>
+					<input type="text" id="fdm-menu-section-modal-name">
+				</div>
+				<p class="description">
+					<?php
+						printf(
+							esc_html( 'Enter a unique name for this section when it appears in this menu. The name entered here will only be used for this menu. To change the name of the section in all menus, visit the %sMenu Sections%s list.', 'food-and-drink-menu' ),
+							'<a href="' . esc_url( admin_url( '/edit-tags.php?taxonomy=fdm-menu-section&post_type=fdm-menu-item' ) ) . '">',
+							'</a>'
+						);
+					?>
+				</p>
+				<div class="buttons">
+					<a id="fdm-menu-section-modal-save" href="#" class="fdm-save button">
+						<?php esc_html_e( 'Update Section Name', 'food-and-drink-menu' ); ?>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<?php
 	}
 
 	/**
