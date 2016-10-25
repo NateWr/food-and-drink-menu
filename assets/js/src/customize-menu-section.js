@@ -40,6 +40,7 @@
 
 		render: function() {
 			wp.Backbone.View.prototype.render.apply( this );
+			this.delegateEvents();
 
 			var list = this.$el.find( '.fdm-menu-item-list' ).empty();
 			this.collectionViews = [];
