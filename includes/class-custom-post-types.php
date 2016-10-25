@@ -187,21 +187,21 @@ class fdmCustomPostTypes {
 
 		$meta_boxes = array(
 
-			// Add a menu footer WYSIWYG editor
-			'fdm_menu_footer' => array (
-				'id'		=>	'fdm_menu_footer',
-				'title'		=> __( 'Menu Footer', 'food-and-drink-menu' ),
-				'callback'	=> array( $this, 'show_menu_footer' ),
-				'post_type'	=> 'fdm-menu',
-				'context'	=> 'normal',
-				'priority'	=> 'core'
-			),
-
 			// Add a menu organizer
 			'fdm_menu_layout' => array (
 				'id'		=>	'fdm_menu_layout',
 				'title'		=> __( 'Menu Layout', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_organizer' ),
+				'post_type'	=> 'fdm-menu',
+				'context'	=> 'normal',
+				'priority'	=> 'core'
+			),
+
+			// Add a menu footer WYSIWYG editor
+			'fdm_menu_footer' => array (
+				'id'		=>	'fdm_menu_footer',
+				'title'		=> __( 'Menu Footer', 'food-and-drink-menu' ),
+				'callback'	=> array( $this, 'show_menu_footer' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'normal',
 				'priority'	=> 'default'
