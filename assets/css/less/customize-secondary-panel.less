@@ -1,0 +1,56 @@
+/**
+ * Styles for the Customizer's slide-out panel
+ *
+ * @since 1.5
+ */
+#fdm-secondary-panel {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -301px;
+	width: 300px;
+	overflow: hidden;
+	background: #fff;
+	transition: left .18s;
+	z-index: 1;
+}
+
+.fdm-secondary-open {
+
+	#customize-preview {
+		opacity: 0.4;
+	}
+
+	.wp-full-overlay-main {
+		left: 300px;
+	}
+
+	#fdm-secondary-panel {
+		left: 0;
+	}
+}
+
+#fdm-secondary-panel {
+
+	.fdm-header {
+		padding: 10px;
+		height: 25px;
+		background: #eee;
+		border-bottom: 1px solid #ddd;
+		text-align: right;
+	}
+
+	.fdm-secondary-content {
+		position: absolute;
+		top: 46px;
+		bottom: 0;
+		margin: 0;
+		width: 100%;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
+		> ul {
+			margin: 0;
+		}
+	}
+}

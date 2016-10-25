@@ -154,6 +154,20 @@ function fdm_customize_enqueue_control_assets() {
 add_action( 'customize_controls_enqueue_scripts', 'fdm_customize_enqueue_control_assets' );
 
 /**
+ * Print JS templates for the customize pane
+ *
+ * @since 1.5
+ */
+function fdm_load_control_templates() {
+	?>
+	<script type="text/html" id="tmpl-fdm-secondary-panel"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/secondary-panel.js' ); ?></script>
+	<script type="text/html" id="tmpl-fdm-menu-section"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/menu-section.js' ); ?></script>
+	<script type="text/html" id="tmpl-fdm-menu-section-item"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/menu-section-item.js' ); ?></script>
+	<?php
+}
+add_action( 'customize_controls_print_footer_scripts', 'fdm_load_control_templates' );
+
+/**
  * Enqueue assets for the preview pane
  *
  * @since 1.5

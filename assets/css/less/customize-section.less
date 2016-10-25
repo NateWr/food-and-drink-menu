@@ -1,0 +1,115 @@
+/**
+ * Styles for the Customizer section control
+ *
+ * @since 1.5
+ */
+ .fdm-customize-section {
+ 	margin-bottom: 1em;
+ 	background: #fff;
+ 	border: @border;
+ 	box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+
+ 	.header {
+ 		position: relative;
+ 		background: #fafafa;
+ 		cursor: move;
+
+ 		h4 {
+ 			margin: 0;
+ 			padding: 1em;
+ 		}
+ 	}
+
+ 	.control {
+ 		padding: 1em;
+ 		border-top: @border;
+ 		border-bottom: @border;
+ 	}
+
+ 	.setting > label {
+ 		display: block;
+ 		margin-bottom: 2em;
+ 	}
+
+ 	textarea {
+ 		width: 100%;
+ 		height: 6em;
+ 	}
+
+ 	.fdm-menu-item-list {
+
+ 		> li {
+ 			position: relative;
+ 			border: @border;
+ 			border-left-width: 4px;
+ 			padding: 0.5em;
+ 			margin-bottom: 0.5em;
+ 			overflow-x: hidden;
+ 			text-overflow: ellipsis;
+ 			white-space: nowrap;
+ 			cursor: move;
+ 		}
+
+ 		.fdm-remove-menu-item {
+ 			position: absolute;
+ 			top: 0;
+ 			right: 0;
+ 			width: 2.5em;
+ 			height: 100%;
+ 			border-left: @border;
+ 			text-align: center;
+ 			color: rgba(0,0,0,0);
+ 			overflow: hidden;
+ 			cursor: pointer;
+
+ 			&:before {
+ 				display: block;
+ 				content: '\f335';
+ 				position: absolute;
+ 				top: 50%;
+ 				left: 50%;
+ 				transform: translate(-50%, -50%);
+ 			    font: normal 20px/1 'dashicons';
+ 				color: red;
+ 			    speak: none;
+ 			    -webkit-font-smoothing: antialiased;
+ 			    -moz-osx-font-smoothing: grayscale;
+ 			}
+
+ 			&:hover,
+ 			&:focus {
+ 				background: red;
+ 				border-left: none;
+
+ 				&:before {
+ 					color: #fff;
+ 				}
+ 			}
+ 		}
+ 	}
+
+ 	.footer {
+ 		padding: 1em;
+ 	}
+
+ 	.control,
+ 	.footer {
+ 		display: none;
+
+ 		&.is-open {
+ 			display: block;
+ 		}
+ 	}
+ }
+
+ .fdm-section-list-placeholder {
+ 	display: block;
+ 	width: 100%;
+ 	height: 3em;
+ 	border: 1px dashed #bbb;
+ 	background: #fafafa;
+ }
+
+ .fdm-remove-menu-section {
+ 	color: red;
+ }

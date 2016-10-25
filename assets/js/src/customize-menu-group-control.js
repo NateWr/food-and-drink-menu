@@ -50,9 +50,10 @@
 			control.group_number = this.id.replace( /^\D+/g, '');
 			control.edited_posts = {};
 
-			_.bindAll( control, 'onPageRefresh', 'renderSections', 'updateSetting', 'sortingComplete', 'getSection', 'updatePreview' );
+			_.bindAll( control, 'onPageRefresh', 'renderSections', 'updateSetting', 'sortingComplete', 'getSection', 'updatePreview', 'toggleSectionPanel' );
 			api.previewer.bind( 'previewer-reset.fdm', control.onPageRefresh );
 			control.container.on( 'menu-section-updated.fdm', control.updateSetting );
+			control.container.click( '.fdm-add-section', control.toggleSectionPanel );
 		},
 
 		/**
@@ -214,6 +215,19 @@
 			}
 			data.id = this.post_id;
 			wp.customize.previewer.send( 'refresh-menu.fdm', data );
+		},
+
+		/**
+		 * Open/close the panel to select a section
+		 *
+		 * @since 1.5
+		 */
+		toggleSectionPanel: function() {
+			if ( $( 'body' ).hasClass( 'fdm-secondary-open' ) ) {
+				api.fdm.secondary_panel.close();
+			} else {
+				api.fdm.secondary_panel.load( 'test', this );
+			}
 		}
 	});
 

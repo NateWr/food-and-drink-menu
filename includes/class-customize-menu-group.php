@@ -40,7 +40,6 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 			return;
 		}
 
-		add_action( 'customize_controls_print_footer_scripts', array( $this, 'load_control_template' ) );
 		add_action( 'customize_update_fdm_menu_group', array( $this, 'save_to_post_content' ), 10, 2 );
 	}
 
@@ -119,19 +118,6 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 	 */
 	public function active_callback() {
 		return fdm_customize_is_menu_post();
-	}
-
-	/**
-	 * Print control templates for use in Backbone Views
-	 *
-	 * @return array
-	 * @since 1.5
-	 */
-	public function load_control_template() {
-		?>
-		<script type="text/html" id="tmpl-fdm-menu-section"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/menu-section.js' ); ?></script>
-		<script type="text/html" id="tmpl-fdm-menu-section-item"><?php include( FDM_PLUGIN_DIR . '/assets/js/templates/menu-section-item.js' ); ?></script>
-		<?php
 	}
 
 	/**
