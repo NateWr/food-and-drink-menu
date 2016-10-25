@@ -363,10 +363,10 @@ class fdmCustomPostTypes {
 						<ul id="fdm-menu-sections-list" class="fdm-sortable-sections">
 							<?php foreach( $sections as $section ) : ?>
 								<li data-term-id="<?php esc_attr_e( $section->term_id ); ?>">
-									<a href="#" class="fdm-title">
+									<div class="fdm-title">
 										<span class="fdm-term-count"><?php esc_html_e( $section->count ); ?></span>
 										<?php esc_html_e( $section->name ); ?>
-									</a>
+									</div>
 									<a href="#" class="fdm-edit-section-name">
 										<span class="dashicons dashicons-edit"></span>
 										<span class="screen-reader-text">
