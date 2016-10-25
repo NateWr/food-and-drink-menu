@@ -349,15 +349,15 @@ class fdmCustomPostTypes {
 						<?php esc_html_e( 'Available Sections', 'food-and-drink-menu' ); ?>
 					</h3>
 					<?php if ( empty( $sections ) ) : ?>
-						<p class="description">
+						<div class="fdm-no-sections">
 							<?php
 								printf(
 									__( "You don't have any Menu Sections yet. When you create Menu Items, you should %sassign them to Menu Sections%s.", 'food-and-drink-menu' ),
-									'<a href="' . esc_url_e( 'http://doc.themeofthecrop.com/plugins/food-and-drink-menu/user/getting-started/create-menu' ) . '" target="_blank">',
+									'<a href="' . esc_url( 'http://doc.themeofthecrop.com/plugins/food-and-drink-menu/user/getting-started/create-menu' ) . '" target="_blank">',
 									'</a>'
 								);
 							?>
-						</p>
+						</div>
 
 					<?php else : ?>
 						<ul id="fdm-menu-sections-list" class="fdm-sortable-sections">
