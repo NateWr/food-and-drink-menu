@@ -535,9 +535,10 @@ class fdmCustomPostTypes {
 				)
 			);
 			foreach( $sections as $section_id ) {
-				$meta_ids['fdm_menu_section_' . absint( $section_id )] = 'sanitize_text_field';
+				if ( isset( $_POST['fdm_menu_section_' . absint( $section_id )] ) ) {
+					$meta_ids['fdm_menu_section_' . absint( $section_id )] = 'sanitize_text_field';
+				}
 			}
-
 		}
 
 		// Create filter so addons can add new data
