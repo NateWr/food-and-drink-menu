@@ -78,8 +78,7 @@ class fdmViewMenu extends fdmView {
 			if ( trim( $col ) == '' ) {
 				continue;
 			} else {
-				$this->groups[$key] = explode( ",", $col );
-				array_pop( $this->groups[$key] );
+				$this->groups[$key] = array_filter( explode( ",", $col ) );
 			}
 		}
 
