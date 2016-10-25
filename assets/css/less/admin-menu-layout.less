@@ -1,0 +1,116 @@
+/**
+ * Styles for menu layout control
+ *
+ * @since 1.5
+ */
+#fdm-menu-organizer > *,
+#fdm-menu-organizer > *:before,
+#fdm-menu-organizer > *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#fdm-menu-organizer {
+	border: 1px solid #ddd;
+}
+
+.fdm-column {
+	float: left;
+	width: 33%;
+	border-right: 1px solid #ddd;
+
+	&:first-child {
+		background: #fafafa;
+	}
+
+	&:nth-child(3) {
+		width: 34%;
+		border-right: none;
+	}
+
+	h3 {
+		background-color: #fafafa;
+		border-bottom: 1px solid #ddd;
+		margin: 0;
+		padding: 1em;
+		font-size: 1em;
+		text-align: center;
+	}
+
+	ul {
+		margin: 0;
+		padding: 1em;
+		height: 300px;
+		overflow: auto;
+
+		> li {
+			position: relative;
+		}
+	}
+
+	.fdm-title {
+		display: block;
+		position: relative;
+		padding: 0.25em 3em 0.25em 3.5em;
+		background: #fff;
+		line-height: 2em;
+		text-decoration: none;
+		border: 1px solid #ddd;
+		color: #555;
+		text-overflow: ellipsis;
+		overflow-x: hidden;
+		white-space: nowrap;
+
+		&:hover,
+		&:focus {
+			border-color: #333;
+		}
+	}
+
+	.fdm-edit-section-name,
+	.fdm-term-count {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 2.5em;
+		background: #eee;
+		border-right: 1px solid #ddd;
+		text-align: center;
+		line-height: 2.5em;
+	}
+
+	.fdm-term-count {
+		color: #888;
+	}
+
+	.fdm-edit-section-name {
+		left: auto;
+		top: 1px;
+		right: 1px;
+		bottom: 1px;
+		border-right: none;
+		border-left: 1px solid #ddd;
+
+		.dashicons {
+			line-height: 1.5em;
+		}
+	}
+}
+
+.fdm-menu-sections-placeholder {
+   display: block;
+   width: 100%;
+   height: 3em;
+   border: 1px dashed #bbb;
+   background: #fafafa;
+}
+
+#fdm-menu-organizer > .description {
+	clear: both;
+	margin: 0;
+	padding: 1em;
+	background: #fafafa;
+	border-top: 1px solid #ddd;
+}

@@ -335,55 +335,66 @@ class fdmCustomPostTypes {
 		$column_two = get_post_meta( $post->ID, 'fdm_menu_column_two', true );
 
 		// Retrieve sections and store in HTML lists
-		$terms = get_terms( 'fdm-menu-section', array( 'hide_empty' => false ) );
-		$sections_list = '';
-		foreach ( $terms as $term ) {
-			$sections_list .= '<li><a href="#" data-termid="' . $term->term_id . '">' . $term->name . ' (' . $term->count . ')</a></li>';
-		}
+		$sections = get_terms( 'fdm-menu-section', array( 'hide_empty' => false ) );
 		?>
 
-			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php echo $column_one; ?>">
-			<input type="hidden" id="fdm_menu_column_two" name="fdm_menu_column_two" value="<?php echo $column_two; ?>">
+			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php esc_attr_e( $column_one ); ?>">
+			<input type="hidden" id="fdm_menu_column_two" name="fdm_menu_column_two" value="<?php esc_attr_e( $column_two ); ?>">
 
-			<p><?php echo __( 'Click on a Menu Section to add it to this menu.', 'food-and-drink-menu' ); ?></p>
+			<p><?php echo __( 'Drag-and-drop Menu Sections into columns on your menu.', 'food-and-drink-menu' ); ?></p>
 
 			<div id="fdm-menu-organizer">
+				<div class="fdm-column">
+					<h3>
+						<?php esc_html_e( 'Available Sections', 'food-and-drink-menu' ); ?>
+					</h3>
+					<?php if ( empty( $sections ) ) : ?>
+						<p class="description">
+							<?php
+								printf(
+									__( "You don't have any Menu Sections yet. When you create Menu Items, you should %sassign them to Menu Sections%s.", 'food-and-drink-menu' ),
+									'<a href="' . esc_url_e( 'http://doc.themeofthecrop.com/plugins/food-and-drink-menu/user/getting-started/create-menu' ) . '" target="_blank">',
+									'</a>'
+								);
+							?>
+						</p>
 
-				<div id="fdm-menu-column-one">
-					<div class="fdm-column fdm-options">
-						<h4><?php echo __( 'Menu Sections', 'food-and-drink-menu' ); ?></h4>
-						<ul>
-							<?php echo $sections_list; ?>
+					<?php else : ?>
+						<ul id="fdm-menu-sections-list" class="fdm-sortable-sections">
+							<?php foreach( $sections as $section ) : ?>
+								<li data-term-id="<?php esc_attr_e( $section->term_id ); ?>">
+									<a href="#" class="fdm-title">
+										<span class="fdm-term-count"><?php esc_html_e( $section->count ); ?></span>
+										<?php esc_html_e( $section->name ); ?>
+									</a>
+									<a href="#" class="fdm-edit-section-name">
+										<span class="dashicons dashicons-edit"></span>
+										<span class="screen-reader-text">
+											<?php esc_html_e( 'Edit Section Name', 'food-and-drink-menu' ); ?>
+										</span>
+									</a>
+								</li>
+							<?php endforeach; ?>
 						</ul>
-					</div>
-					<div class="fdm-column fdm-added">
-						<h4><?php echo __( 'First Column', 'food-and-drink-menu' ); ?></h4>
-						<ul>
-						<!-- List filled with values on page load. see admin.js -->
-						</ul>
-					</div>
+					<?php endif; ?>
+				</div>
+				<div class="fdm-column">
+					<h3>
+						<?php esc_html_e( 'First Column', 'food-and-drink-menu' ); ?>
+					</h3>
+					<ul id="fdm_menu_column_one_list" class="fdm-sortable-sections fdm-sections-added"></ul>
+				</div>
+				<div class="fdm-column">
+					<h3>
+						<?php esc_html_e( 'Second Column', 'food-and-drink-menu' ); ?>
+					</h3>
+					<ul id="fdm_menu_column_two_list" class="fdm-sortable-sections fdm-sections-added"></ul>
 				</div>
 
-				<div id="fdm-menu-column-two">
-					<div class="fdm-column fdm-added">
-						<h4><?php echo __( 'Second Column', 'food-and-drink-menu' ); ?></h4>
-						<ul>
-						<!-- List filled with values on page load. see admin.js -->
-						</ul>
-					</div>
-					<div class="fdm-column fdm-options">
-						<h4><?php echo __( 'Menu Sections', 'food-and-drink-menu' ); ?></h4>
-						<ul>
-							<?php echo $sections_list; ?>
-						</ul>
-					</div>
-				</div>
-
-				<div class="clearfix"></div>
-
+				<p class="description">
+					<?php esc_html_e( 'Hint: Leave the second column empty to display the menu in a single column.', 'food-and-drink-menu' ); ?>
+				</p>
 			</div>
-
-			<p><?php echo __( 'Hint: Leave the second column empty to display the menu in a single column.', 'food-and-drink-menu' ); ?></p>
 
 		<?php
 

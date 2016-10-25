@@ -1,0 +1,98 @@
+/**
+ * Base styles for admin controls
+ *
+ * @since 1.5
+ */
+
+// Admin dashboard icons
+#adminmenu #menu-posts-fdm-menu .wp-menu-image:before { content: "\f330"; }
+#adminmenu #menu-posts-fdm-menu-item .wp-menu-image:before { content: "\f164"; }
+
+// Admin post lists
+.fdm-cols td {
+	background: #ddd;
+	padding: 0.5em;
+	border-radius: 0.5em;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+// Common controls
+.fdm-input-control {
+	position: relative;
+	margin: 1em 0;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	label {
+		width: 100%;
+		display: block;
+		font-weight: bold;
+	}
+
+	input[type="text"] {
+		width: 25em;
+	}
+
+	.fdm-input-delete {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		width: 20px;
+		height: 22px;
+		transform: translateY(-50%);
+		padding: 0  0.5em;
+		background: #eee;
+		border-left: 1px solid #ddd;
+		color: red;
+		text-align: center;
+		text-decoration: none;
+		overflow: hidden;
+	}
+}
+
+// Full-width text fields in sidebar
+.fdm-input-side-panel .fdm-input-control input[type="text"] {
+	width: 100%;
+}
+
+// Inline labels for radio buttons
+.fdm-radio-control label {
+	display: inline;
+	width: auto;
+}
+
+// Delete controls
+.fdm-input-control .fdm-input-delete {
+
+	&:before {
+		content: "×";
+		width: 20px;
+		line-height: 20px;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 700;
+	}
+
+	&:hover,
+	&:focus {
+		background: red;
+
+		&:before {
+			color: #fff;
+		}
+	}
+}
+
+// Shortcode display
+.fdm-menu-shortcode {
+	font-family: monospace;
+	background-color: white;
+	padding: 0.5em 1em;
+	border: 1px solid #ddd;
+	border-radius: 0.25em;
+}
