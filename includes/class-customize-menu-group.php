@@ -151,6 +151,8 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 			return;
 		}
 
+		$column_meta_key = $this->id == 'fdm-menu-column-0' ? 'fdm_menu_column_one' : 'fdm_menu_column_two';
+
 		foreach ( $value as $post ) {
 
 			// List of section IDs to assign to the menu
@@ -186,9 +188,8 @@ class FDM_WP_Customize_Menu_Group extends WP_Customize_Control {
 					wp_update_term( $section['id'], 'fdm-menu-section', $term_updates );
 				}
 			}
-		}
 
-		$column_meta_key = $this->id == 'fdm-menu-column-0' ? 'fdm_menu_column_one' : 'fdm_menu_column_two';
-		update_post_meta( $post['id'], $column_meta_key, join( ',', $section_list ) );
+			update_post_meta( $post['id'], $column_meta_key, join( ',', $section_list ) );
+		}
 	}
 }
