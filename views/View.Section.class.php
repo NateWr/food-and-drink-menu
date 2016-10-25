@@ -15,6 +15,14 @@ class fdmViewSection extends fdmView {
 	public $menu = null;
 
 	/**
+	 * Menu Items assigned to this section
+	 *
+	 * @param array
+	 * @since 1.5
+	 */
+	public $items = array();
+
+	/**
 	 * Initialize the class
 	 * @since 1.1
 	 */
@@ -37,7 +45,7 @@ class fdmViewSection extends fdmView {
 		// Gather data if it's not already set
 		$this->load_section();
 
-		if ( !isset( $this->items ) || ( is_array( $this->items ) && !count( $this->items ) ) ) {
+		if ( empty( $this->items ) ) {
 			return;
 		}
 
