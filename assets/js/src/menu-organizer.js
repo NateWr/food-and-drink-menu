@@ -73,6 +73,19 @@ jQuery( function ( $ ) {
 
 			return false;
 		} );
+
+		fdmMenuOrganizer.$menu_section_modal.click( function( e ) {
+			if ( $( e.target ).is ( fdmMenuOrganizer.$menu_section_modal ) ) {
+				fdmMenuOrganizer.closeMenuSectionModal();
+			}
+		} );
+
+		$( document ).keyup( function( e ) {
+			if ( e.which == '27' ) {
+				fdmMenuOrganizer.closeMenuSectionModal();
+			}
+		} );
+
 	};
 
 	/**
