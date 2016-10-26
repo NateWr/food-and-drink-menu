@@ -57,6 +57,7 @@ class fdmFoodAndDrinkMenu {
 		// Load admin assets
 		add_action( 'admin_print_scripts-post-new.php', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'admin_print_scripts-post.php', array( $this, 'enqueue_admin_assets' ) );
+		add_action( 'admin_print_scripts-edit.php', array( $this, 'enqueue_admin_assets' ) );
 
 		// Register the widget
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );

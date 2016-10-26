@@ -768,32 +768,26 @@ class fdmCustomPostTypes {
 				$terms = get_terms( 'fdm-menu-section', array( 'include' => array_merge( $col1, $col2 ), 'fields' => 'id=>name' ) );
 				?>
 
-				<table class="fdm-cols">
-					<tr>
-						<td>
-					<?php foreach( $col1 as $id ) : ?>
-						<?php if ( isset( $terms[ $id ] ) ) : ?>
-							<p>
-								<a href="<?php echo admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=fdm-menu-item' ); ?>">
-								<?php echo $terms[ $id ]; ?>
-								</a>
-							</p>
-						<?php endif; ?>
-					<?php endforeach; ?>
-						</td>
-						<td>
-					<?php foreach( $col2 as $id ) : ?>
-						<?php if ( isset( $terms[ $id ] ) ) : ?>
-							<p>
-								<a href="<?php echo admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=fdm-menu-item' ); ?>">
+				<div class="fdm-cols">
+					<div class="fdm-col">
+						<?php foreach( $col1 as $id ) : ?>
+							<?php if ( isset( $terms[ $id ] ) ) : ?>
+								<a href="<?php echo esc_url( admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=' . FDM_MENUITEM_POST_TYPE ) ); ?>">
 									<?php echo $terms[ $id ]; ?>
 								</a>
-							</p>
-						<?php endif; ?>
-					<?php endforeach; ?>
-						</td>
-					</tr>
-				</table>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+					<div class="fdm-col">
+						<?php foreach( $col2 as $id ) : ?>
+							<?php if ( isset( $terms[ $id ] ) ) : ?>
+								<a href="<?php echo esc_url( admin_url( 'edit-tags.php?action=edit&taxonomy=fdm-menu-section&tag_ID=' . $id . '&post_type=' . FDM_MENUITEM_POST_TYPE ) ); ?>">
+									<?php echo $terms[ $id ]; ?>
+								</a>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+				</div>
 
 			<?php endif;
 
