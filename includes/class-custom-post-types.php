@@ -8,10 +8,19 @@ if ( !defined( 'ABSPATH' ) )
 
 class fdmCustomPostTypes {
 
+	/**
+	 * Array of menu item taxonomies
+	 *
+	 * @param array
+	 * @since 1.5
+	 */
+	public $menu_item_taxonomies = array();
+
 	public function __construct() {
 
 		// Call when plugin is initialized on every page load
 		add_action( 'init', array( $this, 'load_cpts' ) );
+		add_action( 'admin_menu', array( $this, 'load_cpt_admin_menu' ) );
 
 		// Handle metaboxes
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
@@ -60,7 +69,7 @@ class fdmCustomPostTypes {
 				'not_found_in_trash' => __( 'No Menu found in Trash', 'food-and-drink-menu' ),
 				'parent' => __( 'Parent Menu', 'food-and-drink-menu' )
 			),
-			'menu_position' => 15,
+			'menu_icon' => 'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KPHBhdGggZmlsbD0icmdiYSgyNDAsMjQ1LDI1MCwwLjYpIiBkPSJNNyAwYy0zLjMxNCAwLTYgMy4xMzQtNiA3IDAgMy4zMSAxLjk2OSA2LjA4MyA0LjYxNiA2LjgxMmwtMC45OTMgMTYuMTkxYy0wLjA2NyAxLjA5OCAwLjc3OCAxLjk5NiAxLjg3OCAxLjk5NmgxYzEuMSAwIDEuOTQ1LTAuODk4IDEuODc4LTEuOTk2bC0wLjk5My0xNi4xOTFjMi42NDYtMC43MjkgNC42MTYtMy41MDIgNC42MTYtNi44MTIgMC0zLjg2Ni0yLjY4Ni03LTYtN3pNMjcuMTY3IDBsLTEuNjY3IDEwaC0xLjI1bC0wLjgzMy0xMGgtMC44MzNsLTAuODMzIDEwaC0xLjI1bC0xLjY2Ny0xMGgtMC44MzN2MTNjMCAwLjU1MiAwLjQ0OCAxIDEgMWgyLjYwNGwtMC45ODIgMTYuMDA0Yy0wLjA2NyAxLjA5OCAwLjc3OCAxLjk5NiAxLjg3OCAxLjk5NmgxYzEuMSAwIDEuOTQ1LTAuODk4IDEuODc4LTEuOTk2bC0wLjk4Mi0xNi4wMDRoMi42MDRjMC41NTIgMCAxLTAuNDQ4IDEtMXYtMTNoLTAuODMzeiI+PC9wYXRoPgo8L3N2Zz4=',
 			'public' => true,
 			'rewrite' => array( 'slug' => 'menu' ),
 			'supports' => array(
@@ -83,41 +92,36 @@ class fdmCustomPostTypes {
 		// Add an action so addons can hook in after the menu is registered
 		do_action( 'fdm_menu_post_register' );
 
-		// Define the menu item taxonomies
-		$menu_item_taxonomies = array(
-
-			// Create menu sections (desserts, entrees, etc)
-			'fdm-menu-section'	=> array(
-				'labels' 	=> array(
-					'name' => __( 'Menu Sections', 'food-and-drink-menu' ),
-					'singular_name' => __( 'Menu Section', 'food-and-drink-menu' ),
-					'search_items' => __( 'Search Menu Sections', 'food-and-drink-menu' ),
-					'all_items' => __( 'All Menu Sections', 'food-and-drink-menu' ),
-					'parent_item' => __( 'Menu Section', 'food-and-drink-menu' ),
-					'parent_item_colon' => __( 'Menu Section:', 'food-and-drink-menu' ),
-					'edit_item' => __( 'Edit Menu Section', 'food-and-drink-menu' ),
-					'update_item' => __( 'Update Menu Section', 'food-and-drink-menu' ),
-					'add_new_item' => __( 'Add New Menu Section', 'food-and-drink-menu' ),
-					'new_item_name' => __( 'Menu Section', 'food-and-drink-menu' ),
-					'no_terms' => __( 'No menu sections', 'food-and-drink-menu' ),
-					'items_list_navigation' => __( 'Menu sections list navigation', 'food-and-drink-menu' ),
-					'items_list' => __( 'Menu sections list', 'food-and-drink-menu' ),
-					'archives' => __( 'Menu Archives', 'food-and-drink-menu' ),
-					'insert_into_item' => __( 'Insert into menu', 'food-and-drink-menu' ),
-					'uploaded_to_this_item' => __( 'Uploaded to this menu', 'food-and-drink-menu' ),
-					'filter_items_list' => __( 'Filter menu list', 'food-and-drink-menu' ),
-					'item_list_navigation' => __( 'Menu list navigation', 'food-and-drink-menu' ),
-					'items_list' => __( 'Menu list', 'food-and-drink-menu' ),
-				)
-			)
-
+		// Create menu sections (desserts, entrees, etc)
+		$this->menu_item_taxonomies['fdm-menu-section'] = array(
+			'labels' 	=> array(
+				'name' => __( 'Menu Sections', 'food-and-drink-menu' ),
+				'singular_name' => __( 'Menu Section', 'food-and-drink-menu' ),
+				'search_items' => __( 'Search Menu Sections', 'food-and-drink-menu' ),
+				'all_items' => __( 'All Menu Sections', 'food-and-drink-menu' ),
+				'parent_item' => __( 'Menu Section', 'food-and-drink-menu' ),
+				'parent_item_colon' => __( 'Menu Section:', 'food-and-drink-menu' ),
+				'edit_item' => __( 'Edit Menu Section', 'food-and-drink-menu' ),
+				'update_item' => __( 'Update Menu Section', 'food-and-drink-menu' ),
+				'add_new_item' => __( 'Add New Menu Section', 'food-and-drink-menu' ),
+				'new_item_name' => __( 'Menu Section', 'food-and-drink-menu' ),
+				'no_terms' => __( 'No menu sections', 'food-and-drink-menu' ),
+				'items_list_navigation' => __( 'Menu sections list navigation', 'food-and-drink-menu' ),
+				'items_list' => __( 'Menu sections list', 'food-and-drink-menu' ),
+				'archives' => __( 'Menu Archives', 'food-and-drink-menu' ),
+				'insert_into_item' => __( 'Insert into menu', 'food-and-drink-menu' ),
+				'uploaded_to_this_item' => __( 'Uploaded to this menu', 'food-and-drink-menu' ),
+				'filter_items_list' => __( 'Filter menu list', 'food-and-drink-menu' ),
+				'item_list_navigation' => __( 'Menu list navigation', 'food-and-drink-menu' ),
+				'items_list' => __( 'Menu list', 'food-and-drink-menu' ),
+			),
 		);
 
 		// Create filter so addons can modify the taxonomies
-		$menu_item_taxonomies = apply_filters( 'fdm_menu_item_taxonomies', $menu_item_taxonomies );
+		$this->menu_item_taxonomies = apply_filters( 'fdm_menu_item_taxonomies', $this->menu_item_taxonomies );
 
 		// Register taxonomies
-		foreach( $menu_item_taxonomies as $id => $taxonomy ) {
+		foreach( $this->menu_item_taxonomies as $id => $taxonomy ) {
 			register_taxonomy(
 				$id,
 				'',
@@ -152,7 +156,8 @@ class fdmCustomPostTypes {
 				'item_list_navigation' => __( 'Menu items list navigation', 'food-and-drink-menu' ),
 				'items_list' => __( 'Menu items list', 'food-and-drink-menu' ),
 			),
-			'menu_position' => 15,
+			'menu_position' => 5,
+			'show_in_menu' => 'edit.php?post_type=' . FDM_MENU_POST_TYPE,
 			'public' => true,
 			'rewrite' => array( 'slug' => 'menu-item' ),
 			'supports' => array(
@@ -162,7 +167,7 @@ class fdmCustomPostTypes {
 				'revisions',
 				'page-attributes'
 			),
-			'taxonomies' => array_keys( $menu_item_taxonomies )
+			'taxonomies' => array_keys( $this->menu_item_taxonomies )
 		);
 
 		// Create filter so addons can modify the arguments
@@ -177,6 +182,31 @@ class fdmCustomPostTypes {
 		// Add an action so addons can hook in after the menu is registered
 		do_action( 'fdm_menu_item_post_register' );
 
+	}
+
+	/**
+	 * Add submenu items to the menu
+	 *
+	 * @since 1.5
+	 */
+	public function load_cpt_admin_menu() {
+
+		// Remove the Add Menu item
+		remove_submenu_page(
+			'edit.php?post_type=' . FDM_MENU_POST_TYPE,
+			'post-new.php?post_type=' . FDM_MENU_POST_TYPE
+		);
+
+		// Add any menu item taxonomies
+		foreach( $this->menu_item_taxonomies as $id => $taxonomy ) {
+			add_submenu_page(
+				'edit.php?post_type=' . FDM_MENU_POST_TYPE,
+				$taxonomy['labels']['name'],
+				$taxonomy['labels']['name'],
+				isset( $taxonomy['capabilities'] ) ? $taxonomy['capabilities'] : 'manage_terms',
+				'edit-tags.php?taxonomy=' . $id . '&post_type=' . FDM_MENUITEM_POST_TYPE
+			);
+		}
 	}
 
 	/**
