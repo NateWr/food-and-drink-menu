@@ -45,6 +45,9 @@ class fdmFoodAndDrinkMenu {
 		require_once( FDM_PLUGIN_DIR . '/includes/class-settings.php' );
 		$this->settings = new fdmSettings();
 
+		// Load integrations with other plugins
+		require_once( FDM_PLUGIN_DIR . '/includes/integrations/business-profile.php' );
+
 		// Load compatibility sections
 		require_once( FDM_PLUGIN_DIR . '/includes/compatibility.php' );
 
