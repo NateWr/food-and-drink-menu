@@ -47,6 +47,7 @@ class fdmFoodAndDrinkMenu {
 
 		// Load integrations with other plugins
 		require_once( FDM_PLUGIN_DIR . '/includes/integrations/business-profile.php' );
+		require_once( FDM_PLUGIN_DIR . '/includes/integrations/wordpress-seo.php' );
 
 		// Load compatibility sections
 		require_once( FDM_PLUGIN_DIR . '/includes/compatibility.php' );
