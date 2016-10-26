@@ -210,12 +210,6 @@ class fdmFoodAndDrinkMenu {
 		wp_enqueue_script( 'fdm-admin', FDM_PLUGIN_URL . '/assets/js/admin.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_style( 'fdm-admin', FDM_PLUGIN_URL . '/assets/css/admin.css', array(), '1.0' );
 
-		// Backwards compatibility for old admin icons
-		global $wp_version;
-		if ( $wp_version < 3.8 ) {
-			wp_enqueue_style( 'fdm-admin-compat-3.8', FDM_PLUGIN_URL . '/assets/css/admin-compat-3.8.css', array(), '1.0' );
-		}
-
 		add_action( 'admin_footer', array( $this, 'print_modals' ) );
 	}
 
