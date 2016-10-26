@@ -24,7 +24,7 @@ class fdmFoodAndDrinkMenu {
 		define( 'FDM_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 		define( 'FDM_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 		define( 'FDM_PLUGIN_FNAME', plugin_basename( __FILE__ ) );
-		define( 'FDM_UPGRADE_URL', 'http://themeofthecrop.com/?utm_medium=Plugin%20Upgrade%20Link&utm_campaign=Food%20and%20Drink%20Menu' );
+		define( 'FDM_UPGRADE_URL', 'https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_medium=Plugin%20Upgrade%20Link&utm_campaign=Food%20and%20Drink%20Menu' );
 		define( 'FDM_TEMPLATE_DIR', 'fdm-templates' );
 		define( 'FDM_VERSION', 3 );
 		define( 'FDM_MENU_POST_TYPE', 'fdm-menu' );
