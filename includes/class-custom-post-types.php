@@ -38,6 +38,10 @@ class fdmCustomPostTypes {
 		add_filter( 'manage_fdm-menu_posts_columns', array( $this, 'menu_posts_columns' ) );
 		add_action( 'manage_fdm-menu_posts_custom_column', array( $this, 'menu_posts_columns_content' ), 10, 2 );
 
+		// Process price changes from the menu item list table
+		add_action( 'wp_ajax_nopriv_fdm-menu-item-price' , array( $this , 'ajax_nopriv' ) );
+		add_action( 'wp_ajax_fdm-menu-item-price', array( $this, 'ajax_menu_item_price' ) );
+
 	}
 
 	/**
@@ -294,6 +298,7 @@ class fdmCustomPostTypes {
 
 	/**
 	 * Print the Menu Item price metabox HTML
+	 *
 	 * @since 1.0
 	 */
 	public function show_item_price() {
@@ -309,11 +314,13 @@ class fdmCustomPostTypes {
 
 		?>
 
-			<div class="fdm-input-controls fdm-input-side-panel">
-				<div id="fdm-input-prices" class="fdm-input-group">
+			<div class="fdm-input-controls fdm-input-side-panel" data-menu-item-id="<?php echo $post->ID; ?>">
+				<div class="fdm-input-prices fdm-input-group">
 					<?php foreach( $prices as $key => $price ) : ?>
 						<div class="fdm-input-control">
-							<label for="fdm_item_price" class="screen-reader-text"><?php echo __( 'Price', 'food-and-drink-menu' ); ?></label>
+							<label for="fdm_item_price" class="screen-reader-text">
+								<?php echo __( 'Price', 'food-and-drink-menu' ); ?>
+							</label>
 							<input type="text" name="fdm_item_price[]" value="<?php echo esc_attr( $price ); ?>">
 							<a href="#" class="fdm-input-delete">
 								<?php esc_html_e( 'Remove this price' ); ?>
@@ -321,7 +328,7 @@ class fdmCustomPostTypes {
 						</div>
 					<?php endforeach; ?>
 					<div class="fdm-input-group-add">
-						<a href="#" id="fdm-price-add">
+						<a href="#" class="fdm-price-add">
 							<?php esc_html_e( 'Add Price' ); ?>
 						</a>
 					</div>
@@ -648,7 +655,36 @@ class fdmCustomPostTypes {
 	public function menu_item_posts_columns_content( $column, $post ) {
 
 		if ( $column == 'price' ) {
-			echo get_post_meta( $post, 'fdm_item_price', true );
+			$prices = get_post_meta( $post, 'fdm_item_price' );
+			if ( !empty( $prices ) ) {
+				?>
+				<div class="fdm-item-list-price" data-menu-item-id="<?php echo absint( $post ); ?>">
+					<div class="fdm-item-price-summary">
+						<?php
+							echo join(
+								apply_filters( 'fdm_prices_separator', _x( '/', 'Separator between multiple prices.', 'food-and-drink-menu' ) ),
+								$prices
+							);
+						?>
+					</div>
+					<div class="fdm-item-price-actions">
+						<a href="#" class="fdm-item-price-edit">
+							<?php esc_html_e( 'Edit Price', 'food-and-drink-menu' ); ?>
+						</a>
+					</div>
+					<div class="fdm-item-price-form">
+						<?php $this->show_item_price(); ?>
+						<div class="fdm-item-price-buttons">
+							<span class="spinner"></span>
+							<button class="fdm-item-price-save button" disabled="disabled">
+								<?php esc_html_e( 'Update Price', 'food-and-drink-menu' ); ?>
+							</button>
+						</div>
+						<div class="fdm-item-price-message"></div>
+					</div>
+				</div>
+				<?php
+			}
 		}
 
 		if ( $column == 'sections' ) {
@@ -790,8 +826,64 @@ class fdmCustomPostTypes {
 				</div>
 
 			<?php endif;
-
 		}
 	}
 
+	/**
+	 * Respond to unauthenticated ajax requests
+	 *
+	 * @since 1.5
+	 */
+	public function ajax_nopriv() {
+
+		wp_send_json_error(
+			array(
+				'error' => 'loggedout',
+				'msg' => sprintf( __( 'You have been logged out. Please %slogin again%s.', 'food-and-drink-menu' ), '<a href="' . wp_login_url( admin_url( 'edit.php?post_type=' . FDM_MENUITEM_POST_TYPE ) ) . '">', '</a>' ),
+			)
+		);
+	}
+
+	/**
+	 * Respond to ajax requests with updated menu item prices
+	 *
+	 * @since 1.5
+	 */
+	public function ajax_menu_item_price() {
+
+		// Authenticate request
+		if ( !check_ajax_referer( 'fdm-admin', 'nonce' ) || !current_user_can( 'edit_posts' ) ) {
+			$this->ajax_nopriv();
+		}
+
+		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		if ( !get_post_type( $id ) ) {
+			wp_send_json_error(
+				array(
+					'error'		=> 'menu_item_not_found',
+					'msg'		=> __( 'This menu item could not be found. Please reload the page and try again.', 'food-and-drink-menu' ),
+				)
+			);
+		}
+
+		$prices = isset( $_POST['prices'] ) && is_array( $_POST['prices'] ) ? array_filter( array_map( 'sanitize_text_field', $_POST['prices'] ) ) : array();
+
+		delete_post_meta( $id, 'fdm_item_price' );
+		foreach( $prices as $price ) {
+			add_post_meta( $id, 'fdm_item_price', $price );
+		}
+
+		$response = array(
+			'id' => $id,
+			'prices' => $prices,
+			'price_summary' => join(
+				apply_filters( 'fdm_prices_separator', _x( '/', 'Separator between multiple prices.', 'food-and-drink-menu' ) ),
+				$prices
+			),
+		);
+
+		$response = apply_filters( 'fdm_ajax_menu_item_price', $response, $id, $prices );
+
+		wp_send_json_success( $response );
+	}
 }

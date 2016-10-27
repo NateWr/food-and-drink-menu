@@ -46,3 +46,53 @@
 		}
 	}
 }
+
+// Price in the menu list table
+.fdm-item-list-price {
+
+	.fdm-item-price-form {
+		position: absolute;
+		left: -9999px;
+	}
+
+	&.is-visible {
+
+		.fdm-item-price-form {
+			position: relative;
+			left: auto;
+		}
+
+		.fdm-item-price-actions {
+			position: absolute;
+			left: -9999px;
+		}
+	}
+}
+
+.fdm-item-price-form {
+	margin: 1em 0;
+	padding: 0 1em 1em 1em;
+	border: 1px solid rgba(0,0,0,0.1);
+	background: #fff;
+}
+
+.fdm-item-price-buttons {
+	margin-top: 1em;
+	text-align: right;
+
+	.spinner {
+		float: none;
+		margin-top: 0.35em;
+	}
+}
+
+.fdm-item-price-message {
+	display: block;
+	margin-top: 1em;
+	padding: 0.5em;
+	border: 1px solid red;
+	border-left-width: 0.25em;
+}
+.fdm-item-price-message:empty {
+	display: none;
+}
