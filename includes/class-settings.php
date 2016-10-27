@@ -21,6 +21,33 @@ class fdmSettings {
 	}
 
 	/**
+	 * Get the theme supports options for this plugin
+	 *
+	 * This mimics the core get_theme_support function, except it automatically
+	 * looks up this plugin's feature set and searches for features within
+	 * those settings.
+	 *
+	 * @param string $feature The feature support to check
+	 * @since 1.5
+	 */
+	public function get_theme_support( $feature ) {
+
+		$theme_support = get_theme_support( 'food-and-drink-menu' );
+
+		if ( !is_array( $theme_support ) ) {
+			return apply_filters( 'fdm_get_theme_support_' . $feature, false, $theme_support );
+		}
+
+		$theme_support = $theme_support[0];
+
+		if ( isset( $theme_support[$feature] ) ) {
+			return apply_filters( 'fdm_get_theme_support_' . $feature, $theme_support[$feature], $theme_support );
+		}
+
+		return apply_filters( 'fdm_get_theme_support_' . $feature, false, $theme_support );
+	}
+
+	/**
 	 * Load the admin settings page
 	 * @since 1.1
 	 * @sa https://github.com/NateWr/simple-admin-pages

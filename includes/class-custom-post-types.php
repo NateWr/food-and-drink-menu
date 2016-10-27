@@ -42,6 +42,9 @@ class fdmCustomPostTypes {
 		add_action( 'wp_ajax_nopriv_fdm-menu-item-price' , array( $this , 'ajax_nopriv' ) );
 		add_action( 'wp_ajax_fdm-menu-item-price', array( $this, 'ajax_menu_item_price' ) );
 
+		// Load menus in a page template when desired
+		add_filter( 'template_include', array( $this, 'load_menu_template' ), 99 );
+
 	}
 
 	/**
@@ -224,7 +227,7 @@ class fdmCustomPostTypes {
 			// Add a menu organizer
 			'fdm_menu_layout' => array (
 				'id'		=>	'fdm_menu_layout',
-				'title'		=> __( 'Menu Layout', 'food-and-drink-menu' ),
+				'title'		=> esc_html__( 'Menu Layout', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_organizer' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'normal',
@@ -234,7 +237,7 @@ class fdmCustomPostTypes {
 			// Add a menu footer WYSIWYG editor
 			'fdm_menu_footer' => array (
 				'id'		=>	'fdm_menu_footer',
-				'title'		=> __( 'Menu Footer', 'food-and-drink-menu' ),
+				'title'		=> esc_html__( 'Menu Footer', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_footer' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'normal',
@@ -244,7 +247,7 @@ class fdmCustomPostTypes {
 			// Add a box that shows menu shortcode
 			'fdm_menu_shortcode' => array (
 				'id'		=>	'fdm_menu_shortcode',
-				'title'		=> __( 'Menu Shortcode', 'food-and-drink-menu' ),
+				'title'		=> esc_html__( 'Menu Shortcode', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_shortcode' ),
 				'post_type'	=> 'fdm-menu',
 				'context'	=> 'side',
@@ -254,7 +257,7 @@ class fdmCustomPostTypes {
 			// Add a box that shows menu item shortcode
 			'fdm_menu_item_shortcode' => array (
 				'id'		=>	'fdm_menu_item_shortcode',
-				'title'		=> __( 'Menu Item Shortcode', 'food-and-drink-menu' ),
+				'title'		=> esc_html__( 'Menu Item Shortcode', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_menu_item_shortcode' ),
 				'post_type'	=> 'fdm-menu-item',
 				'context'	=> 'side',
@@ -268,11 +271,24 @@ class fdmCustomPostTypes {
 		if ( !$settings['fdm-disable-price'] ) {
 			$meta_boxes['fdm_menu_item_price'] = array (
 				'id'		=>	'fdm_item_price',
-				'title'		=> __( 'Price', 'food-and-drink-menu' ),
+				'title'		=> esc_html__( 'Price', 'food-and-drink-menu' ),
 				'callback'	=> array( $this, 'show_item_price' ),
 				'post_type'	=> 'fdm-menu-item',
 				'context'	=> 'side',
 				'priority'	=> 'default'
+			);
+		}
+
+		// Add a page template metabox
+		global $fdm_controller;
+		if ( !$fdm_controller->settings->get_theme_support( 'single-menu-template' ) ) {
+			$meta_boxes['fdm_menu_template'] = array(
+				'id' => 'fdm_menu_template',
+				'title' => esc_html__( 'Page Template', 'food-and-drink-menu' ),
+				'callback' => array( $this, 'show_page_template' ),
+				'post_type' => 'fdm-menu',
+				'context' => 'side',
+				'priority' => 'default',
 			);
 		}
 
@@ -443,6 +459,43 @@ class fdmCustomPostTypes {
 	}
 
 	/**
+	 * Print the metabox for selecting a page template for menus
+	 *
+	 * @since 1.5
+	 */
+	public function show_page_template() {
+
+		$templates = array(
+			'' => esc_html__( 'Default Menu Template', 'food-and-drink-menu' ),
+		);
+
+		$page_template = get_page_template();
+		if ( !empty( $page_template )  ) {
+			$templates['page.php'] = esc_html__( 'Default Page Template', 'food-and-drink-menu' );
+		}
+
+		$page_templates = get_page_templates();
+		if ( $page_templates ) {
+			$templates = array_merge( $templates, array_flip( $page_templates ) );
+		}
+
+		global $post;
+		$selected = get_post_meta( $post->ID, 'fdm_template_file', true );
+		?>
+
+			<select name="fdm_template_file">
+				<?php foreach( $templates as $val => $label ) : ?>
+					<option value="<?php esc_attr_e( $val ); ?>"<?php if ( $selected == $val ) : ?> selected<?php endif; ?>><?php esc_html_e( $label ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<p>
+				<?php esc_html_e( 'Choose any of your theme templates to display your menu.', 'food-and-drink-menu' ); ?>
+			</p>
+
+		<?php
+	}
+
+	/**
 	 * Print the menu shortcode HTML on the edit page for easy reference
 	 * @since 1.0
 	 * @note We also add the fdm_nonce field here for security
@@ -562,6 +615,7 @@ class fdmCustomPostTypes {
 
 			$meta_ids['fdm_menu_column_one'] = 'sanitize_text_field';
 			$meta_ids['fdm_menu_column_two'] = 'sanitize_text_field';
+			$meta_ids['fdm_template_file'] = 'sanitize_file_name';
 			$meta_ids['fdm_menu_footer_content'] = 'wp_kses_post';
 
 			// Custom section names for each menu
@@ -885,5 +939,24 @@ class fdmCustomPostTypes {
 		$response = apply_filters( 'fdm_ajax_menu_item_price', $response, $id, $prices );
 
 		wp_send_json_success( $response );
+	}
+
+	/**
+	 * Optionally load a page template instead of the singular menu template
+	 *
+	 * @param string $template Requested file
+	 * @since 1.5
+	 */
+	public function load_menu_template( $template ) {
+
+		if ( is_singular( FDM_MENU_POST_TYPE ) ) {
+			$new_template = get_post_meta( get_the_ID(), 'fdm_template_file', true );
+			$new_template_file = locate_template( $new_template );
+			if ( $new_template_file  ) {
+				return $new_template_file;
+			}
+		}
+
+		return $template;
 	}
 }
