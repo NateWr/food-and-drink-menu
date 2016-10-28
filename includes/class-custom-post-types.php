@@ -210,7 +210,7 @@ class fdmCustomPostTypes {
 				'edit.php?post_type=' . FDM_MENU_POST_TYPE,
 				$taxonomy['labels']['name'],
 				$taxonomy['labels']['name'],
-				isset( $taxonomy['capabilities'] ) ? $taxonomy['capabilities'] : 'manage_terms',
+				isset( $taxonomy['capabilities'] ) ? $taxonomy['capabilities']['edit_terms'] : 'edit_posts',
 				'edit-tags.php?taxonomy=' . $id . '&post_type=' . FDM_MENUITEM_POST_TYPE
 			);
 		}
