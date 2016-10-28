@@ -42,7 +42,8 @@ class fdmCustomPostTypes {
 		add_action( 'wp_ajax_nopriv_fdm-menu-item-price' , array( $this , 'ajax_nopriv' ) );
 		add_action( 'wp_ajax_fdm-menu-item-price', array( $this, 'ajax_menu_item_price' ) );
 
-		// Load menus in a page template when desired
+		// Allow menus to opt for a page template if desired
+		add_filter( 'theme_' . FDM_MENU_POST_TYPE . '_templates', array( $this, 'add_menu_templates' ), 10, 3 );
 		add_filter( 'template_include', array( $this, 'load_menu_template' ), 99 );
 
 	}
@@ -82,7 +83,7 @@ class fdmCustomPostTypes {
 			'supports' => array(
 				'title',
 				'editor',
-				'revisions'
+				'revisions',
 			),
 			'taxonomies' => array_keys( $menu_taxonomies )
 		);
@@ -279,9 +280,9 @@ class fdmCustomPostTypes {
 			);
 		}
 
-		// Add a page template metabox
-		global $fdm_controller;
-		if ( !$fdm_controller->settings->get_theme_support( 'single-menu-template' ) ) {
+		// Add a page template metabox for WP versions before 4.7 when custom
+		// post type templates were introduced
+		if ( version_compare( get_bloginfo( 'version' ), '4.7-beta-1', '<' ) ) {
 			$meta_boxes['fdm_menu_template'] = array(
 				'id' => 'fdm_menu_template',
 				'title' => esc_html__( 'Page Template', 'food-and-drink-menu' ),
@@ -306,9 +307,6 @@ class fdmCustomPostTypes {
 				$meta_box['priority']
 			);
 		}
-
-		// Remove Attributes metabox from menu organizer
-		remove_meta_box( 'pageparentdiv', 'fdm-menu', 'side' );
 	}
 
 
@@ -469,21 +467,13 @@ class fdmCustomPostTypes {
 			'' => esc_html__( 'Default Menu Template', 'food-and-drink-menu' ),
 		);
 
-		$page_template = get_page_template();
-		if ( !empty( $page_template )  ) {
-			$templates['page.php'] = esc_html__( 'Default Page Template', 'food-and-drink-menu' );
-		}
-
-		$page_templates = get_page_templates();
-		if ( $page_templates ) {
-			$templates = array_merge( $templates, array_flip( $page_templates ) );
-		}
+		$templates = $this->add_menu_templates( $templates );
 
 		global $post;
-		$selected = get_post_meta( $post->ID, 'fdm_template_file', true );
+		$selected = get_post_meta( $post->ID, '_wp_page_template', true );
 		?>
 
-			<select name="fdm_template_file">
+			<select name="_wp_page_template">
 				<?php foreach( $templates as $val => $label ) : ?>
 					<option value="<?php esc_attr_e( $val ); ?>"<?php if ( $selected == $val ) : ?> selected<?php endif; ?>><?php esc_html_e( $label ); ?></option>
 				<?php endforeach; ?>
@@ -615,7 +605,6 @@ class fdmCustomPostTypes {
 
 			$meta_ids['fdm_menu_column_one'] = 'sanitize_text_field';
 			$meta_ids['fdm_menu_column_two'] = 'sanitize_text_field';
-			$meta_ids['fdm_template_file'] = 'sanitize_file_name';
 			$meta_ids['fdm_menu_footer_content'] = 'wp_kses_post';
 
 			// Custom section names for each menu
@@ -629,6 +618,11 @@ class fdmCustomPostTypes {
 				if ( isset( $_POST['fdm_menu_section_' . absint( $section_id )] ) ) {
 					$meta_ids['fdm_menu_section_' . absint( $section_id )] = 'sanitize_text_field';
 				}
+			}
+
+			// Save menu templates for WP versions before 4.7
+			if ( version_compare( get_bloginfo( 'version' ), '4.7-beta-1', '<' ) ) {
+				$meta_ids['_wp_page_template'] = 'sanitize_file_name';
 			}
 		}
 
@@ -942,6 +936,36 @@ class fdmCustomPostTypes {
 	}
 
 	/**
+	 * Add page templates to the list of available templates
+	 *
+	 * @param array $post_templates
+	 * @param WP_Theme $wp_theme
+	 * @param WP_Post|null $post
+	 * @since 1.5
+	 */
+	public function add_menu_templates( $post_templates, $wp_theme = null, $post = null ) {
+
+		$page_template = get_page_template();
+		if ( !empty( $page_template )  ) {
+			$post_templates['page.php'] = esc_html__( 'Default Page Template', 'food-and-drink-menu' );
+		}
+
+		$page_templates = get_page_templates();
+		if ( $page_templates ) {
+			$page_templates = array_flip( $page_templates );
+			foreach( $page_templates as $file => $label ) {
+				$post_templates[$file] = sprintf(
+					esc_html__( 'Page Template: %s', 'food-and-drink-menu' ),
+					$label
+				);
+			}
+		}
+
+		return $post_templates;
+	}
+
+
+	/**
 	 * Optionally load a page template instead of the singular menu template
 	 *
 	 * @param string $template Requested file
@@ -950,7 +974,7 @@ class fdmCustomPostTypes {
 	public function load_menu_template( $template ) {
 
 		if ( is_singular( FDM_MENU_POST_TYPE ) ) {
-			$new_template = get_post_meta( get_the_ID(), 'fdm_template_file', true );
+			$new_template = get_post_meta( get_the_ID(), '_wp_page_template', true );
 			$new_template_file = locate_template( $new_template );
 			if ( $new_template_file  ) {
 				return $new_template_file;
