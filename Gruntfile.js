@@ -39,6 +39,24 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// Create a .pot file
+		makepot: {
+			target: {
+				options: {
+					domainPath: 'languages',
+					potHeaders: {
+	                    poedit: true,
+	                    'x-poedit-keywordslist': true
+	                },
+					processPot: function( pot, options ) {
+						pot.headers['report-msgid-bugs-to'] = 'https://themeofthecrop.com';
+						return pot;
+					},
+					type: 'wp-plugin',
+				}
+			}
+		},
+
 		// Watch for changes on some files and auto-compile them
 		watch: {
 			less: {
@@ -57,6 +75,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-wp-i18n');
 
 	// Default task(s).
 	grunt.registerTask('default', ['watch']);
