@@ -39,6 +39,18 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// Watch for changes on some files and auto-compile them
+		watch: {
+			less: {
+				files: 'assets/css/less/**/*.less',
+				tasks: ['less'],
+			},
+			js: {
+				files: 'assets/js/src/**/*.js',
+				tasks: ['jshint', 'concat'],
+			}
+		},
+
 		// Create a .pot file
 		makepot: {
 			target: {
@@ -55,29 +67,16 @@ module.exports = function(grunt) {
 					type: 'wp-plugin',
 				}
 			}
-		},
-
-		// Watch for changes on some files and auto-compile them
-		watch: {
-			less: {
-				files: 'assets/css/less/**/*.less',
-				tasks: ['less'],
-			},
-			js: {
-				files: 'assets/js/src/**/*.js',
-				tasks: ['jshint', 'concat'],
-			}
 		}
 	});
 
-	// Load tasks
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-wp-i18n');
 
-	// Default task(s).
 	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('build', ['less', 'jshint', 'concat', 'makepot']);
 
 };
