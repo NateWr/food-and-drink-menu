@@ -1,13 +1,13 @@
 === Food and Drink Menu ===
 Contributors: NateWr
 Author URI: https://github.com/NateWr
-Plugin URL: http://themeofthecrop.com
-Requires at Least: 3.5
-Tested Up To: 4.6
+Plugin URL: https://themeofthecrop.com
+Requires at Least: 4.6
+Tested Up To: 4.7
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
 Stable tag: 1.4.3
 License: GPLv2 or later
-Donate link: http://themeofthecrop.com
+Donate link: https://themeofthecrop.com
 
 Create a restaurant menu for cafes, bars and eateries, and display it in templates, posts, pages and widgets.
 
@@ -26,6 +26,7 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Responsive menu layout to improve mobile viewing
 * Templates to easily customize the output of menus and menu items
 * Compatible with WPML for multi-language sites
+* Support for Schema.org menu URL when using [Business Profile](https://wordpress.org/plugins/business-profile/)
 
 Get discounts, specials, dietary icons and more in the [Pro addon](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
@@ -86,6 +87,19 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.5 (2016-10-28) =
+* Add: Support for multiple prices per item
+* Add: Edit prices from the list of menu items
+* Add: Unique per-menu titles for sections
+* Add: Choose to display your menu in a page template
+* Add: Support for schema.org menu URL if using Business Profile
+* Add: Support for upcoming post type templates in WP 4.7
+* Update: Drag-and-drop support for arranging sections in menus
+* Update: Combine admin areas into one navigation menu
+* Update: Add menu section slug to menu section CSS classes
+* Update: Improve compatibility with WordPress.org plugin directory translations
+* Update: Increase minimum WP version to 4.6
 
 = 1.4.3 (2016-03-25) =
 * Fix: menu item pagination can sometimes skip menu items
