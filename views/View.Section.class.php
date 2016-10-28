@@ -113,6 +113,7 @@ class fdmViewSection extends fdmView {
 		if ( !$this->title ) {
 			$section = get_term( $this->id, 'fdm-menu-section' );
 			$this->title = $section->name;
+			$this->slug = $section->slug;
 			$this->description = $section->description;
 		}
 
@@ -138,7 +139,8 @@ class fdmViewSection extends fdmView {
 			$classes,
 			array(
 				'fdm-section',
-				'fdm-sectionid-' . $this->id
+				'fdm-sectionid-' . $this->id,
+				'fdm-section-' . $this->slug,
 			)
 		);
 
