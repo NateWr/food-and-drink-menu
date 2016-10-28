@@ -19,7 +19,7 @@
  */
 function fdm_load_old_textdomain( $mofile, $textdomain ) {
 
-	if ( $textdomain === 'restaurant-reservations' && 0 === strpos( $mofile, WP_LANG_DIR . '/plugins/'  ) && !file_exists( $mofile ) ) {
+	if ( $textdomain === 'food-and-drink-menu' && 0 === strpos( $mofile, WP_LANG_DIR . '/plugins/'  ) && !file_exists( $mofile ) ) {
 		$mofile = dirname( $mofile ) . DIRECTORY_SEPARATOR . str_replace( $textdomain, 'fdmdomain', basename( $mofile ) );
 	}
 	return $mofile;
