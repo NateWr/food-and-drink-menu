@@ -67,9 +67,31 @@ module.exports = function(grunt) {
 					type: 'wp-plugin',
 				}
 			}
+		},
+
+		// Build a package for distribution
+		compress: {
+			main: {
+				options: {
+					archive: 'food-and-drink-menu-<%= pkg.version %>.zip'
+				},
+				files: [
+					{
+						src: [
+							'*', '**/*',
+							'!food-and-drink-menu-<%= pkg.version %>.zip',
+							'!.*', '!Gruntfile.js', '!package.json', '!node_modules', '!node_modules/**/*',
+							'!assets/css/less', '!assets/css/less/**/*',
+							'!assets/js/src', '!assets/js/src/**/*',
+						],
+						dest: '/food-and-drink-menu',
+					}
+				]
+			}
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-less');
@@ -78,5 +100,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('build', ['less', 'jshint', 'concat', 'makepot']);
+	grunt.registerTask('package', ['build', 'compress']);
 
 };

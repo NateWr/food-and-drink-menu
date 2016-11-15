@@ -1,13 +1,14 @@
 {
   "name": "food-and-drink-menu",
   "description": "Create a menu for restaurants, cafes, bars and eateries and display it in templates, posts, pages and widgets.",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "author": {
     "name": "Theme of the Crop",
     "url": "https://themeofthecrop.com"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-contrib-compress": "~1.3.0",
     "grunt-contrib-concat": "~1.0.1",
     "grunt-contrib-jshint": "~1.0.0",
     "grunt-contrib-less": "~1.3.0",
