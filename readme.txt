@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
 Tested Up To: 4.7
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.4.3
+Stable tag: 1.5
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -88,7 +88,7 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 
 == Changelog ==
 
-= 1.5 (2016-10-28) =
+= 1.5 (2016-11-15) =
 * Add: Support for multiple prices per item
 * Add: Edit prices from the list of menu items
 * Add: Unique per-menu titles for sections
