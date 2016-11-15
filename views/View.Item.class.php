@@ -138,7 +138,7 @@ class fdmViewItem extends fdmView {
 
 		$settings = get_option( 'food-and-drink-menu-settings' );
 		if ( !$settings['fdm-disable-price'] ) {
-			$this->prices = get_post_meta( $this->id, 'fdm_item_price' );
+			$this->prices = (array) get_post_meta( $this->id, 'fdm_item_price' );
 
 			// Load a single price string to be compatible with custom templates
 			// created before v1.5.

@@ -319,7 +319,7 @@ class fdmCustomPostTypes {
 
 		// Retrieve values for this if it exists
 		global $post;
-		$prices = get_post_meta( $post->ID, 'fdm_item_price' );
+		$prices = (array) get_post_meta( $post->ID, 'fdm_item_price' );
 
 		// Always add at least one price input field
 		if ( empty( $prices ) ) {
@@ -703,7 +703,7 @@ class fdmCustomPostTypes {
 	public function menu_item_posts_columns_content( $column, $post ) {
 
 		if ( $column == 'price' ) {
-			$prices = get_post_meta( $post, 'fdm_item_price' );
+			$prices = (array) get_post_meta( $post, 'fdm_item_price' );
 			if ( !empty( $prices ) ) {
 				?>
 				<div class="fdm-item-list-price" data-menu-item-id="<?php echo absint( $post ); ?>">
