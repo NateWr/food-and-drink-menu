@@ -18,7 +18,7 @@ Create a restaurant menu for cafes, bars and eateries, and display it in templat
 This plugin creates two new post types, Menu Items and Menus, which can be used to easily construct a menu. Create items on your menu, group them into sections and then build menus out of them.
 
 * Unlimited menus and menu items
-* Add a photo and price for each menu item
+* Add a photo and one or many prices for each menu item
 * Menu sections can include guidance, such as "All entrees come with a side salad or fries"
 * Add a footer to each menu for legal disclaimers or other notes
 * Display your menu or menu item in pages, posts and navigation menus or use the custom post type format
