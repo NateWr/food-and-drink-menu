@@ -633,6 +633,12 @@ class fdmCustomPostTypes {
 		foreach ($meta_ids as $meta_id => $sanitize_callback) {
 
 			if ( $meta_id == 'fdm_item_price' ) {
+				// If an out-of-date copy of Food and Drink Menu Pro is running,
+				// we need to coerce the $POST value into an array.
+				if ( isset( $_POST[$meta_id] ) && !is_array( $_POST[$meta_id] ) ) {
+					$_POST[$meta_id] = array( $_POST[$meta_id] );
+				}
+
 				delete_post_meta( $post_id, $meta_id );
 				$new = isset( $_POST[$meta_id] ) ? array_map( $sanitize_callback, $_POST[$meta_id] ) : array();
 				foreach( $new as $new_entry ) {
