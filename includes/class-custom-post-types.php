@@ -313,9 +313,10 @@ class fdmCustomPostTypes {
 	/**
 	 * Print the Menu Item price metabox HTML
 	 *
+	 * @param WP_Post|null $singular_post Only appears on the menu item editing screen
 	 * @since 1.0
 	 */
-	public function show_item_price() {
+	public function show_item_price( $singular_post = null ) {
 
 		// Retrieve values for this if it exists
 		global $post;
@@ -324,6 +325,17 @@ class fdmCustomPostTypes {
 		// Always add at least one price input field
 		if ( empty( $prices ) ) {
 			$prices = array( '' );
+		}
+
+		// If we don't have a $post, this is being printed in the quick edit
+		// panel. Input fields can't have name attributes because it messes with
+		// the menu item filter forms.
+		// @see https://github.com/NateWr/food-and-drink-menu/issues/35
+		$input_attrs = '';
+		if ( !is_null( $singular_post ) && is_a( $singular_post, 'WP_POST' ) ) {
+			$input_attrs = ' name="fdm_item_price[]"';
+		} else {
+			$input_attrs = ' data-name="fdm_item_price"';
 		}
 
 		?>
@@ -335,7 +347,7 @@ class fdmCustomPostTypes {
 							<label for="fdm_item_price" class="screen-reader-text">
 								<?php echo __( 'Price', 'food-and-drink-menu' ); ?>
 							</label>
-							<input type="text" name="fdm_item_price[]" value="<?php echo esc_attr( $price ); ?>">
+							<input type="text"<?php echo $input_attrs; ?> value="<?php echo esc_attr( $price ); ?>">
 							<a href="#" class="fdm-input-delete">
 								<?php esc_html_e( 'Remove this price' ); ?>
 							</a>

@@ -50,13 +50,13 @@ jQuery( function ( $ ) {
 			return;
 		}
 
-		$new_price_input.find( 'input[name="fdm_item_price[]"]' ).val( '' );
+		$new_price_input.find( 'input[data-name="fdm_item_price"], input[name="fdm_item_price[]"]' ).val( '' );
 		$price_input.after( $new_price_input );
 		$new_price_input.find( 'input' ).focus();
 
 		$( '.fdm-input-delete', $price_panel ).off()
 			.click( removePrice );
-		$( 'input[name="fdm_item_price[]"]', $price_panel ).off()
+		$( 'input[data-name="fdm_item_price"], input[name="fdm_item_price[]"]', $price_panel ).off()
 			.keyup( priceChanged );
 
 		return false;
@@ -67,7 +67,7 @@ jQuery( function ( $ ) {
 
 	// Enable the update price button on the menu item list whenever a price
 	// has changed.
-	$( 'input[name="fdm_item_price[]"]', $prices ).keyup( priceChanged );
+	$( 'input[data-name="fdm_item_price"], input[name="fdm_item_price[]"]', $prices ).keyup( priceChanged );
 
 	// Save price changes (only on menu item list table)
 	var $submit = $( '.fdm-item-price-save' );
@@ -78,7 +78,7 @@ jQuery( function ( $ ) {
 				$price_wrapper = $button.closest( '.fdm-item-list-price'),
 				$price_summary = $price_wrapper.find( '.fdm-item-price-summary' ),
 				menu_item_id = $price_wrapper.data( 'menu-item-id' ),
-				$price_inputs = $price_wrapper.find( 'input[name="fdm_item_price[]"]' ),
+				$price_inputs = $price_wrapper.find( 'input[data-name="fdm_item_price"], input[name="fdm_item_price[]"]' ),
 				prices = [],
 				$message = $price_wrapper.find( '.fdm-item-price-message' ),
 				params;
