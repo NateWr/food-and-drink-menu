@@ -1,14 +1,14 @@
-# Copyright (C) 2016 Nate Wright
+# Copyright (C) 2017 Nate Wright
 # This file is distributed under the same license as the Food and Drink Menu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Food and Drink Menu 1.5\n"
+"Project-Id-Version: Food and Drink Menu 1.5.1\n"
 "Report-Msgid-Bugs-To: https://themeofthecrop.com\n"
-"POT-Creation-Date: 2016-10-28 13:55:14+00:00\n"
+"POT-Creation-Date: 2017-03-02 10:40:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.4\n"
@@ -288,8 +288,8 @@ msgid "Menu Item Shortcode"
 msgstr ""
 
 #: includes/class-custom-post-types.php:275
-#: includes/class-custom-post-types.php:336
-#: includes/class-custom-post-types.php:663 includes/class-settings.php:122
+#: includes/class-custom-post-types.php:348
+#: includes/class-custom-post-types.php:681 includes/class-settings.php:122
 msgid "Price"
 msgstr ""
 
@@ -297,126 +297,126 @@ msgstr ""
 msgid "Page Template"
 msgstr ""
 
-#: includes/class-custom-post-types.php:340
+#: includes/class-custom-post-types.php:352
 msgid "Remove this price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:346
+#: includes/class-custom-post-types.php:358
 msgid "Add Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:401
+#: includes/class-custom-post-types.php:413
 msgid "Drag-and-drop Menu Sections into columns on your menu."
 msgstr ""
 
-#: includes/class-custom-post-types.php:406
+#: includes/class-custom-post-types.php:418
 msgid "Available Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:412
+#: includes/class-custom-post-types.php:424
 msgid ""
 "You don't have any Menu Sections yet. When you create Menu Items, you "
 "should %sassign them to Menu Sections%s."
 msgstr ""
 
-#: includes/class-custom-post-types.php:429
+#: includes/class-custom-post-types.php:441
 msgid "Edit Section Name"
 msgstr ""
 
-#: includes/class-custom-post-types.php:439
+#: includes/class-custom-post-types.php:451
 msgid "First Column"
 msgstr ""
 
-#: includes/class-custom-post-types.php:445
+#: includes/class-custom-post-types.php:457
 msgid "Second Column"
 msgstr ""
 
-#: includes/class-custom-post-types.php:451
+#: includes/class-custom-post-types.php:463
 msgid "Hint: Leave the second column empty to display the menu in a single column."
 msgstr ""
 
-#: includes/class-custom-post-types.php:467
+#: includes/class-custom-post-types.php:479
 msgid "Default Menu Template"
 msgstr ""
 
-#: includes/class-custom-post-types.php:482
+#: includes/class-custom-post-types.php:494
 msgid "Choose any of your theme templates to display your menu."
 msgstr ""
 
-#: includes/class-custom-post-types.php:506
+#: includes/class-custom-post-types.php:518
 msgid ""
 "Once this menu is published, look here to find the shortcode you will use "
 "to display this menu in any post or page."
 msgstr ""
 
-#: includes/class-custom-post-types.php:515
-#: includes/class-custom-post-types.php:555
+#: includes/class-custom-post-types.php:527
+#: includes/class-custom-post-types.php:567
 msgid ""
 "Copy and paste the snippet below into any post or page in order to display "
 "this menu."
 msgstr ""
 
-#: includes/class-custom-post-types.php:546
+#: includes/class-custom-post-types.php:558
 msgid ""
 "Once this menu is published, look here to find the shortcode you will use "
 "to display this menu item in any post or page."
 msgstr ""
 
-#: includes/class-custom-post-types.php:662
-#: includes/class-custom-post-types.php:828 widgets/WidgetMenu.class.php:68
+#: includes/class-custom-post-types.php:680
+#: includes/class-custom-post-types.php:846 widgets/WidgetMenu.class.php:68
 #: widgets/WidgetMenuItem.class.php:65
 msgid "Title"
 msgstr ""
 
-#: includes/class-custom-post-types.php:664
-#: includes/class-custom-post-types.php:829
+#: includes/class-custom-post-types.php:682
+#: includes/class-custom-post-types.php:847
 msgid "Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:665
-#: includes/class-custom-post-types.php:830
+#: includes/class-custom-post-types.php:683
+#: includes/class-custom-post-types.php:848
 msgid "Shortcode"
 msgstr ""
 
-#: includes/class-custom-post-types.php:666
-#: includes/class-custom-post-types.php:831
+#: includes/class-custom-post-types.php:684
+#: includes/class-custom-post-types.php:849
 #: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:365
 msgid "Date"
 msgstr ""
 
-#: includes/class-custom-post-types.php:720
+#: includes/class-custom-post-types.php:738
 msgid "Edit Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:728
+#: includes/class-custom-post-types.php:746
 msgid "Update Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:745
+#: includes/class-custom-post-types.php:763
 msgid ", "
 msgstr ""
 
-#: includes/class-custom-post-types.php:770
+#: includes/class-custom-post-types.php:788
 msgid "All sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:776
+#: includes/class-custom-post-types.php:794
 msgid "Unassigned items"
 msgstr ""
 
-#: includes/class-custom-post-types.php:890
+#: includes/class-custom-post-types.php:908
 msgid "You have been logged out. Please %slogin again%s."
 msgstr ""
 
-#: includes/class-custom-post-types.php:912
+#: includes/class-custom-post-types.php:930
 msgid "This menu item could not be found. Please reload the page and try again."
 msgstr ""
 
-#: includes/class-custom-post-types.php:950
+#: includes/class-custom-post-types.php:968
 msgid "Default Page Template"
 msgstr ""
 
-#: includes/class-custom-post-types.php:958
+#: includes/class-custom-post-types.php:976
 msgid "Page Template: %s"
 msgstr ""
 
@@ -579,8 +579,8 @@ msgstr ""
 msgid "https://github.com/NateWr"
 msgstr ""
 
-#: includes/class-custom-post-types.php:713
-#: includes/class-custom-post-types.php:928 views/View.Item.class.php:146
+#: includes/class-custom-post-types.php:731
+#: includes/class-custom-post-types.php:946 views/View.Item.class.php:146
 msgctxt "Separator between multiple prices."
 msgid "/"
 msgstr ""
