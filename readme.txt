@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
 Tested Up To: 4.7
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -87,6 +87,11 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.5.1 (2017-03-02) =
+* Fix: Problem which caused single prices in some setups to appear several times
+* Fix: Menu item filtering can sometimes lead to URLs that are too long
+* Fix: Prevent error message when running with an outdated version of Food and Drink Menu Pro
 
 = 1.5 (2016-11-15) =
 * Add: Support for multiple prices per item
@@ -178,6 +183,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+This minor maintenance update fixes a couple of rare, non-critical bugs.
 
 = 1.4.3 =
 This update fixes a couple of minor bugs, improves compatibility with WP-CLI and provides links to the new online documentation
