@@ -623,7 +623,7 @@ class fdmCustomPostTypes {
 			$sections = array_filter(
 				array_merge(
 					isset( $_POST['fdm_menu_column_one'] ) ? explode( ',', $_POST['fdm_menu_column_one'] ) : array(),
-					isset( $_POST['fdm_menu_column_two'] ) ? explode( ',', $_POST['fdm_menu_column_one'] ) : array()
+					isset( $_POST['fdm_menu_column_two'] ) ? explode( ',', $_POST['fdm_menu_column_two'] ) : array()
 				)
 			);
 			foreach( $sections as $section_id ) {
