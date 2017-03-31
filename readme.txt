@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
-Tested Up To: 4.7
+Tested Up To: 4.7.3
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -87,6 +87,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.5.2 (2017-03-31) =
+* Fix: #36 Problem where custom menu section titles in second column didn't save
 
 = 1.5.1 (2017-03-02) =
 * Fix: Problem which caused single prices in some setups to appear several times
@@ -183,6 +186,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.5.2 =
+This maintenance update fixes a bug that prevented changes to menu section names from being saved when they were listed in the second column.
 
 = 1.5.1 =
 This minor maintenance update fixes a couple of rare, non-critical bugs.
