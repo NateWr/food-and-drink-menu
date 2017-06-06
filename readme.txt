@@ -3,7 +3,7 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
-Tested Up To: 4.7.3
+Tested Up To: 4.8
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
 Stable tag: 1.5.2
 License: GPLv2 or later
