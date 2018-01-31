@@ -939,6 +939,10 @@ class fdmCustomPostTypes {
 			add_post_meta( $id, 'fdm_item_price', $price );
 		}
 
+		// WPML does not sync post on `delete_post_meta` and `add_post_meta`
+		// See: https://wpml.org/forums/topic/why-does-wpml-not-listen-to-wp-api-functions-delete_post_meta-add_post_meta/#post-1500291
+		do_action( 'wpml_sync_custom_field', $id, 'fdm_item_price' );
+
 		$response = array(
 			'id' => $id,
 			'prices' => $prices,
