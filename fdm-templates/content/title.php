@@ -1,1 +1,1 @@
-<p class="fdm-item-title"><?php echo $this->title; ?></p>
+<p class="fdm-item-title"><?php echo apply_filters( 'the_title', $this->title); ?></p>
