@@ -1,3 +1,3 @@
 <div class="fdm-item-content">
-	<?php echo $this->content; ?>
+	<?php apply_filters( 'the_content', $this->content); ?>
 </div>
