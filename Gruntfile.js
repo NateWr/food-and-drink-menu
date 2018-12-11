@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 		// Configure JSHint
 		jshint: {
 			test: {
-				src: 'assets/js/src/**/*.js'
+				src: ['assets/js/src/**/*.js', '!assets/js/src/block*.js']
 			}
 		},
 
