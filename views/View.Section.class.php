@@ -41,6 +41,9 @@ class fdmViewSection extends fdmView {
 			return;
 		}
 
+		// Add any dependent stylesheets or javascript
+		$this->enqueue_assets();
+
 		// Define the classes for this section
 		$this->set_classes();
 
