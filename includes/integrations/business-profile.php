@@ -21,10 +21,10 @@ function fdm_bp_add_menu_setting( $sap ) {
 		array(
 			'id'           => 'menu',
 			'title'        => __( 'Menu', 'business-profile' ),
-			'description'  => __( 'Select your main restaurant menu. Google may display this in your restaurant listing.', 'business-profile' ),
+			'description'  => __( 'Select the page that shows your main restaurant menu. Google may display this in your restaurant listing.', 'business-profile' ),
 			'blank_option' => true,
 			'args'         => array(
-				'post_type'      => FDM_MENU_POST_TYPE,
+				'post_type'      => array('page', FDM_MENU_POST_TYPE),
 				'posts_per_page' => -1,
 				'post_status'    => 'publish',
 			),
