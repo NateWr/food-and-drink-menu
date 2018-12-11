@@ -33,6 +33,33 @@ function fdm_menu_shortcode( $atts ) {
 add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
 
 /**
+ * Create a shortcode to display a menu section
+ * @since 1.0
+ */
+function fdm_menu_section_shortcode( $atts ) {
+
+	error_log('hi: ' . print_r($atts,true));
+
+	// Define shortcode attributes
+	$menu_section_atts = array(
+		'id' => null,
+	);
+
+	// Create filter so addons can modify the accepted attributes
+	$menu_section_atts = apply_filters( 'fdm_shortcode_menu_section_atts', $menu_section_atts );
+
+	// Extract the shortcode attributes
+	$args = shortcode_atts( $menu_section_atts, $atts );
+
+	// Render menu
+	fdm_load_view_files();
+	$menu = new fdmViewSection( $args );
+
+	return $menu->render();
+}
+add_shortcode( 'fdm-menu-section', 'fdm_menu_section_shortcode' );
+
+/**
  * Create a shortcode to display a menu item
  * @since 1.1
  */

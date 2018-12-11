@@ -3,6 +3,7 @@ let webpack = require( 'webpack' ),
 	webpackConfig = {
 		entry: [
 			'./assets/js/src/block-menu.js',
+			'./assets/js/src/block-menu-section.js',
 			'./assets/js/src/block-menu-item.js',
 		],
 		output: {

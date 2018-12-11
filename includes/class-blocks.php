@@ -61,6 +61,18 @@ class fdmBlocks {
 			),
 		) );
 
+		register_block_type( 'food-and-drink-menu/menu-section', array(
+			'editor_script' => 'food-and-drink-menu-blocks',
+			'editor_style' => $load_styles,
+			'render_callback' => array( $this, 'render_menu_section' ),
+			'attributes' => array(
+				'id' => array(
+					'type' => 'number',
+					'minimum' => '0',
+				),
+			),
+		) );
+
 		register_block_type( 'food-and-drink-menu/menu-item', array(
 			'editor_script' => 'food-and-drink-menu-blocks',
 			'editor_style' => $load_styles,
@@ -113,6 +125,16 @@ class fdmBlocks {
 		}
 		wp_reset_postdata();
 
+
+		$menu_sections = get_terms( 'fdm-menu-section', array( 'hide_empty' => true ) );
+		$menu_section_options = array( array( 'value' => 0, 'label' => '' ) );
+		foreach( $menu_sections as $menu_section ) {
+			$menu_section_options[] = array(
+				'value' => $menu_section->term_id,
+				'label' => $menu_section->name,
+			);
+		}
+
 		wp_add_inline_script(
 			'food-and-drink-menu-blocks',
 			sprintf(
@@ -120,6 +142,7 @@ class fdmBlocks {
 				json_encode( array(
 					'menuOptions' => $menu_options,
 					'menuItemOptions' => $menu_item_options,
+					'menuSectionOptions' => $menu_section_options,
 				) )
 			),
 			'before'
@@ -135,6 +158,17 @@ class fdmBlocks {
 	public function render_menu( $attributes ) {
 		$id = !empty( $attributes['id'] ) ? absint( $attributes['id'] ) : 0;
 		return !$id ? ' ' : do_shortcode('[fdm-menu id='  . $id . ']');
+	}
+
+	/**
+	 * Render a single menu section
+	 *
+	 * @param array $attributes The block attributes
+	 * @return string
+	 */
+	public function render_menu_section( $attributes ) {
+		$id = !empty( $attributes['id'] ) ? absint( $attributes['id'] ) : 0;
+		return !$id ? ' ' : do_shortcode('[fdm-menu-section id='  . $id . ']');
 	}
 
 	/**
