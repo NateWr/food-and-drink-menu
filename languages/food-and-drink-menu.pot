@@ -1,14 +1,14 @@
-# Copyright (C) 2017 Nate Wright
+# Copyright (C) 2018 Nate Wright
 # This file is distributed under the same license as the Food and Drink Menu package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Food and Drink Menu 1.5.2\n"
+"Project-Id-Version: Food and Drink Menu 1.6.0\n"
 "Report-Msgid-Bugs-To: https://themeofthecrop.com\n"
-"POT-Creation-Date: 2017-03-31 13:28:31+00:00\n"
+"POT-Creation-Date: 2018-12-11 18:27:09+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: grunt-wp-i18n 0.5.4\n"
@@ -24,39 +24,39 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: food-and-drink-menu.php:114
+#: food-and-drink-menu.php:118
 msgid "Base formatting only"
 msgstr ""
 
-#: food-and-drink-menu.php:123
+#: food-and-drink-menu.php:127
 msgid "Classic style"
 msgstr ""
 
-#: food-and-drink-menu.php:133
+#: food-and-drink-menu.php:137
 msgid "Don't load any CSS styles"
 msgstr ""
 
-#: food-and-drink-menu.php:243
+#: food-and-drink-menu.php:247
 msgid "Section Name"
 msgstr ""
 
-#: food-and-drink-menu.php:258
+#: food-and-drink-menu.php:262
 msgid "Update Section Name"
 msgstr ""
 
-#: food-and-drink-menu.php:294
+#: food-and-drink-menu.php:298
 msgid "View the help documentation for Food and Drink Menu"
 msgstr ""
 
-#: food-and-drink-menu.php:294
+#: food-and-drink-menu.php:298
 msgid "Help"
 msgstr ""
 
-#: food-and-drink-menu.php:297
+#: food-and-drink-menu.php:301
 msgid "Upgrade to Food and Drink Pro"
 msgstr ""
 
-#: food-and-drink-menu.php:297
+#: food-and-drink-menu.php:301
 msgid "Upgrade"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgid "Add New Menu"
 msgstr ""
 
 #: includes/class-custom-post-types.php:70
-#: includes/class-custom-post-types.php:147
+#: includes/class-custom-post-types.php:149
 msgid "Edit"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgid "New Menu"
 msgstr ""
 
 #: includes/class-custom-post-types.php:73
-#: includes/class-custom-post-types.php:150
+#: includes/class-custom-post-types.php:152
 #: lib/simple-admin-pages/classes/AdminPageSetting.Address.class.php:86
 msgid "View"
 msgstr ""
@@ -117,306 +117,293 @@ msgstr ""
 msgid "Parent Menu"
 msgstr ""
 
-#: includes/class-custom-post-types.php:106
+#: includes/class-custom-post-types.php:107
 msgid "Menu Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:107
-#: includes/class-custom-post-types.php:110
-#: includes/class-custom-post-types.php:115
+#: includes/class-custom-post-types.php:108
+#: includes/class-custom-post-types.php:111
+#: includes/class-custom-post-types.php:116
 msgid "Menu Section"
 msgstr ""
 
-#: includes/class-custom-post-types.php:108
+#: includes/class-custom-post-types.php:109
 msgid "Search Menu Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:109
+#: includes/class-custom-post-types.php:110
 msgid "All Menu Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:111
+#: includes/class-custom-post-types.php:112
 msgid "Menu Section:"
 msgstr ""
 
-#: includes/class-custom-post-types.php:112
+#: includes/class-custom-post-types.php:113
 msgid "Edit Menu Section"
 msgstr ""
 
-#: includes/class-custom-post-types.php:113
+#: includes/class-custom-post-types.php:114
 msgid "Update Menu Section"
 msgstr ""
 
-#: includes/class-custom-post-types.php:114
+#: includes/class-custom-post-types.php:115
 msgid "Add New Menu Section"
 msgstr ""
 
-#: includes/class-custom-post-types.php:116
+#: includes/class-custom-post-types.php:117
 msgid "No menu sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:117
+#: includes/class-custom-post-types.php:118
 msgid "Menu sections list navigation"
 msgstr ""
 
-#: includes/class-custom-post-types.php:118
+#: includes/class-custom-post-types.php:119
 msgid "Menu sections list"
 msgstr ""
 
-#: includes/class-custom-post-types.php:119
+#: includes/class-custom-post-types.php:120
 msgid "Menu Archives"
 msgstr ""
 
-#: includes/class-custom-post-types.php:120
+#: includes/class-custom-post-types.php:121
 msgid "Insert into menu"
 msgstr ""
 
-#: includes/class-custom-post-types.php:121
+#: includes/class-custom-post-types.php:122
 msgid "Uploaded to this menu"
 msgstr ""
 
-#: includes/class-custom-post-types.php:122
+#: includes/class-custom-post-types.php:123
 msgid "Filter menu list"
 msgstr ""
 
-#: includes/class-custom-post-types.php:123
+#: includes/class-custom-post-types.php:124
 msgid "Menu list navigation"
 msgstr ""
 
-#: includes/class-custom-post-types.php:124
+#: includes/class-custom-post-types.php:125
 msgid "Menu list"
 msgstr ""
 
-#: includes/class-custom-post-types.php:143
+#: includes/class-custom-post-types.php:145
 msgid "Menu Items"
 msgstr ""
 
-#: includes/class-custom-post-types.php:144 widgets/WidgetMenuItem.class.php:69
+#: includes/class-custom-post-types.php:146 widgets/WidgetMenuItem.class.php:69
 msgid "Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:145
+#: includes/class-custom-post-types.php:147
 msgid "Add Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:146
+#: includes/class-custom-post-types.php:148
 msgid "Add New Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:148
+#: includes/class-custom-post-types.php:150
 msgid "Edit Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:149
+#: includes/class-custom-post-types.php:151
 msgid "New Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:151
+#: includes/class-custom-post-types.php:153
 msgid "View Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:152
+#: includes/class-custom-post-types.php:154
 msgid "Search Menu Items"
 msgstr ""
 
-#: includes/class-custom-post-types.php:153
+#: includes/class-custom-post-types.php:155
 msgid "No Menu Item found"
 msgstr ""
 
-#: includes/class-custom-post-types.php:154
+#: includes/class-custom-post-types.php:156
 msgid "No Menu Item found in Trash"
 msgstr ""
 
-#: includes/class-custom-post-types.php:155
+#: includes/class-custom-post-types.php:157
 msgid "Parent Menu Item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:156
+#: includes/class-custom-post-types.php:158
 msgid "Item Photo"
 msgstr ""
 
-#: includes/class-custom-post-types.php:157
+#: includes/class-custom-post-types.php:159
 msgid "Set item photo"
 msgstr ""
 
-#: includes/class-custom-post-types.php:158
+#: includes/class-custom-post-types.php:160
 msgid "Remove item photo"
 msgstr ""
 
-#: includes/class-custom-post-types.php:159
+#: includes/class-custom-post-types.php:161
 msgid "Use as item photo"
 msgstr ""
 
-#: includes/class-custom-post-types.php:160
+#: includes/class-custom-post-types.php:162
 msgid "Menu Item Archives"
 msgstr ""
 
-#: includes/class-custom-post-types.php:161
+#: includes/class-custom-post-types.php:163
 msgid "Insert into menu item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:162
+#: includes/class-custom-post-types.php:164
 msgid "Uploaded to this menu item"
 msgstr ""
 
-#: includes/class-custom-post-types.php:163
+#: includes/class-custom-post-types.php:165
 msgid "Filter menu items list"
 msgstr ""
 
-#: includes/class-custom-post-types.php:164
+#: includes/class-custom-post-types.php:166
 msgid "Menu items list navigation"
 msgstr ""
 
-#: includes/class-custom-post-types.php:165
+#: includes/class-custom-post-types.php:167
 msgid "Menu items list"
 msgstr ""
 
-#: includes/class-custom-post-types.php:231
+#: includes/class-custom-post-types.php:234
 msgid "Menu Layout"
 msgstr ""
 
-#: includes/class-custom-post-types.php:241
+#: includes/class-custom-post-types.php:244
 msgid "Menu Footer"
 msgstr ""
 
-#: includes/class-custom-post-types.php:251
-msgid "Menu Shortcode"
-msgstr ""
-
-#: includes/class-custom-post-types.php:261
-msgid "Menu Item Shortcode"
-msgstr ""
-
-#: includes/class-custom-post-types.php:275
-#: includes/class-custom-post-types.php:348
-#: includes/class-custom-post-types.php:681 includes/class-settings.php:122
+#: includes/class-custom-post-types.php:257
+#: includes/class-custom-post-types.php:330
+#: includes/class-custom-post-types.php:663 includes/class-settings.php:122
 msgid "Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:288
+#: includes/class-custom-post-types.php:270
 msgid "Page Template"
 msgstr ""
 
-#: includes/class-custom-post-types.php:352
+#: includes/class-custom-post-types.php:334
 msgid "Remove this price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:358
+#: includes/class-custom-post-types.php:340
 msgid "Add Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:413
+#: includes/class-custom-post-types.php:395
 msgid "Drag-and-drop Menu Sections into columns on your menu."
 msgstr ""
 
-#: includes/class-custom-post-types.php:418
+#: includes/class-custom-post-types.php:400
 msgid "Available Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:424
+#: includes/class-custom-post-types.php:406
 msgid ""
 "You don't have any Menu Sections yet. When you create Menu Items, you "
 "should %sassign them to Menu Sections%s."
 msgstr ""
 
-#: includes/class-custom-post-types.php:441
+#: includes/class-custom-post-types.php:423
 msgid "Edit Section Name"
 msgstr ""
 
-#: includes/class-custom-post-types.php:451
+#: includes/class-custom-post-types.php:433
 msgid "First Column"
 msgstr ""
 
-#: includes/class-custom-post-types.php:457
+#: includes/class-custom-post-types.php:439
 msgid "Second Column"
 msgstr ""
 
-#: includes/class-custom-post-types.php:463
+#: includes/class-custom-post-types.php:445
 msgid "Hint: Leave the second column empty to display the menu in a single column."
 msgstr ""
 
-#: includes/class-custom-post-types.php:479
+#: includes/class-custom-post-types.php:461
 msgid "Default Menu Template"
 msgstr ""
 
-#: includes/class-custom-post-types.php:494
+#: includes/class-custom-post-types.php:476
 msgid "Choose any of your theme templates to display your menu."
 msgstr ""
 
-#: includes/class-custom-post-types.php:518
+#: includes/class-custom-post-types.php:500
 msgid ""
 "Once this menu is published, look here to find the shortcode you will use "
 "to display this menu in any post or page."
 msgstr ""
 
-#: includes/class-custom-post-types.php:527
-#: includes/class-custom-post-types.php:567
+#: includes/class-custom-post-types.php:509
+#: includes/class-custom-post-types.php:549
 msgid ""
 "Copy and paste the snippet below into any post or page in order to display "
 "this menu."
 msgstr ""
 
-#: includes/class-custom-post-types.php:558
+#: includes/class-custom-post-types.php:540
 msgid ""
 "Once this menu is published, look here to find the shortcode you will use "
 "to display this menu item in any post or page."
 msgstr ""
 
-#: includes/class-custom-post-types.php:680
-#: includes/class-custom-post-types.php:846 widgets/WidgetMenu.class.php:68
+#: includes/class-custom-post-types.php:662
+#: includes/class-custom-post-types.php:823 widgets/WidgetMenu.class.php:68
 #: widgets/WidgetMenuItem.class.php:65
 msgid "Title"
 msgstr ""
 
-#: includes/class-custom-post-types.php:682
-#: includes/class-custom-post-types.php:847
+#: includes/class-custom-post-types.php:664
+#: includes/class-custom-post-types.php:824
 msgid "Sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:683
-#: includes/class-custom-post-types.php:848
-msgid "Shortcode"
-msgstr ""
-
-#: includes/class-custom-post-types.php:684
-#: includes/class-custom-post-types.php:849
+#: includes/class-custom-post-types.php:665
+#: includes/class-custom-post-types.php:825
 #: lib/simple-admin-pages/classes/AdminPageSetting.Scheduler.class.php:365
 msgid "Date"
 msgstr ""
 
-#: includes/class-custom-post-types.php:738
+#: includes/class-custom-post-types.php:719
 msgid "Edit Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:746
+#: includes/class-custom-post-types.php:727
 msgid "Update Price"
 msgstr ""
 
-#: includes/class-custom-post-types.php:763
+#: includes/class-custom-post-types.php:744
 msgid ", "
 msgstr ""
 
-#: includes/class-custom-post-types.php:788
+#: includes/class-custom-post-types.php:765
 msgid "All sections"
 msgstr ""
 
-#: includes/class-custom-post-types.php:794
+#: includes/class-custom-post-types.php:771
 msgid "Unassigned items"
 msgstr ""
 
-#: includes/class-custom-post-types.php:908
+#: includes/class-custom-post-types.php:880
 msgid "You have been logged out. Please %slogin again%s."
 msgstr ""
 
-#: includes/class-custom-post-types.php:930
+#: includes/class-custom-post-types.php:902
 msgid "This menu item could not be found. Please reload the page and try again."
 msgstr ""
 
-#: includes/class-custom-post-types.php:968
+#: includes/class-custom-post-types.php:944
 msgid "Default Page Template"
 msgstr ""
 
-#: includes/class-custom-post-types.php:976
+#: includes/class-custom-post-types.php:952
 msgid "Page Template: %s"
 msgstr ""
 
@@ -478,8 +465,8 @@ msgstr ""
 
 #: includes/integrations/business-profile.php:24
 msgid ""
-"Select your main restaurant menu. Google may display this in your "
-"restaurant listing."
+"Select the page that shows your main restaurant menu. Google may display "
+"this in your restaurant listing."
 msgstr ""
 
 #: lib/simple-admin-pages/classes/AdminPageSetting.Address.class.php:83
@@ -579,8 +566,8 @@ msgstr ""
 msgid "https://github.com/NateWr"
 msgstr ""
 
-#: includes/class-custom-post-types.php:731
-#: includes/class-custom-post-types.php:946 views/View.Item.class.php:146
+#: includes/class-custom-post-types.php:712
+#: includes/class-custom-post-types.php:922 views/View.Item.class.php:146
 msgctxt "Separator between multiple prices."
 msgid "/"
 msgstr ""

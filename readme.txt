@@ -3,9 +3,9 @@ Contributors: NateWr
 Author URI: https://github.com/NateWr
 Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
-Tested Up To: 4.8
+Tested Up To: 5.0
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.5.2
+Stable tag: 1.6.0
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -21,7 +21,7 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 * Add a photo and one or many prices for each menu item
 * Menu sections can include guidance, such as "All entrees come with a side salad or fries"
 * Add a footer to each menu for legal disclaimers or other notes
-* Display your menu or menu item in pages, posts and navigation menus or use the custom post type format
+* Display any menu, menu section, or menu item in pages, posts and navigation menus
 * Use the widget to display your menu in a sidebar
 * Responsive menu layout to improve mobile viewing
 * Templates to easily customize the output of menus and menu items
@@ -30,7 +30,7 @@ This plugin creates two new post types, Menu Items and Menus, which can be used 
 
 Get discounts, specials, dietary icons and more in the [Pro addon](https://themeofthecrop.com/plugins/food-and-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
-[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) helps you build better restaurant websites. Find the [best WordPress restaurant themes](https://themeofthecrop.com/themes/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) and plugins for restaurants to [take online reservations](https://themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
+[Theme of the Crop](https://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) helps you build better restaurant websites. Find plugins for restaurants to [take online reservations](https://themeofthecrop.com/plugins/restaurant-reservations/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) and [boost their SEO](https://themeofthecrop.com/restaurant-seo/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
 
 = How to use =
 
@@ -40,8 +40,6 @@ Read the [help guide](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/
 * [Customize the menu templates](https://themeofthecrop.com/2014/01/28/customize-restaurant-menu-templates/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
 * [Create a complex menu layout](https://themeofthecrop.com/2014/07/31/achieve-complex-menu-layouts-food-drink-menu/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
 * [Style each section differently](https://themeofthecrop.com/2014/08/19/give-section-restaurant-menu-unique-style/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu)
-
-Follow me on [Twitter](https://twitter.com/themeofthecrop) or [Google+](https://plus.google.com/+Themeofthecrop), or [sign up](https://themeofthecrop.com/about/mailing-list/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu) to my mailing list for more tutorials and tips.
 
 = Developers =
 This plugin is packed with hooks so you can extend and customize it to your delight. Take a look at the [Developer Documentation](http://doc.themeofthecrop.com/plugins/food-and-drink-menu/developer/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu).
@@ -87,6 +85,13 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.6.0 (2018-12-11) =
+* Add: Gutenberg blocks for menus, menu sections and menu items
+* Add: Shortcode for menu sections
+* Add: Allow users to set WPML action for item prices
+* Add: Allow WPML to sync menu item prices when edited from the admin list
+* Update: integration with Business Profile to allow linking to a page as the Schema menu
 
 = 1.5.2 (2017-03-31) =
 * Fix: #36 Problem where custom menu section titles in second column didn't save
@@ -186,6 +191,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.6.0 =
+This update brings menus, menu sections and menu items to the new Gutenberg editor in WordPress 5.0. It also fixes some bugs with WPML compatibility.
 
 = 1.5.2 =
 This maintenance update fixes a bug that prevented changes to menu section names from being saved when they were listed in the second column.
