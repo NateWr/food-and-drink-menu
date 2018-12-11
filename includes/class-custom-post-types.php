@@ -85,7 +85,8 @@ class fdmCustomPostTypes {
 				'editor',
 				'revisions',
 			),
-			'taxonomies' => array_keys( $menu_taxonomies )
+			'taxonomies' => array_keys( $menu_taxonomies ),
+			'show_in_rest' => true
 		);
 
 		// Create filter so addons can modify the arguments
@@ -123,6 +124,7 @@ class fdmCustomPostTypes {
 				'item_list_navigation' => __( 'Menu list navigation', 'food-and-drink-menu' ),
 				'items_list' => __( 'Menu list', 'food-and-drink-menu' ),
 			),
+			'show_in_rest' => true,
 		);
 
 		// Create filter so addons can modify the taxonomies
@@ -175,7 +177,8 @@ class fdmCustomPostTypes {
 				'revisions',
 				'page-attributes'
 			),
-			'taxonomies' => array_keys( $this->menu_item_taxonomies )
+			'taxonomies' => array_keys( $this->menu_item_taxonomies ),
+			'show_in_rest' => true
 		);
 
 		// Create filter so addons can modify the arguments
@@ -244,27 +247,6 @@ class fdmCustomPostTypes {
 				'context'	=> 'normal',
 				'priority'	=> 'default'
 			),
-
-			// Add a box that shows menu shortcode
-			'fdm_menu_shortcode' => array (
-				'id'		=>	'fdm_menu_shortcode',
-				'title'		=> esc_html__( 'Menu Shortcode', 'food-and-drink-menu' ),
-				'callback'	=> array( $this, 'show_menu_shortcode' ),
-				'post_type'	=> 'fdm-menu',
-				'context'	=> 'side',
-				'priority'	=> 'default'
-			),
-
-			// Add a box that shows menu item shortcode
-			'fdm_menu_item_shortcode' => array (
-				'id'		=>	'fdm_menu_item_shortcode',
-				'title'		=> esc_html__( 'Menu Item Shortcode', 'food-and-drink-menu' ),
-				'callback'	=> array( $this, 'show_menu_item_shortcode' ),
-				'post_type'	=> 'fdm-menu-item',
-				'context'	=> 'side',
-				'priority'	=> 'default'
-			),
-
 		);
 
 		// Add menu item price metabox
@@ -680,7 +662,6 @@ class fdmCustomPostTypes {
 			'title'		=> __( 'Title' ),
 			'price'		=> __( 'Price', 'food-and-drink-menu' ),
 			'sections'	=> __( 'Sections', 'food-and-drink-menu' ),
-			'shortcode'	=> __( 'Shortcode', 'food-and-drink-menu' ),
 			'date'		=> __( 'Date' ),
 		);
 	}
@@ -762,10 +743,6 @@ class fdmCustomPostTypes {
 
 			echo join( __( ', ', 'Separator in list of Menu Sections', 'food-and-drink-menu' ), $output );
 		}
-
-		if ( $column == 'shortcode' ) {
-			echo '[fdm-menu-item id=' . $post . ']';
-		}
 	}
 
 	/**
@@ -845,7 +822,6 @@ class fdmCustomPostTypes {
 			'cb'		=> '<input type="checkbox" />',
 			'title'		=> __( 'Title' ),
 			'sections'	=> __( 'Sections', 'food-and-drink-menu' ),
-			'shortcode'	=> __( 'Shortcode', 'food-and-drink-menu' ),
 			'date'		=> __( 'Date' ),
 		);
 	}
@@ -855,10 +831,6 @@ class fdmCustomPostTypes {
 	 * @since 1.4
 	 */
 	public function menu_posts_columns_content( $column, $post ) {
-
-		if ( $column == 'shortcode' ) {
-			echo '[fdm-menu id=' . $post . ']';
-		}
 
 		if ( $column == 'sections' ) {
 			$post_meta = get_post_meta( $post );

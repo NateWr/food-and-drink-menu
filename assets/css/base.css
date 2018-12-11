@@ -64,6 +64,13 @@
 .fdm-item-has-image .fdm-item-panel p  {
 	padding-left: 35%;
 }
+.fdm-item-has-image .fdm-item-panel .wp-block-quote {
+	padding-left: 0;
+	margin-left: 35%;
+}
+.fdm-item-has-image .fdm-item-panel .wp-block-quote p {
+	padding-left: 1rem;
+}
 .fdm-item-image {
 	float: left;
 	width: 33%;

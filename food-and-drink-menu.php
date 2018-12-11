@@ -60,6 +60,10 @@ class fdmFoodAndDrinkMenu {
 		add_action( 'admin_print_scripts-post.php', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'admin_print_scripts-edit.php', array( $this, 'enqueue_admin_assets' ) );
 
+		// Load gutenberg blocks
+		require_once( FDM_PLUGIN_DIR . '/includes/class-blocks.php' );
+		new fdmBlocks();
+
 		// Register the widget
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 

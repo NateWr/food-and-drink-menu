@@ -137,5 +137,4 @@ jQuery( function ( $ ) {
 			return false;
 		} );
 	}
-
 } );
