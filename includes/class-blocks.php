@@ -35,7 +35,7 @@ class fdmBlocks {
 
 		$settings = get_option( 'food-and-drink-menu-settings' );
 		$selected_style = !empty( $settings['fdm-style'] ) ? $settings['fdm-style'] : 'base';
-		$load_styles = [];
+		$load_styles = array();
 		foreach( $fdm_controller->styles as $style ) {
 			if ( $style->id === $selected_style ) {
 				foreach( $style->css as $css ) {
