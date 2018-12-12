@@ -38,8 +38,6 @@ add_shortcode( 'fdm-menu', 'fdm_menu_shortcode' );
  */
 function fdm_menu_section_shortcode( $atts ) {
 
-	error_log('hi: ' . print_r($atts,true));
-
 	// Define shortcode attributes
 	$menu_section_atts = array(
 		'id' => null,

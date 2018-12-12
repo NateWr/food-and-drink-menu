@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
 Tested Up To: 5.0
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -85,6 +85,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.6.2 (2018-12-12) =
+* Fix: #53 blocks do not load the correct item after being saved and reloaded
 
 = 1.6.1 (2018-12-12) =
 * Fix: menu item prices and menu layout can not be saved
@@ -196,6 +199,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.6.2 =
+This update fixes an issue where a saved block for a menu, menu item or menu section would not reload correctly in the editor.
 
 = 1.6.1 =
 This update fixes an issue that prevented changes to a menu item's price and a menu's layout from being saved. It also fixes an error when saving a menu with an alternate page template.
