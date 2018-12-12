@@ -876,7 +876,7 @@ class fdmCustomPostTypes {
 
 		$page_template = get_page_template();
 		if ( !empty( $page_template )  ) {
-			$post_templates['page.php'] = esc_html__( 'Default Page Template', 'food-and-drink-menu' );
+			$post_templates[$page_template] = esc_html__( 'Default Page Template', 'food-and-drink-menu' );
 		}
 
 		$page_templates = get_page_templates();
