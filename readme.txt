@@ -5,7 +5,7 @@ Plugin URL: https://themeofthecrop.com
 Requires at Least: 4.6
 Tested Up To: 5.0
 Tags: restaurant menu, cafe, coffee, restaurant, food, drink, dining, cuisine
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 Donate link: https://themeofthecrop.com
 
@@ -85,6 +85,11 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 6. Upgrade to Food and Drink Menu Pro at [Theme of the Crop](http://themeofthecrop.com/?utm_source=Plugin&utm_medium=Plugin%20Description&utm_campaign=Food%20and%20Drink%20Menu "Buy the Food and Drink Menu Pro plugin") for discounted prices, sales and specials, custom dietary icons, and more
 
 == Changelog ==
+
+= 1.6.1 (2018-12-12) =
+* Fix: menu item prices and menu layout can not be saved
+* Fix: fatal error when alternate page template is saved
+* Fix: remove invalid page template from menu options
 
 = 1.6.0 (2018-12-11) =
 * Add: Gutenberg blocks for menus, menu sections and menu items
@@ -191,6 +196,9 @@ Find answers to even more questions in the [FAQ](http://doc.themeofthecrop.com/p
 *	Initial release
 
 == Upgrade Notice ==
+
+= 1.6.1 =
+This update fixes an issue that prevented changes to a menu item's price and a menu's layout from being saved. It also fixes an error when saving a menu with an alternate page template.
 
 = 1.6.0 =
 This update brings menus, menu sections and menu items to the new Gutenberg editor in WordPress 5.0. It also fixes some bugs with WPML compatibility.
