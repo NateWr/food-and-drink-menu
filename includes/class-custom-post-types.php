@@ -8,6 +8,9 @@ if ( !defined( 'ABSPATH' ) )
 
 class fdmCustomPostTypes {
 
+	/** @var string Nonce used for security */
+	public $nonce = '';
+
 	/**
 	 * Array of menu item taxonomies
 	 *
@@ -19,6 +22,7 @@ class fdmCustomPostTypes {
 	public function __construct() {
 
 		// Call when plugin is initialized on every page load
+		add_action( 'admin_init', array( $this, 'create_nonce' ) );
 		add_action( 'init', array( $this, 'load_cpts' ) );
 		add_action( 'admin_menu', array( $this, 'load_cpt_admin_menu' ) );
 
@@ -45,7 +49,15 @@ class fdmCustomPostTypes {
 		// Allow menus to opt for a page template if desired
 		add_filter( 'theme_' . FDM_MENU_POST_TYPE . '_templates', array( $this, 'add_menu_templates' ), 10, 3 );
 		add_filter( 'template_include', array( $this, 'load_menu_template' ), 99 );
+	}
 
+	/**
+	 * Generate a nonce for secure saving of metadata
+	 *
+	 * @since 1.6.1
+	 */
+	public function create_nonce() {
+		$this->nonce = wp_create_nonce( basename( __FILE__ ) );
 	}
 
 	/**
@@ -322,6 +334,7 @@ class fdmCustomPostTypes {
 
 		?>
 
+			<input type="hidden" name="fdm_nonce" value="<?php echo $this->nonce; ?>">
 			<div class="fdm-input-controls fdm-input-side-panel" data-menu-item-id="<?php echo $post->ID; ?>">
 				<div class="fdm-input-prices fdm-input-group">
 					<?php foreach( $prices as $key => $price ) : ?>
@@ -389,6 +402,7 @@ class fdmCustomPostTypes {
 		}
 		?>
 
+			<input type="hidden" name="fdm_nonce" value="<?php echo $this->nonce; ?>">
 			<input type="hidden" id="fdm_menu_column_one" name="fdm_menu_column_one" value="<?php esc_attr_e( $column_one ); ?>">
 			<input type="hidden" id="fdm_menu_column_two" name="fdm_menu_column_two" value="<?php esc_attr_e( $column_two ); ?>">
 
@@ -476,86 +490,6 @@ class fdmCustomPostTypes {
 				<?php esc_html_e( 'Choose any of your theme templates to display your menu.', 'food-and-drink-menu' ); ?>
 			</p>
 
-		<?php
-	}
-
-	/**
-	 * Print the menu shortcode HTML on the edit page for easy reference
-	 * @since 1.0
-	 * @note We also add the fdm_nonce field here for security
-	 */
-	public function show_menu_shortcode() {
-
-		// Retrieve post ID
-		global $post;
-
-		// Check if menu is ready to be displayed
-		$status = get_post_status( $post->ID );
-
-		// Show advisory note when shortcode isn't ready
-		if ( $status != 'publish' ) {
-
-			?>
-
-			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu in any post or page.', 'food-and-drink-menu' ); ?></p>
-
-			<?php
-
-		// Show the shortcode
-		} else {
-
-			?>
-
-				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', 'food-and-drink-menu' ); ?></p>
-				<div class="fdm-menu-shortcode">[fdm-menu id=<?php echo $post->ID; ?>]</div>
-
-			<?php
-
-		}
-
-		// Add an nonce here for security
-		?>
-		<input type="hidden" name="fdm_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>">
-		<?php
-	}
-
-	/**
-	 * Print the menu shortcode HTML on the edit page for easy reference
-	 * @since 1.0
-	 * @note We also add the fdm_nonce field here for security
-	 */
-	public function show_menu_item_shortcode() {
-
-		// Retrieve post ID
-		global $post;
-
-		// Check if menu is ready to be displayed
-		$status = get_post_status( $post->ID );
-
-		// Show advisory note when shortcode isn't ready
-		if ( $status != 'publish' ) {
-
-			?>
-
-			<p><?php echo __( 'Once this menu is published, look here to find the shortcode you will use to display this menu item in any post or page.', 'food-and-drink-menu' ); ?></p>
-
-			<?php
-
-		// Show the shortcode
-		} else {
-
-			?>
-
-				<p><?php echo __( 'Copy and paste the snippet below into any post or page in order to display this menu.', 'food-and-drink-menu' ); ?></p>
-				<div class="fdm-menu-shortcode">[fdm-menu-item id=<?php echo $post->ID; ?>]</div>
-
-			<?php
-
-		}
-
-		// Add an nonce here for security
-		?>
-		<input type="hidden" name="fdm_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) ); ?>">
 		<?php
 	}
 
