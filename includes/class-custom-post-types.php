@@ -872,6 +872,7 @@ class fdmCustomPostTypes {
 	 * @since 1.5
 	 */
 	public function add_menu_templates( $post_templates, $wp_theme = null, $post = null ) {
+		include_once ABSPATH . 'wp-admin/includes/theme.php';
 
 		$page_template = get_page_template();
 		if ( !empty( $page_template )  ) {
