@@ -21,7 +21,7 @@ registerBlockType( 'food-and-drink-menu/menu-item', {
 		const { id } = attributes;
 
 		function setId( id ) {
-			setAttributes( { id: id } );
+			setAttributes( { id: parseInt(id, 10) } );
 		}
 
 		return (
@@ -41,13 +41,14 @@ registerBlockType( 'food-and-drink-menu/menu-item', {
 						<ServerSideRender block="food-and-drink-menu/menu-item" attributes={ attributes } />
 					</Disabled>
 				) : (
-					<SelectControl
-						label={ __( 'Select a Menu Item' ) }
-						value={ 0 }
-						onChange={ setId }
-						options={ menuItemOptions }
-						className="fdm-block-select"
-					/>
+					<div>
+						<SelectControl
+							label={ __( 'Select a Menu Item' ) }
+							value={ 0 }
+							onChange={ setId }
+							options={ menuItemOptions }
+						/>
+					</div>
 				)}
 			</div>
 		);

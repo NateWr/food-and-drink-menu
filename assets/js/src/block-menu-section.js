@@ -21,7 +21,7 @@ registerBlockType( 'food-and-drink-menu/menu-section', {
 		const { id } = attributes;
 
 		function setId( id ) {
-			setAttributes( { id: id } );
+			setAttributes( { id: parseInt(id, 10) } );
 		}
 
 		return (
