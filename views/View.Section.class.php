@@ -34,11 +34,16 @@ class fdmViewSection extends fdmView {
 			return;
 		}
 
+		$settings = get_option( 'food-and-drink-menu-settings' );
+		$show_empty = $settings['fdm-show-empty-sections'];
+		
 		// Gather data if it's not already set
-		$this->load_section();
+		$this->load_section($show_empty);
 
-		if ( !isset( $this->items ) || ( is_array( $this->items ) && !count( $this->items ) ) ) {
-			return;
+		if( !$show_empty ){
+			if ( !isset( $this->items ) || ( is_array( $this->items ) && !count( $this->items ) ) ) {
+				return;
+			}
 		}
 
 		// Add any dependent stylesheets or javascript
@@ -78,7 +83,7 @@ class fdmViewSection extends fdmView {
 	 * Load section data
 	 * @since 1.1
 	 */
-	public function load_section() {
+	public function load_section($show_empty = false) {
 
 		if ( !isset( $this->id ) ) {
 			return;
@@ -98,7 +103,7 @@ class fdmViewSection extends fdmView {
 				),
 			),
 		));
-		if ( !count( $items->posts ) ) {
+		if ( !count( $items->posts ) && !$show_empty ) {
 			return;
 		}
 

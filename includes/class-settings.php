@@ -104,6 +104,26 @@ class fdmSettings {
 			)
 		);
 
+		// Create a section to change section specific features
+		$sap->add_section(
+			'food-and-drink-menu-settings',	// Page to add this section to
+			array(								// Array of key/value pairs matching the AdminPageSection class constructor variables
+				'id'			=> 'fdm-section-settings',
+				'title'			=> __( 'Sections', 'food-and-drink-menu' ),
+				'description'	=> __( 'Settings that effect each section.', 'food-and-drink-menu' )
+			)
+		);
+		$sap->add_setting(
+			'food-and-drink-menu-settings',
+			'fdm-section-settings',
+			'toggle',
+			array(
+				'id'			=> 'fdm-show-empty-sections',
+				'title'			=> __( 'Show empty', 'food-and-drink-menu' ),
+				'label'			=> __( 'Show sections with no (zero) menu items.', 'food-and-drink-menu' )
+			)
+		);
+		
 		// Create a section to disable specific features
 		$sap->add_section(
 			'food-and-drink-menu-settings',	// Page to add this section to
